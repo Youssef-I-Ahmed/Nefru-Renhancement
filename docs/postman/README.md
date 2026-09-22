@@ -1,13 +1,29 @@
-# NEFRU API Documentation
 
-Postman documentation for NEFRU backend APIs.
+# NEFRU Postman Documentation
 
-## Environment
+## Import
 
-Supported environments:
+1. Import collection:
+`collections/NEFRU.postman_collection.json`
 
-- Local Development
-- Production
+2. Import environment:
+`environments/NEFRU Local.postman_environment.json`
+
+## Authentication
+
+1. Run Login endpoint.
+2. Copy returned token.
+3. Token is used automatically as:
+
+Bearer {{token}}
+
+## Variables
+
+- base_url
+- token
+- user_id
+- trip_id
+- booking_id
 
 ## API Modules
 
@@ -19,21 +35,5 @@ Supported environments:
 - Bookings
 - Payments
 - Reviews
-- Notifications
 - Admin
 
-## Authentication
-
-Protected endpoints require:
-
-Authorization: Bearer <JWT_TOKEN>
-
-## Base URLs
-
-Local:
-
-http://localhost:5000/api
-
-Production:
-
-https://api.nefru.com/api

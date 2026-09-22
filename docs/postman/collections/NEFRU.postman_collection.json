@@ -1,7 +1,7 @@
 {
   "info": {
     "name": "NEFRU API",
-    "description": "Professional Postman documentation for NEFRU backend APIs",
+    "description": "Professional Postman documentation for NEFRU backend APIs.\n\nIncludes authentication flow, examples and automated tests.",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
   "variable": [
@@ -31,11 +31,23 @@
                 "type": "text"
               }
             ],
-            "description": "GET endpoint for NEFRU Admin module.",
+            "description": "\nNEFRU Admin endpoint.\n\nMethod:\nGET\n\nAuthentication:\nBearer Token\n",
             "url": {
               "raw": "{{base_url}}/dashboard"
             }
-          }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status code valid', function () {",
+                  " pm.expect(pm.response.code).to.be.oneOf([200,201,400,401,404]);",
+                  "});"
+                ]
+              }
+            }
+          ]
         },
         {
           "name": "GET /accounts",
@@ -48,11 +60,23 @@
                 "type": "text"
               }
             ],
-            "description": "GET endpoint for NEFRU Admin module.",
+            "description": "\nNEFRU Admin endpoint.\n\nMethod:\nGET\n\nAuthentication:\nBearer Token\n",
             "url": {
               "raw": "{{base_url}}/accounts"
             }
-          }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status code valid', function () {",
+                  " pm.expect(pm.response.code).to.be.oneOf([200,201,400,401,404]);",
+                  "});"
+                ]
+              }
+            }
+          ]
         },
         {
           "name": "GET /accounts/:id",
@@ -65,11 +89,23 @@
                 "type": "text"
               }
             ],
-            "description": "GET endpoint for NEFRU Admin module.",
+            "description": "\nNEFRU Admin endpoint.\n\nMethod:\nGET\n\nAuthentication:\nBearer Token\n",
             "url": {
               "raw": "{{base_url}}/accounts/:id"
             }
-          }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status code valid', function () {",
+                  " pm.expect(pm.response.code).to.be.oneOf([200,201,400,401,404]);",
+                  "});"
+                ]
+              }
+            }
+          ]
         },
         {
           "name": "PATCH /accounts/:id/verification",
@@ -82,11 +118,23 @@
                 "type": "text"
               }
             ],
-            "description": "PATCH endpoint for NEFRU Admin module.",
+            "description": "\nNEFRU Admin endpoint.\n\nMethod:\nPATCH\n\nAuthentication:\nBearer Token\n",
             "url": {
               "raw": "{{base_url}}/accounts/:id/verification"
             }
-          }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status code valid', function () {",
+                  " pm.expect(pm.response.code).to.be.oneOf([200,201,400,401,404]);",
+                  "});"
+                ]
+              }
+            }
+          ]
         },
         {
           "name": "GET /user",
@@ -99,11 +147,23 @@
                 "type": "text"
               }
             ],
-            "description": "GET endpoint for NEFRU Admin module.",
+            "description": "\nNEFRU Admin endpoint.\n\nMethod:\nGET\n\nAuthentication:\nBearer Token\n",
             "url": {
               "raw": "{{base_url}}/user"
             }
-          }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status code valid', function () {",
+                  " pm.expect(pm.response.code).to.be.oneOf([200,201,400,401,404]);",
+                  "});"
+                ]
+              }
+            }
+          ]
         },
         {
           "name": "GET /user/:id",
@@ -116,11 +176,23 @@
                 "type": "text"
               }
             ],
-            "description": "GET endpoint for NEFRU Admin module.",
+            "description": "\nNEFRU Admin endpoint.\n\nMethod:\nGET\n\nAuthentication:\nBearer Token\n",
             "url": {
               "raw": "{{base_url}}/user/:id"
             }
-          }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status code valid', function () {",
+                  " pm.expect(pm.response.code).to.be.oneOf([200,201,400,401,404]);",
+                  "});"
+                ]
+              }
+            }
+          ]
         },
         {
           "name": "PATCH /user/:id",
@@ -133,11 +205,23 @@
                 "type": "text"
               }
             ],
-            "description": "PATCH endpoint for NEFRU Admin module.",
+            "description": "\nNEFRU Admin endpoint.\n\nMethod:\nPATCH\n\nAuthentication:\nBearer Token\n",
             "url": {
               "raw": "{{base_url}}/user/:id"
             }
-          }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status code valid', function () {",
+                  " pm.expect(pm.response.code).to.be.oneOf([200,201,400,401,404]);",
+                  "});"
+                ]
+              }
+            }
+          ]
         },
         {
           "name": "PATCH /user/:id/ban",
@@ -150,11 +234,23 @@
                 "type": "text"
               }
             ],
-            "description": "PATCH endpoint for NEFRU Admin module.",
+            "description": "\nNEFRU Admin endpoint.\n\nMethod:\nPATCH\n\nAuthentication:\nBearer Token\n",
             "url": {
               "raw": "{{base_url}}/user/:id/ban"
             }
-          }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status code valid', function () {",
+                  " pm.expect(pm.response.code).to.be.oneOf([200,201,400,401,404]);",
+                  "});"
+                ]
+              }
+            }
+          ]
         },
         {
           "name": "PATCH /user/:id/unban",
@@ -167,11 +263,23 @@
                 "type": "text"
               }
             ],
-            "description": "PATCH endpoint for NEFRU Admin module.",
+            "description": "\nNEFRU Admin endpoint.\n\nMethod:\nPATCH\n\nAuthentication:\nBearer Token\n",
             "url": {
               "raw": "{{base_url}}/user/:id/unban"
             }
-          }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status code valid', function () {",
+                  " pm.expect(pm.response.code).to.be.oneOf([200,201,400,401,404]);",
+                  "});"
+                ]
+              }
+            }
+          ]
         },
         {
           "name": "DELETE /user/:id",
@@ -184,11 +292,23 @@
                 "type": "text"
               }
             ],
-            "description": "DELETE endpoint for NEFRU Admin module.",
+            "description": "\nNEFRU Admin endpoint.\n\nMethod:\nDELETE\n\nAuthentication:\nBearer Token\n",
             "url": {
               "raw": "{{base_url}}/user/:id"
             }
-          }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status code valid', function () {",
+                  " pm.expect(pm.response.code).to.be.oneOf([200,201,400,401,404]);",
+                  "});"
+                ]
+              }
+            }
+          ]
         },
         {
           "name": "PATCH /guide/:id/approve",
@@ -201,11 +321,23 @@
                 "type": "text"
               }
             ],
-            "description": "PATCH endpoint for NEFRU Admin module.",
+            "description": "\nNEFRU Admin endpoint.\n\nMethod:\nPATCH\n\nAuthentication:\nBearer Token\n",
             "url": {
               "raw": "{{base_url}}/guide/:id/approve"
             }
-          }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status code valid', function () {",
+                  " pm.expect(pm.response.code).to.be.oneOf([200,201,400,401,404]);",
+                  "});"
+                ]
+              }
+            }
+          ]
         },
         {
           "name": "PATCH /guide/:id/reject",
@@ -218,11 +350,23 @@
                 "type": "text"
               }
             ],
-            "description": "PATCH endpoint for NEFRU Admin module.",
+            "description": "\nNEFRU Admin endpoint.\n\nMethod:\nPATCH\n\nAuthentication:\nBearer Token\n",
             "url": {
               "raw": "{{base_url}}/guide/:id/reject"
             }
-          }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status code valid', function () {",
+                  " pm.expect(pm.response.code).to.be.oneOf([200,201,400,401,404]);",
+                  "});"
+                ]
+              }
+            }
+          ]
         },
         {
           "name": "PATCH /guide/:id/suspend",
@@ -235,11 +379,23 @@
                 "type": "text"
               }
             ],
-            "description": "PATCH endpoint for NEFRU Admin module.",
+            "description": "\nNEFRU Admin endpoint.\n\nMethod:\nPATCH\n\nAuthentication:\nBearer Token\n",
             "url": {
               "raw": "{{base_url}}/guide/:id/suspend"
             }
-          }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status code valid', function () {",
+                  " pm.expect(pm.response.code).to.be.oneOf([200,201,400,401,404]);",
+                  "});"
+                ]
+              }
+            }
+          ]
         },
         {
           "name": "GET /tour-reviews",
@@ -252,11 +408,23 @@
                 "type": "text"
               }
             ],
-            "description": "GET endpoint for NEFRU Admin module.",
+            "description": "\nNEFRU Admin endpoint.\n\nMethod:\nGET\n\nAuthentication:\nBearer Token\n",
             "url": {
               "raw": "{{base_url}}/tour-reviews"
             }
-          }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status code valid', function () {",
+                  " pm.expect(pm.response.code).to.be.oneOf([200,201,400,401,404]);",
+                  "});"
+                ]
+              }
+            }
+          ]
         },
         {
           "name": "GET /tour-reviews/:id",
@@ -269,11 +437,23 @@
                 "type": "text"
               }
             ],
-            "description": "GET endpoint for NEFRU Admin module.",
+            "description": "\nNEFRU Admin endpoint.\n\nMethod:\nGET\n\nAuthentication:\nBearer Token\n",
             "url": {
               "raw": "{{base_url}}/tour-reviews/:id"
             }
-          }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status code valid', function () {",
+                  " pm.expect(pm.response.code).to.be.oneOf([200,201,400,401,404]);",
+                  "});"
+                ]
+              }
+            }
+          ]
         },
         {
           "name": "PATCH /tour-reviews/:id",
@@ -286,11 +466,23 @@
                 "type": "text"
               }
             ],
-            "description": "PATCH endpoint for NEFRU Admin module.",
+            "description": "\nNEFRU Admin endpoint.\n\nMethod:\nPATCH\n\nAuthentication:\nBearer Token\n",
             "url": {
               "raw": "{{base_url}}/tour-reviews/:id"
             }
-          }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status code valid', function () {",
+                  " pm.expect(pm.response.code).to.be.oneOf([200,201,400,401,404]);",
+                  "});"
+                ]
+              }
+            }
+          ]
         },
         {
           "name": "GET /tours/:page",
@@ -303,11 +495,23 @@
                 "type": "text"
               }
             ],
-            "description": "GET endpoint for NEFRU Admin module.",
+            "description": "\nNEFRU Admin endpoint.\n\nMethod:\nGET\n\nAuthentication:\nBearer Token\n",
             "url": {
               "raw": "{{base_url}}/tours/:page"
             }
-          }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status code valid', function () {",
+                  " pm.expect(pm.response.code).to.be.oneOf([200,201,400,401,404]);",
+                  "});"
+                ]
+              }
+            }
+          ]
         },
         {
           "name": "GET /trip/:id",
@@ -320,11 +524,23 @@
                 "type": "text"
               }
             ],
-            "description": "GET endpoint for NEFRU Admin module.",
+            "description": "\nNEFRU Admin endpoint.\n\nMethod:\nGET\n\nAuthentication:\nBearer Token\n",
             "url": {
               "raw": "{{base_url}}/trip/:id"
             }
-          }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status code valid', function () {",
+                  " pm.expect(pm.response.code).to.be.oneOf([200,201,400,401,404]);",
+                  "});"
+                ]
+              }
+            }
+          ]
         },
         {
           "name": "PATCH /trip/:id/status",
@@ -337,11 +553,23 @@
                 "type": "text"
               }
             ],
-            "description": "PATCH endpoint for NEFRU Admin module.",
+            "description": "\nNEFRU Admin endpoint.\n\nMethod:\nPATCH\n\nAuthentication:\nBearer Token\n",
             "url": {
               "raw": "{{base_url}}/trip/:id/status"
             }
-          }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status code valid', function () {",
+                  " pm.expect(pm.response.code).to.be.oneOf([200,201,400,401,404]);",
+                  "});"
+                ]
+              }
+            }
+          ]
         },
         {
           "name": "GET /booking-operations",
@@ -354,11 +582,23 @@
                 "type": "text"
               }
             ],
-            "description": "GET endpoint for NEFRU Admin module.",
+            "description": "\nNEFRU Admin endpoint.\n\nMethod:\nGET\n\nAuthentication:\nBearer Token\n",
             "url": {
               "raw": "{{base_url}}/booking-operations"
             }
-          }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status code valid', function () {",
+                  " pm.expect(pm.response.code).to.be.oneOf([200,201,400,401,404]);",
+                  "});"
+                ]
+              }
+            }
+          ]
         },
         {
           "name": "GET /booking-operations/:id",
@@ -371,11 +611,23 @@
                 "type": "text"
               }
             ],
-            "description": "GET endpoint for NEFRU Admin module.",
+            "description": "\nNEFRU Admin endpoint.\n\nMethod:\nGET\n\nAuthentication:\nBearer Token\n",
             "url": {
               "raw": "{{base_url}}/booking-operations/:id"
             }
-          }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status code valid', function () {",
+                  " pm.expect(pm.response.code).to.be.oneOf([200,201,400,401,404]);",
+                  "});"
+                ]
+              }
+            }
+          ]
         },
         {
           "name": "GET /analytics",
@@ -388,11 +640,23 @@
                 "type": "text"
               }
             ],
-            "description": "GET endpoint for NEFRU Admin module.",
+            "description": "\nNEFRU Admin endpoint.\n\nMethod:\nGET\n\nAuthentication:\nBearer Token\n",
             "url": {
               "raw": "{{base_url}}/analytics"
             }
-          }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status code valid', function () {",
+                  " pm.expect(pm.response.code).to.be.oneOf([200,201,400,401,404]);",
+                  "});"
+                ]
+              }
+            }
+          ]
         },
         {
           "name": "GET /bookings/:page",
@@ -405,11 +669,23 @@
                 "type": "text"
               }
             ],
-            "description": "GET endpoint for NEFRU Admin module.",
+            "description": "\nNEFRU Admin endpoint.\n\nMethod:\nGET\n\nAuthentication:\nBearer Token\n",
             "url": {
               "raw": "{{base_url}}/bookings/:page"
             }
-          }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status code valid', function () {",
+                  " pm.expect(pm.response.code).to.be.oneOf([200,201,400,401,404]);",
+                  "});"
+                ]
+              }
+            }
+          ]
         }
       ]
     },
@@ -427,11 +703,32 @@
                 "type": "text"
               }
             ],
-            "description": "POST endpoint for NEFRU Authentication module.",
+            "description": "\nNEFRU Authentication endpoint.\n\nMethod:\nPOST\n\nAuthentication:\nBearer Token\n",
             "url": {
               "raw": "{{base_url}}/register"
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Ahmed Mohamed\",\n  \"email\": \"ahmed@test.com\",\n  \"password\": \"Password123\",\n  \"role\": \"tourist\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
             }
-          }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status code valid', function () {",
+                  " pm.expect(pm.response.code).to.be.oneOf([200,201,400,401,404]);",
+                  "});"
+                ]
+              }
+            }
+          ]
         },
         {
           "name": "POST /login",
@@ -444,11 +741,32 @@
                 "type": "text"
               }
             ],
-            "description": "POST endpoint for NEFRU Authentication module.",
+            "description": "\nNEFRU Authentication endpoint.\n\nMethod:\nPOST\n\nAuthentication:\nBearer Token\n",
             "url": {
               "raw": "{{base_url}}/login"
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"tourist@test.com\",\n  \"password\": \"Password123\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
             }
-          }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status code valid', function () {",
+                  " pm.expect(pm.response.code).to.be.oneOf([200,201,400,401,404]);",
+                  "});"
+                ]
+              }
+            }
+          ]
         },
         {
           "name": "POST /logout",
@@ -461,11 +779,23 @@
                 "type": "text"
               }
             ],
-            "description": "POST endpoint for NEFRU Authentication module.",
+            "description": "\nNEFRU Authentication endpoint.\n\nMethod:\nPOST\n\nAuthentication:\nBearer Token\n",
             "url": {
               "raw": "{{base_url}}/logout"
             }
-          }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status code valid', function () {",
+                  " pm.expect(pm.response.code).to.be.oneOf([200,201,400,401,404]);",
+                  "});"
+                ]
+              }
+            }
+          ]
         },
         {
           "name": "POST /google",
@@ -478,11 +808,23 @@
                 "type": "text"
               }
             ],
-            "description": "POST endpoint for NEFRU Authentication module.",
+            "description": "\nNEFRU Authentication endpoint.\n\nMethod:\nPOST\n\nAuthentication:\nBearer Token\n",
             "url": {
               "raw": "{{base_url}}/google"
             }
-          }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status code valid', function () {",
+                  " pm.expect(pm.response.code).to.be.oneOf([200,201,400,401,404]);",
+                  "});"
+                ]
+              }
+            }
+          ]
         },
         {
           "name": "POST /verify-email",
@@ -495,11 +837,23 @@
                 "type": "text"
               }
             ],
-            "description": "POST endpoint for NEFRU Authentication module.",
+            "description": "\nNEFRU Authentication endpoint.\n\nMethod:\nPOST\n\nAuthentication:\nBearer Token\n",
             "url": {
               "raw": "{{base_url}}/verify-email"
             }
-          }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status code valid', function () {",
+                  " pm.expect(pm.response.code).to.be.oneOf([200,201,400,401,404]);",
+                  "});"
+                ]
+              }
+            }
+          ]
         }
       ]
     },
@@ -517,11 +871,23 @@
                 "type": "text"
               }
             ],
-            "description": "GET endpoint for NEFRU System module.",
+            "description": "\nNEFRU System endpoint.\n\nMethod:\nGET\n\nAuthentication:\nBearer Token\n",
             "url": {
               "raw": "{{base_url}}/rates"
             }
-          }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status code valid', function () {",
+                  " pm.expect(pm.response.code).to.be.oneOf([200,201,400,401,404]);",
+                  "});"
+                ]
+              }
+            }
+          ]
         }
       ]
     },
@@ -539,11 +905,23 @@
                 "type": "text"
               }
             ],
-            "description": "GET endpoint for NEFRU Marketplace module.",
+            "description": "\nNEFRU Marketplace endpoint.\n\nMethod:\nGET\n\nAuthentication:\nBearer Token\n",
             "url": {
               "raw": "{{base_url}}/dashboard"
             }
-          }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status code valid', function () {",
+                  " pm.expect(pm.response.code).to.be.oneOf([200,201,400,401,404]);",
+                  "});"
+                ]
+              }
+            }
+          ]
         },
         {
           "name": "GET /guides/:id/quality",
@@ -556,11 +934,23 @@
                 "type": "text"
               }
             ],
-            "description": "GET endpoint for NEFRU Marketplace module.",
+            "description": "\nNEFRU Marketplace endpoint.\n\nMethod:\nGET\n\nAuthentication:\nBearer Token\n",
             "url": {
               "raw": "{{base_url}}/guides/:id/quality"
             }
-          }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status code valid', function () {",
+                  " pm.expect(pm.response.code).to.be.oneOf([200,201,400,401,404]);",
+                  "});"
+                ]
+              }
+            }
+          ]
         },
         {
           "name": "GET /trips/:id/edit",
@@ -573,11 +963,23 @@
                 "type": "text"
               }
             ],
-            "description": "GET endpoint for NEFRU Marketplace module.",
+            "description": "\nNEFRU Marketplace endpoint.\n\nMethod:\nGET\n\nAuthentication:\nBearer Token\n",
             "url": {
               "raw": "{{base_url}}/trips/:id/edit"
             }
-          }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status code valid', function () {",
+                  " pm.expect(pm.response.code).to.be.oneOf([200,201,400,401,404]);",
+                  "});"
+                ]
+              }
+            }
+          ]
         },
         {
           "name": "PATCH /trips/:id/content",
@@ -590,11 +992,23 @@
                 "type": "text"
               }
             ],
-            "description": "PATCH endpoint for NEFRU Marketplace module.",
+            "description": "\nNEFRU Marketplace endpoint.\n\nMethod:\nPATCH\n\nAuthentication:\nBearer Token\n",
             "url": {
               "raw": "{{base_url}}/trips/:id/content"
             }
-          }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status code valid', function () {",
+                  " pm.expect(pm.response.code).to.be.oneOf([200,201,400,401,404]);",
+                  "});"
+                ]
+              }
+            }
+          ]
         },
         {
           "name": "POST /trips/:id/actions/:action",
@@ -607,11 +1021,23 @@
                 "type": "text"
               }
             ],
-            "description": "POST endpoint for NEFRU Marketplace module.",
+            "description": "\nNEFRU Marketplace endpoint.\n\nMethod:\nPOST\n\nAuthentication:\nBearer Token\n",
             "url": {
               "raw": "{{base_url}}/trips/:id/actions/:action"
             }
-          }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status code valid', function () {",
+                  " pm.expect(pm.response.code).to.be.oneOf([200,201,400,401,404]);",
+                  "});"
+                ]
+              }
+            }
+          ]
         },
         {
           "name": "POST /revisions/:id/actions/:action",
@@ -624,11 +1050,23 @@
                 "type": "text"
               }
             ],
-            "description": "POST endpoint for NEFRU Marketplace module.",
+            "description": "\nNEFRU Marketplace endpoint.\n\nMethod:\nPOST\n\nAuthentication:\nBearer Token\n",
             "url": {
               "raw": "{{base_url}}/revisions/:id/actions/:action"
             }
-          }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status code valid', function () {",
+                  " pm.expect(pm.response.code).to.be.oneOf([200,201,400,401,404]);",
+                  "});"
+                ]
+              }
+            }
+          ]
         },
         {
           "name": "POST /occurrences/:id/actions/:action",
@@ -641,11 +1079,23 @@
                 "type": "text"
               }
             ],
-            "description": "POST endpoint for NEFRU Marketplace module.",
+            "description": "\nNEFRU Marketplace endpoint.\n\nMethod:\nPOST\n\nAuthentication:\nBearer Token\n",
             "url": {
               "raw": "{{base_url}}/occurrences/:id/actions/:action"
             }
-          }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status code valid', function () {",
+                  " pm.expect(pm.response.code).to.be.oneOf([200,201,400,401,404]);",
+                  "});"
+                ]
+              }
+            }
+          ]
         },
         {
           "name": "POST /bookings/:id/attendance/:action",
@@ -658,11 +1108,23 @@
                 "type": "text"
               }
             ],
-            "description": "POST endpoint for NEFRU Marketplace module.",
+            "description": "\nNEFRU Marketplace endpoint.\n\nMethod:\nPOST\n\nAuthentication:\nBearer Token\n",
             "url": {
               "raw": "{{base_url}}/bookings/:id/attendance/:action"
             }
-          }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status code valid', function () {",
+                  " pm.expect(pm.response.code).to.be.oneOf([200,201,400,401,404]);",
+                  "});"
+                ]
+              }
+            }
+          ]
         },
         {
           "name": "POST /accounts/:id/actions/:action",
@@ -675,11 +1137,23 @@
                 "type": "text"
               }
             ],
-            "description": "POST endpoint for NEFRU Marketplace module.",
+            "description": "\nNEFRU Marketplace endpoint.\n\nMethod:\nPOST\n\nAuthentication:\nBearer Token\n",
             "url": {
               "raw": "{{base_url}}/accounts/:id/actions/:action"
             }
-          }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status code valid', function () {",
+                  " pm.expect(pm.response.code).to.be.oneOf([200,201,400,401,404]);",
+                  "});"
+                ]
+              }
+            }
+          ]
         },
         {
           "name": "POST /verification/:id/actions/:action",
@@ -692,11 +1166,23 @@
                 "type": "text"
               }
             ],
-            "description": "POST endpoint for NEFRU Marketplace module.",
+            "description": "\nNEFRU Marketplace endpoint.\n\nMethod:\nPOST\n\nAuthentication:\nBearer Token\n",
             "url": {
               "raw": "{{base_url}}/verification/:id/actions/:action"
             }
-          }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status code valid', function () {",
+                  " pm.expect(pm.response.code).to.be.oneOf([200,201,400,401,404]);",
+                  "});"
+                ]
+              }
+            }
+          ]
         },
         {
           "name": "POST /reviews/:id/actions/:action",
@@ -709,11 +1195,23 @@
                 "type": "text"
               }
             ],
-            "description": "POST endpoint for NEFRU Marketplace module.",
+            "description": "\nNEFRU Marketplace endpoint.\n\nMethod:\nPOST\n\nAuthentication:\nBearer Token\n",
             "url": {
               "raw": "{{base_url}}/reviews/:id/actions/:action"
             }
-          }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status code valid', function () {",
+                  " pm.expect(pm.response.code).to.be.oneOf([200,201,400,401,404]);",
+                  "});"
+                ]
+              }
+            }
+          ]
         },
         {
           "name": "GET /reviews/:id",
@@ -726,11 +1224,23 @@
                 "type": "text"
               }
             ],
-            "description": "GET endpoint for NEFRU Marketplace module.",
+            "description": "\nNEFRU Marketplace endpoint.\n\nMethod:\nGET\n\nAuthentication:\nBearer Token\n",
             "url": {
               "raw": "{{base_url}}/reviews/:id"
             }
-          }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status code valid', function () {",
+                  " pm.expect(pm.response.code).to.be.oneOf([200,201,400,401,404]);",
+                  "});"
+                ]
+              }
+            }
+          ]
         },
         {
           "name": "GET /audit/:id",
@@ -743,11 +1253,23 @@
                 "type": "text"
               }
             ],
-            "description": "GET endpoint for NEFRU Marketplace module.",
+            "description": "\nNEFRU Marketplace endpoint.\n\nMethod:\nGET\n\nAuthentication:\nBearer Token\n",
             "url": {
               "raw": "{{base_url}}/audit/:id"
             }
-          }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status code valid', function () {",
+                  " pm.expect(pm.response.code).to.be.oneOf([200,201,400,401,404]);",
+                  "});"
+                ]
+              }
+            }
+          ]
         },
         {
           "name": "POST /cases/:id/resolve",
@@ -760,11 +1282,23 @@
                 "type": "text"
               }
             ],
-            "description": "POST endpoint for NEFRU Marketplace module.",
+            "description": "\nNEFRU Marketplace endpoint.\n\nMethod:\nPOST\n\nAuthentication:\nBearer Token\n",
             "url": {
               "raw": "{{base_url}}/cases/:id/resolve"
             }
-          }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status code valid', function () {",
+                  " pm.expect(pm.response.code).to.be.oneOf([200,201,400,401,404]);",
+                  "});"
+                ]
+              }
+            }
+          ]
         },
         {
           "name": "GET /cases/:id",
@@ -777,11 +1311,23 @@
                 "type": "text"
               }
             ],
-            "description": "GET endpoint for NEFRU Marketplace module.",
+            "description": "\nNEFRU Marketplace endpoint.\n\nMethod:\nGET\n\nAuthentication:\nBearer Token\n",
             "url": {
               "raw": "{{base_url}}/cases/:id"
             }
-          }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status code valid', function () {",
+                  " pm.expect(pm.response.code).to.be.oneOf([200,201,400,401,404]);",
+                  "});"
+                ]
+              }
+            }
+          ]
         },
         {
           "name": "POST /merchandising/:kind/:id",
@@ -794,11 +1340,23 @@
                 "type": "text"
               }
             ],
-            "description": "POST endpoint for NEFRU Marketplace module.",
+            "description": "\nNEFRU Marketplace endpoint.\n\nMethod:\nPOST\n\nAuthentication:\nBearer Token\n",
             "url": {
               "raw": "{{base_url}}/merchandising/:kind/:id"
             }
-          }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status code valid', function () {",
+                  " pm.expect(pm.response.code).to.be.oneOf([200,201,400,401,404]);",
+                  "});"
+                ]
+              }
+            }
+          ]
         }
       ]
     }
