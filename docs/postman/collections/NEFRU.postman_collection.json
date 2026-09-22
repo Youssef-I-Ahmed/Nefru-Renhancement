@@ -1,0 +1,806 @@
+{
+  "info": {
+    "name": "NEFRU API",
+    "description": "Professional Postman documentation for NEFRU backend APIs",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:5000/api",
+      "type": "string"
+    },
+    {
+      "key": "token",
+      "value": "",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Admin",
+      "item": [
+        {
+          "name": "GET /dashboard",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "description": "GET endpoint for NEFRU Admin module.",
+            "url": {
+              "raw": "{{base_url}}/dashboard"
+            }
+          }
+        },
+        {
+          "name": "GET /accounts",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "description": "GET endpoint for NEFRU Admin module.",
+            "url": {
+              "raw": "{{base_url}}/accounts"
+            }
+          }
+        },
+        {
+          "name": "GET /accounts/:id",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "description": "GET endpoint for NEFRU Admin module.",
+            "url": {
+              "raw": "{{base_url}}/accounts/:id"
+            }
+          }
+        },
+        {
+          "name": "PATCH /accounts/:id/verification",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "description": "PATCH endpoint for NEFRU Admin module.",
+            "url": {
+              "raw": "{{base_url}}/accounts/:id/verification"
+            }
+          }
+        },
+        {
+          "name": "GET /user",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "description": "GET endpoint for NEFRU Admin module.",
+            "url": {
+              "raw": "{{base_url}}/user"
+            }
+          }
+        },
+        {
+          "name": "GET /user/:id",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "description": "GET endpoint for NEFRU Admin module.",
+            "url": {
+              "raw": "{{base_url}}/user/:id"
+            }
+          }
+        },
+        {
+          "name": "PATCH /user/:id",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "description": "PATCH endpoint for NEFRU Admin module.",
+            "url": {
+              "raw": "{{base_url}}/user/:id"
+            }
+          }
+        },
+        {
+          "name": "PATCH /user/:id/ban",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "description": "PATCH endpoint for NEFRU Admin module.",
+            "url": {
+              "raw": "{{base_url}}/user/:id/ban"
+            }
+          }
+        },
+        {
+          "name": "PATCH /user/:id/unban",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "description": "PATCH endpoint for NEFRU Admin module.",
+            "url": {
+              "raw": "{{base_url}}/user/:id/unban"
+            }
+          }
+        },
+        {
+          "name": "DELETE /user/:id",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "description": "DELETE endpoint for NEFRU Admin module.",
+            "url": {
+              "raw": "{{base_url}}/user/:id"
+            }
+          }
+        },
+        {
+          "name": "PATCH /guide/:id/approve",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "description": "PATCH endpoint for NEFRU Admin module.",
+            "url": {
+              "raw": "{{base_url}}/guide/:id/approve"
+            }
+          }
+        },
+        {
+          "name": "PATCH /guide/:id/reject",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "description": "PATCH endpoint for NEFRU Admin module.",
+            "url": {
+              "raw": "{{base_url}}/guide/:id/reject"
+            }
+          }
+        },
+        {
+          "name": "PATCH /guide/:id/suspend",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "description": "PATCH endpoint for NEFRU Admin module.",
+            "url": {
+              "raw": "{{base_url}}/guide/:id/suspend"
+            }
+          }
+        },
+        {
+          "name": "GET /tour-reviews",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "description": "GET endpoint for NEFRU Admin module.",
+            "url": {
+              "raw": "{{base_url}}/tour-reviews"
+            }
+          }
+        },
+        {
+          "name": "GET /tour-reviews/:id",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "description": "GET endpoint for NEFRU Admin module.",
+            "url": {
+              "raw": "{{base_url}}/tour-reviews/:id"
+            }
+          }
+        },
+        {
+          "name": "PATCH /tour-reviews/:id",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "description": "PATCH endpoint for NEFRU Admin module.",
+            "url": {
+              "raw": "{{base_url}}/tour-reviews/:id"
+            }
+          }
+        },
+        {
+          "name": "GET /tours/:page",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "description": "GET endpoint for NEFRU Admin module.",
+            "url": {
+              "raw": "{{base_url}}/tours/:page"
+            }
+          }
+        },
+        {
+          "name": "GET /trip/:id",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "description": "GET endpoint for NEFRU Admin module.",
+            "url": {
+              "raw": "{{base_url}}/trip/:id"
+            }
+          }
+        },
+        {
+          "name": "PATCH /trip/:id/status",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "description": "PATCH endpoint for NEFRU Admin module.",
+            "url": {
+              "raw": "{{base_url}}/trip/:id/status"
+            }
+          }
+        },
+        {
+          "name": "GET /booking-operations",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "description": "GET endpoint for NEFRU Admin module.",
+            "url": {
+              "raw": "{{base_url}}/booking-operations"
+            }
+          }
+        },
+        {
+          "name": "GET /booking-operations/:id",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "description": "GET endpoint for NEFRU Admin module.",
+            "url": {
+              "raw": "{{base_url}}/booking-operations/:id"
+            }
+          }
+        },
+        {
+          "name": "GET /analytics",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "description": "GET endpoint for NEFRU Admin module.",
+            "url": {
+              "raw": "{{base_url}}/analytics"
+            }
+          }
+        },
+        {
+          "name": "GET /bookings/:page",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "description": "GET endpoint for NEFRU Admin module.",
+            "url": {
+              "raw": "{{base_url}}/bookings/:page"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Authentication",
+      "item": [
+        {
+          "name": "POST /register",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "description": "POST endpoint for NEFRU Authentication module.",
+            "url": {
+              "raw": "{{base_url}}/register"
+            }
+          }
+        },
+        {
+          "name": "POST /login",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "description": "POST endpoint for NEFRU Authentication module.",
+            "url": {
+              "raw": "{{base_url}}/login"
+            }
+          }
+        },
+        {
+          "name": "POST /logout",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "description": "POST endpoint for NEFRU Authentication module.",
+            "url": {
+              "raw": "{{base_url}}/logout"
+            }
+          }
+        },
+        {
+          "name": "POST /google",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "description": "POST endpoint for NEFRU Authentication module.",
+            "url": {
+              "raw": "{{base_url}}/google"
+            }
+          }
+        },
+        {
+          "name": "POST /verify-email",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "description": "POST endpoint for NEFRU Authentication module.",
+            "url": {
+              "raw": "{{base_url}}/verify-email"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "System",
+      "item": [
+        {
+          "name": "GET /rates",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "description": "GET endpoint for NEFRU System module.",
+            "url": {
+              "raw": "{{base_url}}/rates"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Marketplace",
+      "item": [
+        {
+          "name": "GET /dashboard",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "description": "GET endpoint for NEFRU Marketplace module.",
+            "url": {
+              "raw": "{{base_url}}/dashboard"
+            }
+          }
+        },
+        {
+          "name": "GET /guides/:id/quality",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "description": "GET endpoint for NEFRU Marketplace module.",
+            "url": {
+              "raw": "{{base_url}}/guides/:id/quality"
+            }
+          }
+        },
+        {
+          "name": "GET /trips/:id/edit",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "description": "GET endpoint for NEFRU Marketplace module.",
+            "url": {
+              "raw": "{{base_url}}/trips/:id/edit"
+            }
+          }
+        },
+        {
+          "name": "PATCH /trips/:id/content",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "description": "PATCH endpoint for NEFRU Marketplace module.",
+            "url": {
+              "raw": "{{base_url}}/trips/:id/content"
+            }
+          }
+        },
+        {
+          "name": "POST /trips/:id/actions/:action",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "description": "POST endpoint for NEFRU Marketplace module.",
+            "url": {
+              "raw": "{{base_url}}/trips/:id/actions/:action"
+            }
+          }
+        },
+        {
+          "name": "POST /revisions/:id/actions/:action",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "description": "POST endpoint for NEFRU Marketplace module.",
+            "url": {
+              "raw": "{{base_url}}/revisions/:id/actions/:action"
+            }
+          }
+        },
+        {
+          "name": "POST /occurrences/:id/actions/:action",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "description": "POST endpoint for NEFRU Marketplace module.",
+            "url": {
+              "raw": "{{base_url}}/occurrences/:id/actions/:action"
+            }
+          }
+        },
+        {
+          "name": "POST /bookings/:id/attendance/:action",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "description": "POST endpoint for NEFRU Marketplace module.",
+            "url": {
+              "raw": "{{base_url}}/bookings/:id/attendance/:action"
+            }
+          }
+        },
+        {
+          "name": "POST /accounts/:id/actions/:action",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "description": "POST endpoint for NEFRU Marketplace module.",
+            "url": {
+              "raw": "{{base_url}}/accounts/:id/actions/:action"
+            }
+          }
+        },
+        {
+          "name": "POST /verification/:id/actions/:action",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "description": "POST endpoint for NEFRU Marketplace module.",
+            "url": {
+              "raw": "{{base_url}}/verification/:id/actions/:action"
+            }
+          }
+        },
+        {
+          "name": "POST /reviews/:id/actions/:action",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "description": "POST endpoint for NEFRU Marketplace module.",
+            "url": {
+              "raw": "{{base_url}}/reviews/:id/actions/:action"
+            }
+          }
+        },
+        {
+          "name": "GET /reviews/:id",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "description": "GET endpoint for NEFRU Marketplace module.",
+            "url": {
+              "raw": "{{base_url}}/reviews/:id"
+            }
+          }
+        },
+        {
+          "name": "GET /audit/:id",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "description": "GET endpoint for NEFRU Marketplace module.",
+            "url": {
+              "raw": "{{base_url}}/audit/:id"
+            }
+          }
+        },
+        {
+          "name": "POST /cases/:id/resolve",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "description": "POST endpoint for NEFRU Marketplace module.",
+            "url": {
+              "raw": "{{base_url}}/cases/:id/resolve"
+            }
+          }
+        },
+        {
+          "name": "GET /cases/:id",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "description": "GET endpoint for NEFRU Marketplace module.",
+            "url": {
+              "raw": "{{base_url}}/cases/:id"
+            }
+          }
+        },
+        {
+          "name": "POST /merchandising/:kind/:id",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "description": "POST endpoint for NEFRU Marketplace module.",
+            "url": {
+              "raw": "{{base_url}}/merchandising/:kind/:id"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
