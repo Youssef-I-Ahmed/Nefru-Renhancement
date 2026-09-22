@@ -1,0 +1,32 @@
+name: Marketplace quality
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  quality:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: |
+            backend/package-lock.json
+            frontend/package-lock.json
+      - run: npm ci --prefix backend --ignore-scripts
+      - run: npm ci --prefix frontend --ignore-scripts
+      # CI runner only. Tests start their own disposable dbPath/port/replica set.
+      - name: Install MongoDB test binary (8.0 compatibility)
+        run: |
+          curl -fsSL https://www.mongodb.org/static/pgp/server-8.0.asc | sudo gpg --dearmor -o /usr/share/keyrings/mongodb-server-8.0.gpg
+          echo "deb [ arch=amd64 signed-by=/usr/share/keyrings/mongodb-server-8.0.gpg ] https://repo.mongodb.org/apt/ubuntu noble/mongodb-org/8.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-8.0.list
+          sudo apt-get update
+          sudo apt-get install -y mongodb-org-server
+      - run: npm run check --prefix backend
+      - run: npm test --prefix backend
+        env:
+          NEFRU_TEST_MONGOD: /usr/bin/mongod
+      - run: npm run lint --prefix frontend
+      - run: npm run build --prefix frontend

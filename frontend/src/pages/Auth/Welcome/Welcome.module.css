@@ -1,0 +1,714 @@
+/* start mobile view */
+
+.main{
+  background-image:url("../../../assets/images/RecoveryBg.png");
+  background-size: cover;
+  background-position: center;
+
+  background-size:cover;
+  height:100vh;
+  padding:2rem;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
+}
+.body{
+  width:100%;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:16px;
+  height:85%;
+}
+.label{
+  width:100%;
+  padding-left:40px;
+}
+.cards{
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  /* border:1px solid red; */
+  height:100%;
+}
+.card{
+  width:100%;
+  height:100%;
+  flex:1;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  padding:20px;
+  box-sizing:border-box;
+  background-color:white;
+  border:2px solid rgb(194, 194, 194);
+  border-radius:12px;
+  cursor:pointer;
+}
+.selected{
+  border:2px solid var(--color-primary);
+  background-color:var(--color-primary-mute)
+}
+.select{
+  /* border:1px solid red; */
+  justify-items:right;
+  width:100%;
+  height:18px;
+  /* border:1px solid red; */
+  color:var(--color-secondary)
+}
+.icon{
+  font-size:100px;
+  margin:10px 0;
+  height:50%;
+}
+.cardTitle , .cardSubTitle{
+  width:fit-content;
+  margin:3px;
+}
+.button{
+  background-color:var(--color-primary);
+  width:100%;
+  color:white;
+  padding:15px;
+  box-sizing:border-box;
+  border-radius:12px;
+  font-size:20px;
+}
+/* end mobile view */
+.page {
+  min-height: 100vh;
+  width: 100%;
+  color: var(--color-primary-dark);
+  background:
+    radial-gradient(circle at 18% 18%, rgba(237, 174, 73, 0.14), transparent 28%),
+    linear-gradient(120deg, #fbf7ee 0%, #fffaf1 45%, #f6efe5 100%);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+}
+
+.page::before,
+.page::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.75;
+}
+
+.page::before {
+  width: 220px;
+  height: 220px;
+  left: -82px;
+  top: -74px;
+  border: 1px solid rgba(237, 174, 73, 0.44);
+  border-radius: 50%;
+}
+
+.page::after {
+  width: 430px;
+  height: 430px;
+  right: 6%;
+  top: 22%;
+  border: 1px solid rgba(237, 174, 73, 0.3);
+  border-radius: 50%;
+}
+
+.topBar {
+  width: min(100%, 1366px);
+  margin: 0 auto;
+  padding: 16px clamp(28px, 4vw, 60px) 0;
+  min-height: 72px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  position: relative;
+  z-index: 2;
+}
+
+.topLogo {
+  width: 112px;
+  height: auto;
+  object-fit: contain;
+  opacity: 0.96;
+}
+
+.loginLink {
+  border: 0;
+  background: transparent;
+  color: var(--color-primary-dark);
+  font-size: 15px;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 0 6px;
+  cursor: pointer;
+  position: relative;
+}
+
+.loginLink::after {
+  content: "";
+  position: absolute;
+  left: 28px;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: var(--color-secondary);
+}
+
+.loginLink svg {
+  font-size: 22px;
+}
+
+.alreadyHaveAccount {
+  width: 100%;
+  max-width: 540px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.mainGrid {
+  width: min(100%, 1366px);
+  margin: 80px auto;
+  padding: 0 clamp(28px, 4vw, 60px) 10px;
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: clamp(28px, 4vw, 64px);
+  position: relative;
+  z-index: 1;
+}
+
+.contentSide {
+  flex: 1 1 48%;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 2;
+}
+
+.mobileLogo {
+  display: none;
+}
+
+.copyBlock {
+  width: 100%;
+  max-width: 590px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.title {
+  font-family: Georgia, "Times New Roman", serif;
+  color: var(--color-primary-dark);
+  font-size: clamp(44px, 4.8vw, 74px);
+  font-weight: 500;
+  line-height: 0.98;
+  letter-spacing: -0.04em;
+  margin: 0;
+}
+
+.divider {
+  width: 176px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--color-secondary), transparent);
+  margin: 16px auto 14px;
+  position: relative;
+}
+
+.divider::after {
+  content: "✦";
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  color: var(--color-secondary);
+  background: #fbf7ee;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+}
+
+.subtitle {
+  color: var(--color-primary-dark);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(22px, 2.1vw, 30px);
+  line-height: 1.14;
+  font-weight: 600;
+  max-width: 520px;
+  margin: 0 auto 10px;
+}
+
+.subtitle span {
+  color: var(--color-secondary);
+}
+
+.description {
+  color: rgba(0, 26, 51, 0.72);
+  font-size: clamp(13px, 1.2vw, 15px);
+  line-height: 1.65;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.cards {
+  width: 100%;
+  max-width: 540px;
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  gap: 16px;
+}
+
+.roleCard {
+  flex: 1 1 0;
+  appearance: none;
+  border: 1px solid rgba(237, 174, 73, 0.5);
+  background: #0d2a46;
+  border-radius: 14px;
+  padding: 0;
+  overflow: hidden;
+  min-height: 218px;
+  cursor: pointer;
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  text-align: center;
+  color: #ffffff;
+  box-shadow: 0 14px 26px rgba(0, 26, 51, 0.18);
+  transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+}
+
+.roleCard:hover,
+.roleCard:focus-visible {
+  transform: translateY(-5px);
+  border-color: var(--color-secondary);
+  box-shadow: 0 18px 34px rgba(0, 26, 51, 0.26);
+  outline: none;
+}
+
+.cardImg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.02);
+  transition: transform 0.28s ease;
+}
+
+.roleCard:hover .cardImg,
+.roleCard:focus-visible .cardImg {
+  transform: scale(1.08);
+}
+
+.cardOverlay {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(0, 26, 51, 0.04) 0%, rgba(0, 26, 51, 0.76) 56%, rgba(0, 26, 51, 0.96) 100%);
+}
+
+.cardContent {
+  width: 100%;
+  padding: 0 18px 18px;
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.cardContent h3 {
+  color: #ffffff;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 22px;
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
+.cardContent p {
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 12px;
+  line-height: 1.45;
+  min-height: 34px;
+  margin-bottom: 12px;
+}
+
+.cardCta {
+  width: 100%;
+  min-height: 40px;
+  border: 1px solid rgba(237, 174, 73, 0.86);
+  border-radius: 8px;
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.cardCta svg {
+  color: var(--color-secondary);
+}
+
+.mobileLoginBlock {
+  display: none;
+}
+
+.heroSide {
+  flex: 1 1 52%;
+  min-width: 0;
+  min-height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+}
+
+.heroImage {
+  width: 100%;
+  height: clamp(450px, 61vh, 590px);
+  border-radius: 260px 0 0 0;
+  overflow: hidden;
+  background:
+    linear-gradient(180deg, rgba(0, 26, 51, 0.05), rgba(0, 26, 51, 0.24)),
+    url("../../../assets/images/auth/welcome-hero.jpg") center / cover no-repeat;
+  box-shadow:
+    inset 0 0 0 1px rgba(237, 174, 73, 0.44),
+    0 18px 44px rgba(0, 26, 51, 0.16);
+  position: relative;
+}
+
+.heroImage::before {
+  content: "";
+  position: absolute;
+  inset: 18px 0 0 22px;
+  border-top-left-radius: 238px;
+  border: 1px solid rgba(237, 174, 73, 0.45);
+  border-right: 0;
+  border-bottom: 0;
+}
+
+@media (max-width: 1180px) {
+  .mainGrid {
+    gap: 28px;
+  }
+
+  .title {
+    font-size: clamp(40px, 4.4vw, 58px);
+  }
+
+  .heroImage {
+    height: clamp(430px, 60vh, 530px);
+  }
+
+  .roleCard {
+    min-height: 205px;
+  }
+}
+
+@media (max-width: 900px) {
+  .page {
+    overflow-y: auto;
+    color: #ffffff;
+    background:
+      linear-gradient(to bottom, var(--color-primary-dark) 0%, rgba(0, 26, 51, 0.92) 15%, transparent 30%),
+      url("../../../assets/images/egypt.png") center 56px / 118% auto no-repeat,
+      var(--color-primary-dark);
+  }
+
+  .topBar,
+  .heroSide {
+    display: none;
+  }
+
+  .page::before,
+  .page::after {
+    display: none;
+  }
+
+  .mainGrid {
+    width: 100%;
+    min-height: 100vh;
+    padding: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .contentSide {
+    width: 100%;
+    min-height: calc(100vh - 48px);
+    justify-content: center;
+  }
+
+  .mobileLogo {
+    display: block;
+    width: 150px;
+    max-width: 70%;
+    margin: 0 auto 12px;
+  }
+
+  .copyBlock {
+    max-width: 430px;
+    margin-bottom: 16px;
+  }
+
+  .title,
+  .description,
+  .divider {
+    display: none;
+  }
+
+  .subtitle {
+    color: #ffffff;
+    font-family: "Poppins", sans-serif;
+    font-size: clamp(20px, 5vw, 26px);
+    line-height: 1.25;
+    font-weight: 800;
+    max-width: 360px;
+}
+
+  .cards {
+    max-width: 430px;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .roleCard {
+    width: 100%;
+    flex: 0 0 auto;
+    min-height: 112px;
+    border: 0;
+    border-radius: 12px;
+    text-align: left;
+    align-items: stretch;
+    background: rgba(255, 255, 255, 0.08);
+    box-shadow: none;
+  }
+
+  .roleCard:hover,
+  .roleCard:focus-visible {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.18);
+}
+
+  .cardImg {
+    position: relative;
+    inset: auto;
+    width: 104px;
+    min-width: 104px;
+    height: auto;
+    transform: none;
+    -webkit-mask-image: linear-gradient(to right, black 70%, transparent 100%);
+    mask-image: linear-gradient(to right, black 70%, transparent 100%);
+  }
+
+  .roleCard:hover .cardImg,
+  .roleCard:focus-visible .cardImg {
+    transform: none;
+  }
+
+  .cardOverlay {
+    display: none;
+  }
+
+  .cardContent {
+    padding: 14px 14px 12px 6px;
+    align-items: flex-start;
+    justify-content: center;
+  }
+
+  .cardContent h3 {
+    font-family: "Poppins", sans-serif;
+    color: var(--color-secondary);
+    font-size: 15px;
+    font-weight: 800;
+    margin-bottom: 2px;
+  }
+
+  .cardContent p {
+    font-size: 11px;
+    line-height: 1.35;
+    min-height: auto;
+    margin-bottom: 6px;
+    color: rgba(255, 255, 255, 0.78);
+  }
+
+  .cardCta {
+    min-height: auto;
+    width: auto;
+    border: 0;
+    font-size: 0;
+    justify-content: flex-start;
+}
+
+  .cardCta svg {
+    font-size: 14px;
+    color: #ffffff;
+  }
+
+  .mobileLoginBlock {
+    width: 100%;
+    max-width: 430px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    margin-top: 14px;
+  }
+
+  .loginButton {
+    width: 100%;
+    min-height: 46px;
+    border: 0;
+    border-radius: 8px;
+    background: var(--color-secondary);
+    color: #0a2238;
+    font-weight: 800;
+  cursor: pointer;
+  }
+
+  .mobileSocials {
+    display: flex;
+    gap: 16px;
+    margin-top: 6px;
+  }
+
+  .mobileSocials a {
+    color: rgba(255, 255, 255, 0.78);
+    text-decoration: none;
+    display: flex;
+    font-size: 16px;
+}
+
+  .mobileLoginBlock p {
+    color: rgba(255, 255, 255, 0.72);
+    font-size: 10px;
+    font-style: italic;
+    text-align: center;
+  }
+}
+
+@media (max-width: 430px) {
+  .mainGrid {
+    padding: 22px 18px;
+  }
+
+  .contentSide {
+    min-height: calc(100vh - 44px);
+}
+
+  .mobileLogo {
+    width: 136px;
+    margin-bottom: 8px;
+  }
+
+  .copyBlock {
+    margin-bottom: 12px;
+  }
+
+  .cards {
+    gap: 10px;
+  }
+
+  .roleCard {
+    min-height: 102px;
+  }
+
+  .cardImg {
+    width: 96px;
+    min-width: 96px;
+  }
+
+  .cardContent h3 {
+    font-size: 14px;
+  }
+
+  .cardContent p {
+    font-size: 10px;
+  }
+
+  .loginButton {
+    min-height: 42px;
+  }
+}
+
+@media (max-width: 370px), (max-height: 690px) and (max-width: 900px) {
+  .mainGrid {
+    padding: 16px;
+  }
+
+  .contentSide {
+    min-height: calc(100vh - 32px);
+  }
+
+  .mobileLogo {
+    width: 112px;
+    margin-bottom: 6px;
+  }
+
+  .subtitle {
+    font-size: 18px;
+  }
+
+  .copyBlock {
+    margin-bottom: 10px;
+  }
+
+  .cards {
+    gap: 8px;
+  }
+
+  .roleCard {
+    min-height: 90px;
+  }
+
+  .cardImg {
+    width: 84px;
+    min-width: 84px;
+  }
+
+  .cardContent {
+    padding: 10px 12px 10px 4px;
+  }
+
+  .cardContent h3 {
+    font-size: 13px;
+  }
+
+  .cardContent p {
+    font-size: 9px;
+    line-height: 1.25;
+  }
+
+  .mobileLoginBlock {
+    gap: 9px;
+    margin-top: 10px;
+  }
+
+  .loginButton {
+    min-height: 38px;
+  }
+}

@@ -1,0 +1,336 @@
+.page {
+  min-height: 75vh;
+  background: #fbfaf7;
+  padding: 40px clamp(18px, 5vw, 72px) 72px;
+  color: #16233f;
+}
+
+.shell {
+  width: min(1240px, 100%);
+  margin: 0 auto;
+}
+
+.accountHero {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: clamp(22px, 4vw, 34px);
+  margin-bottom: 24px;
+  background:
+    radial-gradient(circle at 86% 8%, rgba(201, 151, 46, 0.12), transparent 28%),
+    linear-gradient(135deg, #ffffff 0%, #f8f5ee 100%);
+  border: 1px solid #ebe6dc;
+  border-radius: 26px;
+  box-shadow: 0 14px 36px rgba(22, 35, 63, 0.06);
+}
+
+.identity {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  min-width: 0;
+}
+
+.avatar,
+.avatarFallback {
+  width: 88px;
+  height: 88px;
+  flex: 0 0 88px;
+  border-radius: 50%;
+  border: 4px solid #ffffff;
+  box-shadow: 0 10px 28px rgba(22, 35, 63, 0.14);
+}
+
+.avatar {
+  object-fit: cover;
+  background: #f0ede6;
+}
+
+.avatarFallback {
+  display: grid;
+  place-items: center;
+  background: #16233f;
+  color: #ffffff;
+  font-size: 26px;
+  font-weight: 850;
+}
+
+.identityCopy {
+  min-width: 0;
+}
+
+.eyebrow {
+  display: block;
+  margin-bottom: 6px;
+  color: #a14e2f;
+  font-size: 11px;
+  font-weight: 850;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.identityCopy h1 {
+  margin: 0;
+  font-family: "Fraunces", Georgia, serif;
+  color: #16233f;
+  font-size: clamp(30px, 4vw, 44px);
+  line-height: 1.02;
+  font-weight: 650;
+  letter-spacing: -0.025em;
+}
+
+.identityCopy p {
+  margin: 7px 0 0;
+  color: #76756f;
+  font-size: 14px;
+  overflow-wrap: anywhere;
+}
+
+.identityBadges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 13px;
+}
+
+.identityBadges span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  padding: 5px 10px;
+  border-radius: 999px;
+  background: #f3f1ec;
+  color: #5e5c57;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.identityBadges span[data-verified="true"] {
+  background: #edf7f1;
+  color: #24704c;
+}
+
+.editProfileButton {
+  min-height: 46px;
+  padding: 0 18px;
+  border: 1px solid #dcd6ca;
+  border-radius: 14px;
+  background: #ffffff;
+  color: #16233f;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 850;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: transform 160ms ease, border-color 160ms ease, box-shadow 160ms ease;
+}
+
+.editProfileButton:hover {
+  transform: translateY(-1px);
+  border-color: #c1633b;
+  box-shadow: 0 8px 18px rgba(22, 35, 63, 0.07);
+}
+
+.accountLayout {
+  display: grid;
+  grid-template-columns: 250px minmax(0, 1fr);
+  gap: 24px;
+  align-items: start;
+}
+
+.sidebar {
+  position: sticky;
+  top: 94px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.accountNav {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 10px;
+  border: 1px solid #ebe6dc;
+  border-radius: 20px;
+  background: #ffffff;
+  box-shadow: 0 8px 24px rgba(22, 35, 63, 0.045);
+}
+
+.navItem {
+  min-height: 46px;
+  padding: 0 13px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #66645f;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 750;
+  transition: background 150ms ease, color 150ms ease, transform 150ms ease;
+}
+
+.navItem:hover {
+  background: #f8f6f1;
+  color: #16233f;
+}
+
+.navItemActive {
+  background: #f4ece5;
+  color: #a14e2f;
+}
+
+.sidebarNote {
+  display: flex;
+  gap: 10px;
+  padding: 14px;
+  border: 1px solid #e9dfcf;
+  border-radius: 16px;
+  background: #fffaf2;
+  color: #8a6033;
+}
+
+.sidebarNote svg {
+  flex: 0 0 auto;
+  margin-top: 2px;
+}
+
+.sidebarNote div {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.sidebarNote strong {
+  color: #70461f;
+  font-size: 12px;
+}
+
+.sidebarNote span {
+  color: #8a765e;
+  font-size: 10px;
+  line-height: 1.45;
+}
+
+.logoutButton {
+  min-height: 44px;
+  padding: 0 14px;
+  border: 1px solid #efd8d7;
+  border-radius: 13px;
+  background: #fffafa;
+  color: #a23d39;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.content {
+  min-width: 0;
+}
+
+@media (max-width: 991px) {
+  .page {
+    padding: 22px 14px 104px;
+  }
+
+  .accountHero {
+    align-items: flex-start;
+    padding: 20px;
+    border-radius: 22px;
+  }
+
+  .avatar,
+  .avatarFallback {
+    width: 68px;
+    height: 68px;
+    flex-basis: 68px;
+  }
+
+  .identity {
+    gap: 14px;
+  }
+
+  .identityCopy h1 {
+    font-size: 28px;
+  }
+
+  .editProfileButton {
+    min-height: 40px;
+    padding: 0 12px;
+  }
+
+  .accountLayout {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    position: static;
+    gap: 10px;
+  }
+
+  .navScroller {
+    overflow-x: auto;
+    scrollbar-width: none;
+    margin-inline: -14px;
+    padding-inline: 14px;
+  }
+
+  .navScroller::-webkit-scrollbar {
+    display: none;
+  }
+
+  .accountNav {
+    width: max-content;
+    min-width: 100%;
+    flex-direction: row;
+    gap: 6px;
+    padding: 7px;
+    border-radius: 16px;
+  }
+
+  .navItem {
+    min-height: 40px;
+    padding: 0 12px;
+    white-space: nowrap;
+  }
+
+  .sidebarNote,
+  .logoutButton {
+    display: none;
+  }
+}
+
+@media (max-width: 620px) {
+  .accountHero {
+    position: relative;
+    display: block;
+    padding-bottom: 68px;
+  }
+
+  .identity {
+    align-items: flex-start;
+  }
+
+  .identityCopy p {
+    max-width: 210px;
+  }
+
+  .editProfileButton {
+    position: absolute;
+    left: 20px;
+    bottom: 18px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .editProfileButton,
+  .navItem {
+    transition: none;
+  }
+}

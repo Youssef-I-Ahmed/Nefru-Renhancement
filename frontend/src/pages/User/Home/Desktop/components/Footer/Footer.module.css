@@ -1,0 +1,106 @@
+.footer {
+  background: #001426;
+  color: #ffffff;
+  margin-top: 100px;
+  border-top: 2px solid rgba(237, 174, 73, 0.35);
+  position: relative;
+}
+
+.container {
+  max-width: 1400px;
+  margin: auto;
+  padding: 70px clamp(20px, 4vw, 40px) 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 60px;
+  flex-wrap: wrap;
+}
+
+.brand {
+  max-width: 360px;
+}
+
+.logoWrapper {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo {
+  width: 44px;
+  height: 44px;
+  object-fit: contain;
+}
+
+.brand h2 {
+  font-size: 2.4rem;
+  font-family: "Cormorant Garamond", serif;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0;
+  letter-spacing: 0.02em;
+}
+
+.brand p {
+  margin-top: 16px;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 14px;
+}
+
+.links {
+  display: flex;
+  gap: clamp(30px, 5vw, 70px);
+  flex-wrap: wrap;
+}
+
+.links h4 {
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #edae49;
+  font-weight: 700;
+  margin-bottom: 18px;
+}
+
+.links a {
+  display: block;
+  margin-bottom: 10px;
+  text-decoration: none;
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+
+.links a:hover {
+  color: #edae49;
+  transform: translateX(3px);
+}
+
+.bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  text-align: center;
+  padding: 24px clamp(20px, 4vw, 40px);
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.5);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+    gap: 40px;
+    padding-top: 50px;
+  }
+
+  .bottom {
+    flex-direction: column;
+    gap: 8px;
+    text-align: center;
+  }
+}

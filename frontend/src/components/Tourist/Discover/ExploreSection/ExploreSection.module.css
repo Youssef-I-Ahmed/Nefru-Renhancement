@@ -1,0 +1,66 @@
+.section {
+
+    padding: 16px;
+}
+
+.header {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 16px;
+}
+
+.header h2 {
+
+    font-size: clamp(20px, 4vw, 28px);
+}
+
+
+.header button {
+
+    border: none;
+
+    background: none;
+
+    color: #0E5A77;
+
+    cursor: pointer;
+}
+
+.blogs {
+
+    display: grid;
+
+    gap: 16px;
+    grid-template-columns: 1fr;
+
+    /* for touch devices */
+    -webkit-overflow-scrolling: touch;
+}
+
+.blogs::-webkit-scrollbar {
+    display: none;
+}
+
+@media (min-width: 768px) {
+    .blogs {
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    }
+}
+
+.seeAll {
+
+    border: none;
+
+    background: none;
+
+    color: #0E5A77;
+
+    font-weight: 600;
+
+    cursor: pointer;
+}

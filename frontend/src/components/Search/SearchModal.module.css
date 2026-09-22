@@ -1,0 +1,218 @@
+.dialog {
+  width: min(880px, 94vw) !important;
+  max-width: 880px !important;
+  padding: 28px !important;
+  overflow: hidden;
+  border: 1px solid #e9e4da !important;
+  border-radius: 28px !important;
+  background: #fff !important;
+  box-shadow: 0 30px 90px rgba(22, 35, 63, 0.2) !important;
+}
+
+.topline > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: #c1633b;
+  font-size: 11px;
+  font-weight: 850;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.topline h2 {
+  margin: 8px 0 7px;
+  color: #16233f;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(34px, 4vw, 48px);
+  line-height: 1;
+  letter-spacing: -0.025em;
+}
+
+.topline p {
+  margin: 0;
+  color: #6b7280;
+  font-size: 13px;
+}
+
+.searchForm {
+  margin-top: 24px;
+  padding: 10px;
+  border: 1px solid #e9e4da;
+  border-radius: 22px;
+  background: #fbfaf7;
+}
+
+.queryBox {
+  min-height: 60px;
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 0 14px;
+  border: 1px solid #e8e3da;
+  border-radius: 16px;
+  background: #fff;
+  color: #16233f;
+}
+
+.queryBox input {
+  width: 100%;
+  min-width: 0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: #16233f;
+  font: inherit;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.queryBox input::placeholder {
+  color: #8d929a;
+  font-weight: 550;
+}
+
+.detailGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.detailGrid label {
+  min-width: 0;
+  padding: 10px 12px;
+  border: 1px solid #ece8df;
+  border-radius: 15px;
+  background: #fff;
+}
+
+.detailGrid label > span {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 5px;
+  color: #7c818a;
+  font-size: 10px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.detailGrid input,
+.detailGrid select {
+  width: 100%;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: #16233f;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 750;
+}
+
+.personalBookingNote {
+  margin-top: 8px;
+  padding: 10px 12px;
+  border: 1px solid #ece5da;
+  border-radius: 14px;
+  background: #fffaf5;
+  color: #5f6470;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.personalBookingNote svg {
+  flex: 0 0 auto;
+  color: #c1633b;
+}
+
+.personalBookingNote strong {
+  color: #16233f;
+}
+
+.searchButton {
+  width: 100%;
+  min-height: 52px;
+  margin-top: 8px;
+  border: 0;
+  border-radius: 15px;
+  background: #c1633b;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 850;
+  cursor: pointer;
+}
+
+.discoveryGrid {
+  display: grid;
+  grid-template-columns: 0.85fr 1.15fr;
+  gap: 26px;
+  margin-top: 26px;
+}
+
+.discoveryGrid h3 {
+  margin: 0 0 11px;
+  color: #16233f;
+  font-size: 12px;
+  font-weight: 850;
+}
+
+.chips,
+.destinations {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.chips button,
+.destinations button {
+  min-height: 38px;
+  border: 1px solid #e8e3da;
+  border-radius: 999px;
+  padding: 0 13px;
+  background: #fff;
+  color: #29364f;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 750;
+  cursor: pointer;
+}
+
+.chips button:hover,
+.destinations button:hover {
+  border-color: #d5c5b6;
+  background: #fcf7f2;
+}
+
+@media (max-width: 640px) {
+  .dialog {
+    width: calc(100vw - 20px) !important;
+    padding: 21px 16px !important;
+    border-radius: 23px !important;
+  }
+
+  .topline h2 {
+    font-size: 34px;
+  }
+
+  .detailGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .discoveryGrid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}

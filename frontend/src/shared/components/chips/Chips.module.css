@@ -1,0 +1,27 @@
+.container{
+    display:flex;
+    gap:20px;
+    width:100%;
+    overflow:auto;
+    scrollbar-width:none;
+}
+.chip{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:40px;
+    width:fit-content;
+    padding:0 15px;
+    border-radius:25px;
+    font-size:16px;
+    background-color:white;
+    gap:10px;
+    cursor:pointer;
+}
+.icon{
+    color:var(--color-secondary)
+}
+.active{
+    color:white;
+    background-color:var(--color-primary)
+}

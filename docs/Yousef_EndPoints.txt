@@ -1,0 +1,18 @@
+Auth
+POST   /api/auth/register
+POST   /api/auth/login
+POST   /api/auth/forgot-password
+POST   /api/auth/reset-password
+PATCH  /api/auth/change-password
+
+Users & Profiles(Tourist view)
+GET    /api/users/me
+PATCH  /api/users/me
+
+
+Notifications
+GET    /api/notifications
+PATCH  /api/notifications/:id/read
+PATCH  /api/notifications/read-all
+
+

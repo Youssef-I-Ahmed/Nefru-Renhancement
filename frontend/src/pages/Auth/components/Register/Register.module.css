@@ -1,0 +1,844 @@
+.container {
+  width: 100%;
+  height: 100svh;
+  overflow: hidden;
+  background: #fbf7ef;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.authLayout {
+  flex: 1 1 auto;
+  min-height: 0;
+  width: 100%;
+
+  display: flex;
+  align-items: stretch;
+}
+
+.formSide {
+  min-width: 0;
+  display: flex;
+  align-items: stretch;
+}
+
+.hero {
+  position: relative;
+  flex: 1 1 54%;
+  min-width: 0;
+
+  background-image: url('../../../../assets/images/tours/pyramids.webp');
+  background-size: cover;
+  background-position: center;
+
+  display: flex;
+  align-items: flex-start;
+  padding: clamp(52px, 6vw, 82px);
+  color: #fff;
+  overflow: hidden;
+}
+
+.heroOverlay {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgba(4, 24, 45, 0.78) 0%, rgba(4, 24, 45, 0.42) 45%, rgba(4, 24, 45, 0.08) 100%),
+    linear-gradient(180deg, rgba(4, 24, 45, 0.18) 0%, rgba(4, 24, 45, 0.12) 60%, rgba(4, 24, 45, 0.42) 100%);
+  z-index: 0;
+}
+
+.heroContent {
+  position: relative;
+  z-index: 1;
+  max-width: 610px;
+}
+
+.heroTitle {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: clamp(48px, 5.2vw, 78px);
+  line-height: 0.98;
+  font-weight: 400;
+  letter-spacing: -2px;
+  margin: 0 0 24px;
+}
+
+.heroLine {
+  width: 320px;
+  max-width: 70%;
+  height: 1px;
+  background: linear-gradient(90deg, var(--color-secondary), rgba(255, 255, 255, 0));
+  margin-bottom: 24px;
+  position: relative;
+}
+
+.heroLine::before {
+  content: '✦';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translate(-2px, -50%);
+  color: var(--color-secondary);
+  font-size: 18px;
+}
+
+.heroText {
+  max-width: 420px;
+  font-size: clamp(17px, 1.4vw, 22px);
+  line-height: 1.5;
+  margin: 0;
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.registerSide {
+  flex: 1 1 46%;
+  min-width: 880px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 16px clamp(24px, 4vw, 58px);
+  background:
+    radial-gradient(circle at 15% 12%, rgba(212, 162, 88, 0.12), transparent 26%),
+    linear-gradient(135deg, #fffaf2 0%, #ffffff 52%, #f8efe3 100%);
+  overflow: hidden;
+}
+
+.registerCard {
+  width: min(100%, 570px);
+  padding: 18px 26px 20px;
+  border: 1px solid rgba(15, 45, 78, 0.16);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.82);
+  box-shadow: 0 18px 50px rgba(20, 31, 45, 0.14);
+  backdrop-filter: blur(10px);
+}
+
+.StepTwoContainer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.content {
+  width: 100%;
+  max-width: var(--auth-content-width);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.logo {
+  width: clamp(110px, 10vw, 145px);
+  max-width: 70%;
+  display: block;
+  margin: 0 auto 4px;
+}
+
+.title {
+  color: var(--color-primary);
+  font-size: var(--font-title);
+  font-weight: 700;
+  line-height: 1.2;
+  text-align: center;
+  margin-bottom: 8px;
+}
+
+.subtitle {
+  color: var(--color-text-muted);
+  font-size: 13px;
+  line-height: 1.35;
+  text-align: center;
+  margin-bottom: 12px;
+}
+
+.form {
+  width: 100%;
+  max-width: 100%;
+  padding: 14px 18px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius-lg);
+  background-color: var(--color-card);
+  box-shadow: var(--shadow-card);
+}
+
+.field {
+  width: 100%;
+  margin-bottom: 8px;
+}
+
+.field label,
+.label {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-text);
+  margin-bottom: 4px;
+  letter-spacing: 0.1px;
+}
+
+.form input:not(.checkbox):not(.hiddenInput) {
+  min-height: 28px;
+  height: 28px;
+  font-size: 12px;
+}
+
+.hiddenInput {
+  display: none;
+}
+
+.documentTypeSelect {
+  width: 100%;
+  min-height: 32px;
+  border: 2px solid var(--color-border);
+  border-radius: var(--border-radius-sm);
+  background: var(--color-input-bg);
+  color: var(--color-text);
+  padding: 4px 10px;
+  font-size: 12px;
+}
+
+.documentTypeSelect:focus-visible {
+  outline: 2px solid var(--color-secondary);
+  outline-offset: 1px;
+}
+
+.passportIcon {
+  color: var(--color-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  padding: 0 12px;
+  flex-shrink: 0;
+}
+
+.uploadZone {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: 1.5px dashed var(--color-secondary);
+  border-radius: var(--border-radius-lg);
+  padding: 9px 14px;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+  background: var(--color-input-bg);
+  outline: none;
+}
+
+.uploadZone:hover,
+.uploadZone:focus-visible,
+.uploadZoneDragging {
+  background: #fdf8ee;
+  border-color: var(--color-secondary);
+}
+
+.uploadZoneError {
+  border-color: var(--color-warning);
+}
+
+.uploadText {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+}
+
+.uploadTitle {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--color-secondary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 260px;
+}
+
+.uploadSub {
+  font-size: 10px;
+  color: var(--color-text-muted);
+}
+
+.termsRow {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  margin: 2px 0 10px;
+}
+
+.checkbox {
+  width: 16px;
+  height: 16px;
+  min-width: 16px;
+  border-radius: 4px;
+  border: 1.5px solid var(--color-border);
+  background: #fff;
+  cursor: pointer;
+  margin-top: 1px;
+  padding: 0;
+}
+
+.checkboxChecked {
+  background: var(--color-secondary);
+  border-color: var(--color-secondary);
+}
+
+.termsText {
+  font-size: 11px;
+  color: var(--color-text-muted);
+  line-height: 1.4;
+  margin: 0;
+}
+
+.termsLink,
+.loginLink {
+  color: var(--color-secondary);
+  text-decoration: none;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.termsLink:hover,
+.loginLink:hover {
+  text-decoration: underline;
+}
+
+.errorMsg {
+  display: block;
+  color: var(--color-warning);
+  font-size: 11px;
+  margin-top: 3px;
+}
+
+.loginRow {
+  text-align: center;
+  margin-top: 10px;
+  font-size: 12px;
+  color: var(--color-text-muted);
+}
+
+.roleToggle {
+  width: 100%;
+  min-height: 38px;
+  padding: 3px;
+  margin-bottom: 10px;
+  border: 1.5px solid var(--color-border);
+  border-radius: 999px;
+  background-color: #fff;
+
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.roleOption {
+  flex: 1;
+  height: 30px;
+  border: none;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--color-primary);
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.2s ease;
+}
+
+.roleOption svg {
+  font-size: 12px;
+}
+
+.roleOptionActive {
+  background-color: var(--color-primary);
+  color: #fff;
+  box-shadow: 0 8px 18px rgba(6, 38, 77, 0.28);
+}
+
+.roleOption:hover {
+  background-color: rgba(6, 38, 77, 0.08);
+}
+
+.roleOptionActive:hover {
+  background-color: var(--color-primary);
+}
+
+.roleOption:focus-visible {
+  outline: 2px solid var(--color-secondary);
+  outline-offset: 2px;
+}
+
+.form > div:last-child button {
+  min-height: 38px;
+  height: 38px;
+  font-size: 13px;
+}
+
+@media (max-width: 1180px) {
+  .hero {
+    flex-basis: 48%;
+    padding: 44px;
+  }
+
+  .registerSide {
+    flex-basis: 52%;
+    min-width: 450px;
+    padding: 16px clamp(20px, 4vw, 46px);
+  }
+
+  .heroTitle {
+    font-size: clamp(44px, 5vw, 64px);
+  }
+
+  .registerCard {
+    width: min(100%, 540px);
+    padding: 16px 22px 18px;
+  }
+}
+
+@media (max-width: 1024px) and (min-width: 901px) {
+  .hero {
+    flex-basis: 44%;
+    padding: 36px;
+  }
+
+  .registerSide {
+    flex-basis: 56%;
+    min-width: 430px;
+  }
+
+  .heroTitle {
+    font-size: 46px;
+  }
+
+  .heroText {
+    font-size: 16px;
+  }
+
+  .registerCard {
+    width: min(100%, 500px);
+    padding: 14px 20px 16px;
+  }
+
+  .logo {
+    width: 115px;
+  }
+
+  .form {
+    padding: 12px 16px;
+  }
+
+  .field {
+    margin-bottom: 7px;
+  }
+
+  .roleToggle {
+    min-height: 36px;
+    margin-bottom: 8px;
+  }
+
+  .roleOption {
+    height: 28px;
+  }
+
+  .uploadZone {
+    padding: 8px 12px;
+  }
+
+  .loginRow {
+    margin-top: 8px;
+  }
+}
+
+@media (max-height: 820px) and (min-width: 901px) {
+  .registerCard {
+    transform: scale(0.94);
+    transform-origin: center;
+  }
+
+  .hero {
+    padding-top: 48px;
+  }
+
+  .heroTitle {
+    font-size: clamp(44px, 5vw, 68px);
+  }
+}
+
+@media (max-height: 720px) and (min-width: 901px) {
+  .registerCard {
+    transform: scale(0.88);
+  }
+
+  .hero {
+    padding-top: 34px;
+  }
+}
+
+@media (min-width: 992px) {
+  .hero,
+  .formSide {
+    flex: 0 0 50%;
+    width: 50%;
+    max-width: 50%;
+    min-width: 0;
+  }
+
+  .formSide > .container {
+    flex: 1 1 auto;
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+    background: transparent;
+    overflow: hidden;
+  }
+
+  .formSide .authLayout {
+    height: 100%;
+    min-height: 0;
+  }
+
+  .formSide .registerSide {
+    flex: 1 1 auto;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+  }
+}
+
+@media (max-width: 991.98px) {
+  .container {
+    min-height: 100svh;
+    height: auto;
+    width: 100%;
+
+    background-image: url('../../../../assets/images/RecoveryBg.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    padding: clamp(18px, 4vw, 28px);
+    overflow-x: hidden;
+  }
+
+  .authLayout {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .hero {
+    display: none;
+  }
+
+  .registerSide {
+    width: 100%;
+    min-width: 0;
+    padding: 0;
+    background: transparent;
+    display: flex;
+    justify-content: center;
+    overflow: visible;
+  }
+
+  .registerCard {
+    width: 100%;
+    max-width: min(var(--auth-content-width), 420px);
+    padding: 0;
+    border: none;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+    backdrop-filter: none;
+    transform: none;
+  }
+
+  .logo {
+    width: clamp(132px, 34vw, var(--auth-logo-width));
+    max-width: 70%;
+    margin: 0 auto 12px;
+  }
+
+  .subtitle {
+    margin-bottom: 16px;
+  }
+
+  .form {
+    max-width: 100%;
+    padding: clamp(18px, 4.4vw, 24px);
+  }
+
+  .field {
+    margin-bottom: 14px;
+  }
+
+  .roleToggle {
+    min-height: 48px;
+    margin-bottom: 16px;
+  }
+
+  .roleOption {
+    height: 38px;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 18px;
+  }
+
+  .form {
+    padding: 18px;
+  }
+
+  .logo {
+    width: 132px;
+    margin-bottom: 10px;
+  }
+
+  .subtitle {
+    margin-bottom: 14px;
+  }
+
+  .field {
+    margin-bottom: 12px;
+  }
+
+  .roleToggle {
+    min-height: 44px;
+    margin-bottom: 14px;
+  }
+
+  .roleOption {
+    height: 34px;
+    font-size: 12px;
+    gap: 6px;
+  }
+
+  .uploadZone {
+    padding: 12px;
+    gap: 10px;
+  }
+
+  .passportIcon {
+    font-size: 32px;
+    padding: 0 8px 0 0;
+  }
+
+  .uploadTitle {
+    max-width: 180px;
+    font-size: 12px;
+  }
+
+  .uploadSub {
+    font-size: 11px;
+  }
+
+  .termsRow {
+    gap: 9px;
+    margin: 2px 0 14px;
+  }
+
+  .checkbox {
+    width: 17px;
+    height: 17px;
+    min-width: 17px;
+  }
+
+  .termsText,
+  .loginRow {
+    font-size: 12px;
+  }
+
+  .loginRow {
+    margin-top: 16px;
+  }
+}
+
+@media (max-width: 400px) {
+  .container {
+    padding: 14px;
+  }
+
+  .registerCard {
+    max-width: 100%;
+  }
+
+  .logo {
+    width: 118px;
+  }
+
+  .form {
+    padding: 14px;
+  }
+
+  .field {
+    margin-bottom: 10px;
+  }
+
+  .label {
+    margin-bottom: 4px;
+  }
+
+  .uploadTitle {
+    max-width: 150px;
+  }
+}
+
+@media (max-height: 760px) and (max-width: 480px) {
+  .container {
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+
+  .logo {
+    width: 104px;
+    margin-bottom: 4px;
+  }
+
+  .subtitle {
+    font-size: 11px;
+    line-height: 1.25;
+    margin-bottom: 8px;
+  }
+
+  .form {
+    padding: 12px;
+    border-radius: 14px;
+  }
+
+  .roleToggle {
+    min-height: 36px;
+    margin-bottom: 8px;
+    padding: 3px;
+  }
+
+  .roleOption {
+    height: 28px;
+    font-size: 10px;
+    gap: 4px;
+  }
+
+  .roleOption svg {
+    font-size: 11px;
+  }
+
+  .field {
+    margin-bottom: 7px;
+  }
+
+  .label {
+    font-size: 11px;
+    margin-bottom: 3px;
+  }
+
+  .uploadZone {
+    padding: 7px 10px;
+    gap: 8px;
+    border-radius: 12px;
+  }
+
+  .passportIcon {
+    font-size: 24px;
+    padding: 0 6px 0 0;
+  }
+
+  .uploadTitle {
+    font-size: 10px;
+    max-width: 150px;
+  }
+
+  .uploadSub {
+    font-size: 9px;
+  }
+
+  .termsRow {
+    gap: 7px;
+    margin: 0 0 8px;
+  }
+
+  .checkbox {
+    width: 14px;
+    height: 14px;
+    min-width: 14px;
+    border-radius: 3px;
+  }
+
+  .termsText {
+    font-size: 10px;
+    line-height: 1.35;
+  }
+
+  .errorMsg {
+    font-size: 10px;
+    margin-top: 3px;
+  }
+
+  .loginRow {
+    font-size: 10px;
+    margin-top: 10px;
+  }
+}
+
+.googleWrap {
+  width: 100%;
+  margin: 2px 0 8px;
+}
+
+.authDivider {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 7px 0 9px;
+  color: #7b8190;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+}
+
+.authDivider::before,
+.authDivider::after {
+  content: "";
+  height: 1px;
+  flex: 1;
+  background: rgba(15, 45, 78, 0.14);
+}
+
+.roleHint {
+  margin: -2px 0 8px;
+  color: var(--color-text-muted);
+  font-size: 10px;
+  line-height: 1.4;
+  text-align: center;
+}
+
+.loginLinkButton {
+  border: 0;
+  background: transparent;
+  color: var(--color-secondary);
+  font: inherit;
+  font-weight: 700;
+  padding: 0;
+  cursor: pointer;
+}
+
+.loginLinkButton:hover {
+  text-decoration: underline;
+}

@@ -1,0 +1,30 @@
+.section { width: 100%; }
+.heading { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 16px; }
+.heading > span { width: 38px; height: 38px; border-radius: 12px; display: grid; place-items: center; background: #f4ece5; color: #a14e2f; }
+.heading h2 { margin: 0; color: #16233f; font-family: "Fraunces", Georgia, serif; font-size: 25px; font-weight: 650; }
+.heading p { margin: 4px 0 0; color: #807d76; font-size: 11px; }
+.grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 16px; }
+.card { padding: 20px; border: 1px solid #ebe6dc; border-radius: 20px; background: #fff; box-shadow: 0 8px 24px rgba(22,35,63,.035); }
+.cardTitle { display: flex; gap: 10px; margin-bottom: 18px; color: #a14e2f; }
+.cardTitle h3 { margin: 0; color: #16233f; font-size: 15px; }
+.cardTitle p { margin: 3px 0 0; color: #88857e; font-size: 10px; line-height: 1.45; }
+.successMessage, .errorMessage { margin: 0 0 14px; padding: 10px 12px; border-radius: 11px; display: flex; align-items: center; gap: 7px; font-size: 11px; }
+.successMessage { border: 1px solid #cce5d6; background: #f2fbf6; color: #28704d; }
+.errorMessage { border: 1px solid #efd2d2; background: #fff7f7; color: #a23d39; }
+.fields { display: flex; flex-direction: column; gap: 11px; }
+.fields label { display: flex; flex-direction: column; gap: 6px; color: #625f59; font-size: 10px; font-weight: 800; }
+.fields input { min-height: 46px; padding: 0 12px; border: 1px solid #ddd7cc; border-radius: 12px; background: #fff; color: #202735; font: inherit; font-size: 12px; outline: 0; }
+.fields input:focus { border-color: #c1633b; box-shadow: 0 0 0 3px rgba(193,99,59,.11); }
+.primaryButton, .secondaryButton, .dangerButton, .cancelButton { width: 100%; min-height: 44px; margin-top: 14px; border-radius: 12px; font: inherit; font-size: 11px; font-weight: 850; cursor: pointer; }
+.primaryButton { border: 0; background: #c1633b; color: #fff; }
+.secondaryButton { border: 1px solid #ddd7cc; background: #fff; color: #16233f; }
+.dangerButton { border: 1px solid #efd2d2; background: #fff7f7; color: #a23d39; }
+.cancelButton { min-height: 36px; margin-top: 7px; border: 0; background: transparent; color: #77746d; }
+.primaryButton:disabled, .secondaryButton:disabled, .dangerButton:disabled { opacity: .55; cursor: not-allowed; }
+.providerStatus { min-height: 52px; padding: 0 13px; border: 1px solid #e4dfd5; border-radius: 13px; display: flex; align-items: center; justify-content: space-between; background: #faf9f6; }
+.providerStatus span { color: #4f4d48; font-size: 11px; font-weight: 800; }
+.providerStatus strong { color: #8a877f; font-size: 10px; }
+.providerStatus[data-linked="true"] strong { color: #28704d; }
+.hint { margin: 7px 0 0; color: #8d8982; font-size: 10px; line-height: 1.45; }
+.googleButtonWrap { margin-top: 14px; }
+@media (max-width: 760px) { .grid { grid-template-columns: 1fr; } }

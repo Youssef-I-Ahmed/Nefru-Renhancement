@@ -1,0 +1,58 @@
+.backButton {
+  display: none;
+}
+
+@media (max-width: 900px) {
+  .backButton {
+    position: fixed;
+    top: max(14px, env(safe-area-inset-top));
+    left: 16px;
+    z-index: 30;
+
+    width: 40px;
+    height: 40px;
+    border: 1px solid rgba(237, 174, 73, 0.42);
+    border-radius: 50%;
+    background: rgba(0, 26, 51, 0.54);
+    color: #ffffff;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+    transition:
+      transform 0.18s ease,
+      background-color 0.18s ease,
+      border-color 0.18s ease;
+  }
+
+  .backButton:hover,
+  .backButton:focus-visible {
+    transform: translateX(-2px);
+    background: rgba(237, 174, 73, 0.18);
+    border-color: rgba(237, 174, 73, 0.85);
+    outline: none;
+  }
+
+  .backButton svg {
+    width: 22px;
+    height: 22px;
+  }
+}
+
+@media (max-width: 370px), (max-height: 690px) and (max-width: 900px) {
+  .backButton {
+    top: 12px;
+    left: 12px;
+    width: 36px;
+    height: 36px;
+  }
+
+  .backButton svg {
+    width: 20px;
+    height: 20px;
+  }
+}

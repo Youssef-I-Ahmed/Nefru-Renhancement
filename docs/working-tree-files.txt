@@ -1,0 +1,161 @@
+Working tree at 2026-09-19 handoff. Includes preserved pre-existing changes; not a per-turn ownership list.
+
+ M .agent/CHANGELOG.md
+ M .agent/PLAN.md
+ M .gitignore
+ M backend/.env.example
+ M backend/package-lock.json
+ M backend/package.json
+ M backend/src/config/cloudinary.js
+ M backend/src/config/db.js
+ M backend/src/config/env.js
+ M backend/src/config/verificationUpload.js
+ M backend/src/controllers/Admin/Admin.controller.js
+ M backend/src/controllers/Admin/accountReview.controller.js
+ M backend/src/controllers/Admin/bookingAnalytics.controller.js
+ M backend/src/controllers/Admin/services.js
+ M backend/src/controllers/Admin/tourModeration.controller.js
+ M backend/src/controllers/Auth/authUser.controller.js
+ M backend/src/controllers/guideTripManagement.controller.js
+ M backend/src/controllers/guideVerification.controller.js
+ M backend/src/controllers/payment.controller.js
+ M backend/src/controllers/profile.controller.js
+ M backend/src/controllers/review.controller.js
+ M backend/src/controllers/savedTrip.controller.js
+ M backend/src/controllers/trip.controller.js
+ M backend/src/middlewares/authMiddleware.js
+ M backend/src/middlewares/errorHandler.js
+ M backend/src/models/booking.model.js
+ M backend/src/models/bookingSeat.model.js
+ M backend/src/models/guide.model.js
+ M backend/src/models/guideVerification.model.js
+ M backend/src/models/notification.model.js
+ M backend/src/models/review.model.js
+ M backend/src/models/tourist.model.js
+ M backend/src/models/trip.model.js
+ M backend/src/models/user.model.js
+ M backend/src/routes/guideVerification.routes.js
+ M backend/src/routes/index.js
+ M backend/src/routes/payment.routes.js
+ M backend/src/routes/trip.routes.js
+ M backend/src/scripts/seed.js
+ M backend/src/server.js
+ M backend/src/services/Booking.service.js
+ M backend/src/services/guide.service.js
+ M backend/src/services/home.service.js
+ M backend/src/services/media.service.js
+ M backend/src/utils/authEmailTemplates.js
+ M backend/src/utils/sendEmail.js
+ M frontend/.env.example
+ M frontend/package-lock.json
+ M frontend/package.json
+ M frontend/src/assets/icons.jsx
+ M frontend/src/components/Checkout/Checkout.module.css
+ M frontend/src/components/Checkout/CheckoutWizard.jsx
+ M frontend/src/components/Search/ExploreSearchBar.jsx
+ M frontend/src/components/Tourist/Discover/CategoryTabs/CategoryTabs.jsx
+ M frontend/src/components/Tourist/Discover/TourCard/TourCard.jsx
+ M frontend/src/components/ui/ExperienceCard/ExperienceCard.jsx
+ M frontend/src/components/ui/button.jsx
+ M frontend/src/components/ui/command.jsx
+ M frontend/src/components/ui/dialog.jsx
+ M frontend/src/components/ui/input-group.jsx
+ M frontend/src/components/ui/input.jsx
+ M frontend/src/components/ui/textarea.jsx
+ M frontend/src/main.jsx
+ M frontend/src/pages/Admin/components/Sidebar/Sidebar.jsx
+ M frontend/src/pages/Admin/components/Table/Table.jsx
+ M frontend/src/pages/Admin/pages/Accounts/Accounts.jsx
+ M frontend/src/pages/Admin/pages/Analytics/Analytics.jsx
+ M frontend/src/pages/Admin/pages/Booking/Booking.jsx
+ M frontend/src/pages/Admin/pages/CMS/CMS.jsx
+ M frontend/src/pages/Admin/pages/DashboardStatus/DashboardStatus.jsx
+ M frontend/src/pages/Auth/components/ResetPassword/components/ResetPasswordForm.jsx
+ M frontend/src/pages/Guide/CreateTour/CreateTour.jsx
+ M frontend/src/pages/Guide/GuideBookings/GuideBookings.jsx
+ M frontend/src/pages/Guide/GuideCalendar/GuideCalendar.jsx
+ M frontend/src/pages/Guide/GuideDashboard/GuideDashboard.jsx
+ M frontend/src/pages/Guide/GuideEarnings/GuideEarnings.jsx
+ M frontend/src/pages/Guide/GuideVerification/GuideVerification.jsx
+ M frontend/src/pages/Guide/Schedule/Schedule.jsx
+ M frontend/src/pages/Guide/TourApprove/TourApprove.jsx
+ M frontend/src/pages/Guide/TourMedia/TourMedia.jsx
+ M frontend/src/pages/Guide/ToursManagement/ToursManagement.jsx
+ M frontend/src/pages/Guide/components/GuideSidebar/GuideSidebar.jsx
+ M frontend/src/pages/User/AvailableToday/AvailableTodayPage.jsx
+ M frontend/src/pages/User/Discover/Discover.jsx
+ M frontend/src/pages/User/DiscoverEgypt/DiscoverEgyptPage.jsx
+ M frontend/src/pages/User/Home/Desktop/DesktopHome.jsx
+ M frontend/src/pages/User/Home/Desktop/components/DiscoverEgypt/DiscoverEgypt.jsx
+ M frontend/src/pages/User/Home/Mobile/MobileHome.jsx
+ M frontend/src/pages/User/Home/PremiumHome.jsx
+ M frontend/src/pages/User/NearbyMap/NearbyMap.jsx
+ M frontend/src/pages/User/Profile/Desktop/components/ProfileSidebar.jsx
+ M frontend/src/pages/User/Profile/pages/MyBookings/MyBookings.jsx
+ M frontend/src/pages/User/Profile/pages/MyBookings/MyBookingsPremium.module.css
+ M frontend/src/pages/User/Profile/pages/ReviewsWritten/ReviewsWritten.jsx
+ M frontend/src/pages/User/RecommendedTrips/RecommendedTrips.jsx
+ M frontend/src/pages/User/Settings/Settings.jsx
+ M frontend/src/pages/User/Settings/Settings.module.css
+ M frontend/src/pages/User/Trips/Book/Book.jsx
+ M frontend/src/pages/User/Trips/Guide/Guide.jsx
+ M frontend/src/pages/User/Trips/Info/Info.jsx
+ M frontend/src/pages/User/User.jsx
+ M frontend/src/pages/User/api.js
+ M frontend/src/routes/ProtectedRoute.jsx
+ M frontend/src/routes/RequireApprovedGuide.jsx
+ M frontend/src/routes/routes.jsx
+ M frontend/src/shared/components/cards/Cards.jsx
+ M frontend/src/utils/formatters.js
+ M frontend/vite.config.js
+?? .agent/checklists/marketplace.md
+?? .github/workflows/quality.yml
+?? EGP-CURRENCY-MIGRATION.md
+?? PAYMOB_LOCAL_TESTING.md
+?? backend/.env.demo.example
+?? backend/src/controllers/fx.controller.js
+?? backend/src/controllers/marketplace.controller.js
+?? backend/src/domain/policies.js
+?? backend/src/models/auditLog.model.js
+?? backend/src/models/domainJob.model.js
+?? backend/src/models/fxRate.model.js
+?? backend/src/models/occurrence.model.js
+?? backend/src/models/operationalCase.model.js
+?? backend/src/models/paymentAttempt.model.js
+?? backend/src/models/paymentMethod.model.js
+?? backend/src/models/privateExperienceSurvey.model.js
+?? backend/src/models/tripRevision.model.js
+?? backend/src/routes/fx.routes.js
+?? backend/src/routes/marketplace.routes.js
+?? backend/src/scripts/checkSyntax.js
+?? backend/src/scripts/demo/fixtures.js
+?? backend/src/scripts/demo/seed.demo.test.js
+?? backend/src/scripts/domain.worker.js
+?? backend/src/scripts/migrateMarketplace.js
+?? backend/src/scripts/migrateUsdToEgp.js
+?? backend/src/scripts/seed.demo.js
+?? backend/src/services/catalog.service.js
+?? backend/src/services/domainWorker.service.js
+?? backend/src/services/fxRate.service.js
+?? backend/src/services/mail.service.js
+?? backend/src/services/marketplace.service.js
+?? backend/src/services/paymentToken.service.js
+?? backend/src/services/paymob.service.js
+?? backend/src/services/quality.service.js
+?? backend/src/services/reservation.service.js
+?? backend/src/services/reviewLifecycle.service.js
+?? backend/src/tests/domain.test.js
+?? backend/src/tests/marketplace.integration.test.js
+?? docs/implementation-report.md
+?? docs/marketplace-implementation.md
+?? docs/portfolio-deployment.md
+?? docs/working-tree-files.txt
+?? frontend/src/components/Checkout/PaymobPixel.jsx
+?? frontend/src/pages/Marketplace/Operations.css
+?? frontend/src/pages/Marketplace/Operations.jsx
+?? frontend/src/routes/returnTo.js
+?? frontend/src/shared/components/PriceDisplay/PriceDisplay.jsx
+?? frontend/src/shared/components/PriceDisplay/PriceDisplay.module.css
+?? frontend/src/state/CurrencyProvider.jsx
+?? frontend/src/state/currencyContext.js
+?? frontend/vercel.json

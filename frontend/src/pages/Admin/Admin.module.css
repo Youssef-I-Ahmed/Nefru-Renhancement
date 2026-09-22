@@ -1,0 +1,2 @@
+.dashboard{min-height:100vh;background:#f7f5f0;color:#16233f;display:grid;grid-template-columns:238px minmax(0,1fr)}.sidebar{position:sticky;top:0;height:100vh;z-index:40}.body{min-width:0}.navbar{position:sticky;top:0;z-index:35}.page{padding:26px clamp(16px,3vw,34px) 48px}
+@media(max-width:960px){.dashboard{display:block}.sidebar{position:sticky;top:0;height:auto;z-index:50}.navbar{top:66px}.page{padding-top:20px}}

@@ -1,0 +1,4 @@
+.page { width: 100%; min-height: calc(100svh - 80px); display: grid; grid-template-columns: minmax(260px, 300px) minmax(0, 1fr); gap: clamp(var(--space-6), 3vw, var(--space-10)); align-items: start; margin: 0 auto; padding: var(--space-10) clamp(var(--tablet-page-padding), 5vw, var(--desktop-page-padding)) var(--space-12); background: var(--color-surface-muted); }
+.content { min-width: 0; }
+@media (min-width: 1600px) { .page { padding-inline: max(var(--desktop-page-padding), calc((100vw - var(--page-max-width)) / 2)); } }
+@media (max-width: 1199px) { .page { grid-template-columns: 260px minmax(0, 1fr); gap: var(--space-6); padding-inline: var(--tablet-page-padding); } }

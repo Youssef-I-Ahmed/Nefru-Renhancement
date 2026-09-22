@@ -1,0 +1,37 @@
+.section {
+
+    padding: 16px;
+}
+
+.header {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 16px;
+}
+
+.header button {
+
+    border: none;
+
+    background: none;
+
+    color: #0E5A77;
+
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+.tours {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 16px;
+}

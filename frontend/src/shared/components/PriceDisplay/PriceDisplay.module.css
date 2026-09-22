@@ -1,0 +1,4 @@
+.wrap{display:inline-flex;flex-direction:column;align-items:flex-start;gap:2px;line-height:1.2}
+.primary{font:inherit;color:inherit;font-weight:800}
+.approx{font-size:.74em;font-weight:600;color:#726b60;white-space:nowrap}
+.suffix{font-size:.72em;font-weight:600;color:#777168}
