@@ -1,4 +1,4 @@
-import {renderTransactionalEmail} from '../../services/mail.service.js';
+import { renderTransactionalEmail } from '../../services/mail.service.js';
 import crypto from "crypto";
 
 import { env } from "../../config/env.js";
@@ -168,8 +168,8 @@ async function createAccount({
 
     return { user, profile };
   } catch (error) {
-    if (profile) await profile.deleteOne().catch(() => {});
-    if (user) await user.deleteOne().catch(() => {});
+    if (profile) await profile.deleteOne().catch(() => { });
+    if (user) await user.deleteOne().catch(() => { });
     throw error;
   }
 }
@@ -245,7 +245,7 @@ async function sendVerificationEmail(user) {
     // Keep any previously issued link valid when SMTP is temporarily down.
     user.emailVerificationToken = previousToken;
     user.emailVerificationExpires = previousExpiry;
-    await user.save({ validateBeforeSave: false }).catch(() => {});
+    await user.save({ validateBeforeSave: false }).catch(() => { });
     throw error;
   }
 }
@@ -436,11 +436,31 @@ export const loginUser = async (req, res, next) => {
       });
     }
 
+    // if (
+    //   !env.devAuthBypass &&
+    //   !user.emailVerified &&
+    //   hasLocalProvider(user) &&
+    //   user.emailVerificationToken
+    // ) {
+    //   return res.status(403).json({
+    //     success: false,
+    //     message:
+    //       "Please verify your email before logging in. Check your Inbox and Spam/Junk folders for the verification link.",
+    //     error: { code: "EMAIL_NOT_VERIFIED" },
+    //   });
+    // }
+
+    // // Backward-compatible migration for accounts created before email
+    // // verification was introduced. New unverified accounts always have a
+    // // verification token, so only legacy accounts reach this branch.
+    // if (!user.emailVerified && !user.emailVerificationToken) {
+    //   user.emailVerified = true;
+    //   await user.save({ validateBeforeSave: false });
+    // }
     if (
       !env.devAuthBypass &&
       !user.emailVerified &&
-      hasLocalProvider(user) &&
-      user.emailVerificationToken
+      hasLocalProvider(user)
     ) {
       return res.status(403).json({
         success: false,
@@ -449,15 +469,6 @@ export const loginUser = async (req, res, next) => {
         error: { code: "EMAIL_NOT_VERIFIED" },
       });
     }
-
-    // Backward-compatible migration for accounts created before email
-    // verification was introduced. New unverified accounts always have a
-    // verification token, so only legacy accounts reach this branch.
-    if (!user.emailVerified && !user.emailVerificationToken) {
-      user.emailVerified = true;
-      await user.save({ validateBeforeSave: false });
-    }
-
     const profile = await getProfile(user);
     return sendAuthenticatedResponse(
       res,
@@ -864,7 +875,7 @@ export const forgotPassword = async (req, res, next) => {
         email: user.email,
         subject: "Reset your Nefru password",
         message: `Reset your Nefru password using this link: ${resetUrl}. The link is valid for 10 minutes.`,
-        html: renderTransactionalEmail({title:'Reset your password',message:'This link expires in 10 minutes. If you did not request a reset, ignore this email.',url:resetUrl,cta:'Reset password'}),
+        html: renderTransactionalEmail({ title: 'Reset your password', message: 'This link expires in 10 minutes. If you did not request a reset, ignore this email.', url: resetUrl, cta: 'Reset password' }),
       });
     } catch (emailError) {
       user.passwordResetToken = undefined;
