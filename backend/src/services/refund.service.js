@@ -98,7 +98,10 @@ async function queueRefundNotifications(session, booking, eventId) {
       user: String(booking.guide),
       type: "payment",
       title: "Booking refunded",
-      message: "A booking was refunded and its unsettled guide earnings were adjusted.",
+      message:
+        booking.settlementStatus === "settled"
+          ? "A booking was refunded after settlement and requires finance reconciliation."
+          : "A booking was refunded and its unsettled guide earnings were adjusted.",
       link: "/guide/earnings",
       entityType: "booking",
       entityId: String(booking._id),
@@ -250,12 +253,20 @@ export async function finalizePaymobRefund(
       );
     }
 
+    const resolutionQuery = {
+      booking: booking._id,
+      type: "refund_review",
+      status: "open",
+    };
+
+    if (booking.settlementStatus === "settled") {
+      resolutionQuery.key = {
+        $ne: `refund-settlement-recovery:${booking._id}`,
+      };
+    }
+
     await OperationalCase.updateMany(
-      {
-        booking: booking._id,
-        type: "refund_review",
-        status: "open",
-      },
+      resolutionQuery,
       {
         $set: {
           status: "resolved",
