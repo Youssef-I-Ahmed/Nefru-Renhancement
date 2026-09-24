@@ -6,6 +6,7 @@ import {
   ClipboardList,
   Home,
   MapPinned,
+  Star,
   UserRound,
 } from "lucide-react";
 import { NavLink, useNavigate } from "react-router-dom";
@@ -19,6 +20,7 @@ const navigationItems = [
   { label: "Calendar", to: "/guide/calendar", icon: CalendarDays },
   { label: "Operations", to: "/guide/operations", icon: Activity },
   { label: "Bookings", to: "/guide/bookings", icon: ClipboardList },
+  { label: "Reviews", to: "/guide/reviews", icon: Star },
   { label: "Earnings", to: "/guide/earnings", icon: CircleDollarSign },
   { label: "Profile", to: "/guide/profile", icon: UserRound },
 ];

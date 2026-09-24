@@ -90,6 +90,119 @@ function serializeReview(review, travelers, guides) {
 
 
 
+export const getGuideReviews = asyncHandler(async (req, res) => {
+  const [reviews, guideProfile] = await Promise.all([
+    Review.find({
+      guide: req.user._id,
+      moderationStatus: "published",
+      isVisible: true,
+    })
+      .populate("trip", "title image location")
+      .sort({ createdAt: -1 })
+      .lean(),
+    GuideProfile.findOne({ user: req.user._id })
+      .select("rating reviewsCount")
+      .lean(),
+  ]);
+
+  const touristIds = [
+    ...new Set(
+      reviews
+        .map((review) => (review.tourist?._id || review.tourist)?.toString?.())
+        .filter(Boolean),
+    ),
+  ];
+  const travelers = await getTravelerProfiles(touristIds);
+  const serialized = reviews.map((review) => {
+    const row = serializeReview(review, travelers, new Map());
+    delete row.bookingId;
+    return row;
+  });
+
+  res.status(200).json({
+    success: true,
+    data: {
+      reviews: serialized,
+      summary: {
+        rating: Number(guideProfile?.rating || 0),
+        reviewsCount: Number(guideProfile?.reviewsCount || 0),
+      },
+    },
+  });
+});
+
+export const updateGuideResponse = asyncHandler(async (req, res) => {
+  assertObjectId(req.params.id, "review ID");
+  const responseText = String(req.body.response || "").trim();
+
+  if (responseText.length < 3) {
+    throw new AppError(
+      "Guide response must be at least 3 characters",
+      400,
+      "GUIDE_RESPONSE_TOO_SHORT",
+    );
+  }
+
+  if (responseText.length > 1000) {
+    throw new AppError(
+      "Guide response cannot exceed 1000 characters",
+      400,
+      "GUIDE_RESPONSE_TOO_LONG",
+    );
+  }
+
+  const review = await Review.findOne({
+    _id: req.params.id,
+    guide: req.user._id,
+    moderationStatus: "published",
+    isVisible: true,
+  });
+
+  if (!review) {
+    throw new AppError(
+      "Published review not found",
+      404,
+      "GUIDE_REVIEW_NOT_FOUND",
+    );
+  }
+
+  review.guideResponse = responseText;
+  await review.save();
+
+  const eventKey =
+    `guide-review-response:${review._id}:${review.updatedAt.toISOString()}`;
+
+  await Notification.updateOne(
+    { eventKey },
+    {
+      $setOnInsert: {
+        eventKey,
+        user: review.tourist,
+        type: "review",
+        title: "Your guide replied",
+        message: "The guide responded publicly to your review.",
+        link: "/user/profile/reviews",
+        entityType: "review",
+        entityId: review._id,
+      },
+    },
+    { upsert: true, runValidators: true },
+  );
+
+  res.status(200).json({
+    success: true,
+    message: "Guide response published",
+    data: {
+      review: {
+        id: review._id,
+        guideResponse: review.guideResponse,
+        updatedAt: review.updatedAt,
+      },
+    },
+  });
+});
+
+
 export const getMyReviews = asyncHandler(async (req, res) => {
   const [reviews, completedBookings] = await Promise.all([
     Review.find({ tourist: req.user._id })

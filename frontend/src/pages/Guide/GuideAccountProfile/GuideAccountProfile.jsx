@@ -276,6 +276,13 @@ export default function GuideAccountProfile() {
             <Star size={17} fill="currentColor" />
             <strong>{guideData.rating.toFixed(1)} / 5</strong>
             <span>{guideData.reviewsCount} reviews</span>
+            <button
+              type="button"
+              className={styles.reviewsLink}
+              onClick={() => navigate("/guide/reviews")}
+            >
+              View reviews
+            </button>
           </div>
         </div>
       </section>

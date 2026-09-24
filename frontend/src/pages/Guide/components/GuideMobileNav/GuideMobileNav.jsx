@@ -1,4 +1,4 @@
-import { Activity, ClipboardList, Home, MapPinned, UserRound } from "lucide-react";
+import { Activity, ClipboardList, Home, MapPinned, Star } from "lucide-react";
 import { NavLink } from "react-router-dom";
 
 import styles from "./GuideMobileNav.module.css";
@@ -8,7 +8,7 @@ const items = [
   { label: "My Tours", to: "/guide", icon: MapPinned, end: true },
   { label: "Operations", to: "/guide/operations", icon: Activity },
   { label: "Bookings", to: "/guide/bookings", icon: ClipboardList },
-  { label: "Profile", to: "/guide/profile", icon: UserRound },
+  { label: "Reviews", to: "/guide/reviews", icon: Star },
 ];
 
 export default function GuideMobileNav() {

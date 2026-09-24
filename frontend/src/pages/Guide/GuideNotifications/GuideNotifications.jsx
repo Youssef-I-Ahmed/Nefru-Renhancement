@@ -16,7 +16,7 @@ const resolveGuideNotification = (notification) => {
 
   if (type === "booking") link = "/guide/bookings";
   if (type === "payment") link = "/guide/earnings";
-  if (type === "review") link = "/guide/profile";
+  if (type === "review") link = "/guide/reviews";
   if (type === "account") link = notification?.metadata?.verificationStatus ? "/guide/verification" : "/guide/profile";
   if (type === "support") link = "/guide/profile";
 

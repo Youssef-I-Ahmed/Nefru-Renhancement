@@ -224,11 +224,31 @@ export async function moderateReview(id, action, actor, reason = "") {
       "notification",
       {
         user: String(review.tourist),
+        type: "review",
         title: "Review moderation",
         message: `Your review is ${review.moderationStatus}.`,
         link: "/user/profile/reviews",
+        entityType: "review",
+        entityId: String(review._id),
       },
     );
+
+    if (action === "publish")
+      await enqueue(
+        session,
+        `guide-review-published:${id}:${review.updatedAt.toISOString()}`,
+        "notification",
+        {
+          user: String(review.guide),
+          type: "review",
+          title: "New review published",
+          message: "A traveler review is now live on your guide profile.",
+          link: "/guide/reviews",
+          entityType: "review",
+          entityId: String(review._id),
+        },
+      );
+
     return review;
   });
 }

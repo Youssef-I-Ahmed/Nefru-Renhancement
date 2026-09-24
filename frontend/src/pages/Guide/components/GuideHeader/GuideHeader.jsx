@@ -9,6 +9,7 @@ import {
   LogOut,
   MapPinned,
   ShieldCheck,
+  Star,
   User,
 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
@@ -27,7 +28,7 @@ const resolveGuideNotificationLink = (notification) => {
   const type = notification?.type?.trim();
   if (type === "booking") return "/guide/bookings";
   if (type === "payment") return "/guide/earnings";
-  if (type === "review") return "/guide/profile";
+  if (type === "review") return "/guide/reviews";
   if (type === "account") return notification?.metadata?.verificationStatus ? "/guide/verification" : "/guide/profile";
   if (type === "support") return "/guide/profile";
   return notification?.link?.startsWith("/guide") ? notification.link : null;
@@ -40,6 +41,7 @@ const profileMenuItems = [
   { path: "/guide", label: "My Tours", icon: MapPinned },
   { path: "/guide/calendar", label: "Calendar", icon: CalendarDays },
   { path: "/guide/operations", label: "Operations", icon: Activity },
+  { path: "/guide/reviews", label: "Reviews", icon: Star },
   { path: "/guide/earnings", label: "Earnings", icon: CircleDollarSign },
 ];
 
@@ -47,6 +49,7 @@ const mobileBackFallbacks = {
   "/guide/profile": "/guide/dashboard",
   "/guide/notifications": "/guide/dashboard",
   "/guide/earnings": "/guide/dashboard",
+  "/guide/reviews": "/guide/dashboard",
   "/guide/verification": "/guide/profile",
   "/guide/application-received": "/guide/verification",
 };
