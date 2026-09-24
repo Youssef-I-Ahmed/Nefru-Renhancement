@@ -619,6 +619,28 @@ export async function actOnOccurrence(id, action, actor, reason = "") {
         b.holdExpiresAt = null;
         b.refundEntitlement = cancellationEntitlement(b, actor.role, now);
         await b.save({ session });
+
+        if (
+          b.paymentStatus === "paid" &&
+          b.refundEntitlement !== "not_applicable"
+        ) {
+          await OperationalCase.updateOne(
+            { key: `refund-review:${b._id}` },
+            {
+              $setOnInsert: {
+                key: `refund-review:${b._id}`,
+                type: "refund_review",
+                booking: b._id,
+                occurrence: occurrence._id,
+                openedBy: actor?._id || null,
+                report:
+                  "Paid booking was cancelled by the guide/admin and is due for refund processing.",
+              },
+            },
+            { upsert: true, session },
+          );
+        }
+
         await BookingSeat.deleteOne({ booking: b._id }, { session });
         await signal(
           session,

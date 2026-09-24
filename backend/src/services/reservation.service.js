@@ -3,6 +3,7 @@ import { BookingSeat } from "../models/bookingSeat.model.js";
 import { Trip } from "../models/trip.model.js";
 import { User } from "../models/user.model.js";
 import { Occurrence } from "../models/occurrence.model.js";
+import { OperationalCase } from "../models/operationalCase.model.js";
 import {
   atomic,
   assertBookable,
@@ -234,6 +235,29 @@ export async function cancelReservation(id, tourist, reason = "") {
     b.cancellationReason = String(reason).slice(0, 500);
     b.holdExpiresAt = null;
     await b.save({ session });
+
+    if (
+      b.paymentStatus === "paid" &&
+      b.refundEntitlement !== "not_applicable"
+    ) {
+      await OperationalCase.updateOne(
+        { key: `refund-review:${b._id}` },
+        {
+          $setOnInsert: {
+            key: `refund-review:${b._id}`,
+            type: "refund_review",
+            booking: b._id,
+            openedBy: tourist._id,
+            report:
+              b.refundEntitlement === "full_refund_due"
+                ? "Paid traveler cancellation is eligible for a full refund."
+                : "Paid traveler cancellation requires admin refund review.",
+          },
+        },
+        { upsert: true, session },
+      );
+    }
+
     await BookingSeat.deleteOne({ booking: b._id }, { session });
     await signal(
       session,

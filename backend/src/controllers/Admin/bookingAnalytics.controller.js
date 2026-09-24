@@ -7,6 +7,7 @@ import { TouristProfile } from "../../models/tourist.model.js";
 import { Trip } from "../../models/trip.model.js";
 import { User } from "../../models/user.model.js";
 import { expirePendingBookings } from "../../services/Booking.service.js";
+import { requestFullPaymobRefund } from "../../services/refund.service.js";
 
 const PAGE_LIMIT = 12;
 const BOOKING_STATUSES = new Set([
@@ -96,6 +97,20 @@ function serializeBooking(booking, profiles = { tourists: new Map(), guides: new
     totalPrice: booking.totalPrice,
     platformFee: booking.platformFee,
     guideEarnings: booking.guideEarnings,
+    earningsAvailableAt: booking.earningsAvailableAt || null,
+    settlementStatus: booking.settlementStatus || "unsettled",
+    settledAt: booking.settledAt || null,
+    refundEntitlement: booking.refundEntitlement || "not_applicable",
+    refundStatus: booking.refundStatus || "none",
+    refundedAmount: Number(booking.refundedAmount || 0),
+    refundRequestedAmount: Number(booking.refundRequestedAmount || 0),
+    refundReason: booking.refundReason || "",
+    refundRequestedAt: booking.refundRequestedAt || null,
+    refundCompletedAt: booking.refundCompletedAt || null,
+    refundProviderReference: booking.refundProviderReference || "",
+    refundFailureReason: booking.refundFailureReason || "",
+    refundOriginalGuideEarnings: booking.refundOriginalGuideEarnings,
+    refundOriginalPlatformFee: booking.refundOriginalPlatformFee,
     currency: booking.currency || "EGP",
     status: booking.status,
     paymentStatus: booking.paymentStatus,
@@ -134,6 +149,7 @@ async function buildSearchFilter(query) {
     { paymobIntentionId: regex },
     { paymobOrderId: regex },
     { paymobTransactionId: regex },
+    { refundProviderReference: regex },
   ];
   if (mongoose.isValidObjectId(q)) clauses.push({ _id: q });
   if (tripIds.length) clauses.push({ trip: { $in: tripIds.map((item) => item._id) } });
@@ -267,6 +283,35 @@ export async function getAdminBookingOperation(req, res) {
     return res.status(500).json({ success: false, message: "Unable to load booking details" });
   }
 }
+
+export async function refundAdminBookingOperation(req, res, next) {
+  try {
+    if (!mongoose.isValidObjectId(req.params.id)) {
+      return res.status(400).json({
+        success: false,
+        message: "Invalid booking ID",
+      });
+    }
+
+    const booking = await requestFullPaymobRefund(
+      req.params.id,
+      req.user,
+      req.body.reason || "",
+    );
+
+    return res.status(200).json({
+      success: true,
+      message:
+        booking.refundStatus === "refunded"
+          ? "Refund completed."
+          : "Refund submitted to Paymob and is processing.",
+      data: serializeBooking(booking),
+    });
+  } catch (error) {
+    next(error);
+  }
+}
+
 
 function startDateForRange(days) {
   const date = new Date();

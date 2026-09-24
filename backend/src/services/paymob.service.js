@@ -33,6 +33,73 @@ export async function createPaymobIntention(payload) {
   }
 }
 
+export async function refundPaymobTransaction(
+  transactionId,
+  amountCents,
+) {
+  if (!env.paymobSecretKey) {
+    throw new AppError(
+      "Paymob refunds are not configured. Add PAYMOB_SECRET_KEY.",
+      503,
+      "PAYMOB_REFUND_NOT_CONFIGURED",
+    );
+  }
+
+  const transaction = Number(transactionId);
+  const amount = Number(amountCents);
+
+  if (!Number.isInteger(transaction) || transaction <= 0) {
+    throw new AppError(
+      "A valid Paymob transaction ID is required",
+      409,
+      "PAYMOB_TRANSACTION_ID_INVALID",
+    );
+  }
+
+  if (!Number.isInteger(amount) || amount <= 0) {
+    throw new AppError(
+      "Refund amount must be a positive integer in cents",
+      400,
+      "PAYMOB_REFUND_AMOUNT_INVALID",
+    );
+  }
+
+  try {
+    const response = await axios.post(
+      `${env.paymobBaseUrl}/api/acceptance/void_refund/refund`,
+      {
+        transaction_id: transaction,
+        amount_cents: amount,
+      },
+      {
+        headers: {
+          Authorization: `Token ${env.paymobSecretKey}`,
+          "Content-Type": "application/json",
+        },
+        timeout: 15000,
+      },
+    );
+
+    const data = response.data || {};
+    if (data.success === false) {
+      throw new AppError(
+        providerMessage({ response }, "Paymob rejected the refund"),
+        409,
+        "PAYMOB_REFUND_REJECTED",
+      );
+    }
+    return data;
+  } catch (error) {
+    if (error instanceof AppError) throw error;
+    throw new AppError(
+      providerMessage(error, "Unable to submit the Paymob refund"),
+      502,
+      "PAYMOB_REFUND_FAILED",
+    );
+  }
+}
+
+
 export async function createPaymobInquiryAuthToken() {
   if (!env.paymobApiKey) {
     throw new AppError(

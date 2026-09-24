@@ -12,7 +12,7 @@ const schema = new mongoose.Schema(
     transactionId: { type: String, unique: true, sparse: true },
     outcome: {
       type: String,
-      enum: ["created", "failed", "paid"],
+      enum: ["created", "failed", "paid", "refunded"],
       required: true,
     },
     amountCents: { type: Number, required: true },
