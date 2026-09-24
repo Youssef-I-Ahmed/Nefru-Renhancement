@@ -92,7 +92,7 @@ export async function runDueJob(now = new Date()) {
           lockedUntil: null,
           dueAt: new Date(
             Date.now() +
-              Math.min(3600000, 2 ** Math.min(job.attempts, 10) * 30000),
+            Math.min(3600000, 2 ** Math.min(job.attempts, 10) * 30000),
           ),
           lastError: "Delivery failed; retry scheduled",
         },
@@ -234,8 +234,7 @@ export async function reconcileDomainTime(now = new Date()) {
             `review-invite:${b._id}`,
             "review_invitation",
             { booking: String(b._id) },
-            new Date(+now + 45 * 60000),
-          );
+            new Date(+now + env.reviewInviteDelayMinutes * 60000));
       }
       await audit(session, null, "occurrence_auto_completed", "Occurrence", o, {
         status: "in_progress",
