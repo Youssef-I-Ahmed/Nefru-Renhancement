@@ -50,12 +50,12 @@ export const env = {
   paymobApiKey: process.env.PAYMOB_API_KEY,
   paymobIntegrationIds,
   paymobCurrency: String(process.env.PAYMOB_CURRENCY || "EGP").toUpperCase(),
-  
+
   paymobCheckoutExpirationSeconds: Math.max(
     60,
     Math.min(Number(process.env.PAYMOB_CHECKOUT_EXPIRATION_SECONDS) || 900, 3600),
   ),
-  
+
   paymobWebhookUrl: (process.env.PAYMOB_WEBHOOK_URL || "https://doorbell-bottling-astride.ngrok-free.dev/api/payments/paymob/webhook").trim(),
 
   paymobCheckoutMode: ["pixel", "redirect"].includes(
@@ -65,13 +65,18 @@ export const env = {
     : "pixel",
   paymentTokenEncryptionKey: process.env.PAYMENT_TOKEN_ENCRYPTION_KEY?.trim(),
 
-    // Tourist display FX. EGP remains the only booking/payment source of truth.
+  // Tourist display FX. EGP remains the only booking/payment source of truth.
   fxProviderUrl: (process.env.FX_PROVIDER_URL || "https://api.frankfurter.dev/v2/rates").trim(),
   fxProvider: String(process.env.FX_PROVIDER || "cbe").trim().toLowerCase(),
   fxRefreshHours: Math.max(1, Number(process.env.FX_REFRESH_HOURS) || 12),
   fxRefreshMs: Math.max(1, Number(process.env.FX_REFRESH_HOURS) || 12) * 60 * 60 * 1000,
   fxRequestTimeoutMs: Math.max(1000, Number(process.env.FX_REQUEST_TIMEOUT_MS) || 10000),
 
+
+  resendApiKey: process.env.RESEND_API_KEY?.trim(),
+  mailerFrom:
+    process.env.MAILER_FROM?.trim() ||
+    "Nefru <onboarding@resend.dev>",
   mailerHost: process.env.MAILER_HOST || "smtp.gmail.com",
   mailerPort: Number(process.env.MAILER_PORT) || 465,
   mailerEmail: process.env.MAILER_EMAIL || "nefru.team@gmail.com",
