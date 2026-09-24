@@ -30,7 +30,7 @@ function matchesAny(pathname, patterns) {
 function getHomePathByRole(role) {
   if (role === "admin") return "/admin/overview";
   if (role === "guide") return "/guide/dashboard";
-  return "/user/home";
+  return "/explore";
 }
 
 

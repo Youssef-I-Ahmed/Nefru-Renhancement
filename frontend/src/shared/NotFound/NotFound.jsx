@@ -10,7 +10,7 @@ import styles from "./NotFound.module.css";
 const ROLE_DESTINATIONS = {
   tourist: {
     label: "Traveler",
-    homePath: "/user/home",
+    homePath: "/explore",
     homeLabel: "Back to traveler home",
     showExplore: true,
   },
@@ -37,7 +37,7 @@ export default function NotFound() {
   const role = isAuthenticated ? user?.role : null;
   const destination = ROLE_DESTINATIONS[role] || {
     label: "Guest",
-    homePath: "/user/home",
+    homePath: "/explore",
     homeLabel: "Go to Nefru home",
     showExplore: true,
   };
@@ -95,7 +95,7 @@ export default function NotFound() {
                 type="outline"
                 className={styles.button}
                 icon={<FiCompass />}
-                onClick={() => navigate("/user/trips")}
+                onClick={() => navigate("/trips")}
               >
                 Explore Tours
               </Button>

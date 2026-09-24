@@ -699,7 +699,7 @@ export default function NearbyMap() {
       <header className="h-[72px] bg-white border-b border-slate-200/80 px-5 lg:px-8 flex items-center justify-between z-30 shrink-0 shadow-xs">
         {/* Brand Logo */}
         <div
-          onClick={() => navigate("/user/home")}
+          onClick={() => navigate("/explore")}
           className="flex items-center gap-2 cursor-pointer select-none group"
         >
           <img
@@ -821,7 +821,7 @@ export default function NearbyMap() {
         {/* Right Navigation Items */}
         <div className="flex items-center gap-4 lg:gap-6" ref={actionsRef}>
           <button
-            onClick={() => navigate("/user/discover")}
+            onClick={() => navigate("/trips")}
             className="hidden lg:inline-block text-sm font-semibold text-slate-700 hover:text-[#003D5B] transition-colors"
           >
             Explore
@@ -926,7 +926,7 @@ export default function NearbyMap() {
           <div className="md:hidden absolute top-3 left-3 right-3 z-[1000] flex flex-col gap-2">
             <div className="flex items-center gap-2">
               <button
-                onClick={() => navigate("/user/home")}
+                onClick={() => navigate("/explore")}
                 className="w-10 h-10 bg-white rounded-2xl flex items-center justify-center text-slate-700 shadow-md border border-slate-100 hover:bg-slate-50 transition-colors shrink-0"
                 aria-label="Back to Home"
               >
@@ -1569,7 +1569,7 @@ export default function NearbyMap() {
             </div>
 
             <button
-              onClick={() => navigate("/user/discover")}
+              onClick={() => navigate("/trips")}
               className="bg-[#003D5B] hover:bg-[#002b40] text-white font-bold text-xs px-4 py-2 rounded-xl transition-all shadow-xs shrink-0"
             >
               Create Tour

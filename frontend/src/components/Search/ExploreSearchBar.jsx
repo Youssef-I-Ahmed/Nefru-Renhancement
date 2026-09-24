@@ -51,7 +51,7 @@ function ExploreSearchBar({
     if (values.category) params.set("category", values.category);
 
     const queryString = params.toString();
-    navigate(`/user/trips${queryString ? `?${queryString}` : ""}`);
+    navigate(`/trips${queryString ? `?${queryString}` : ""}`);
   };
 
   return (

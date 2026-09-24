@@ -118,7 +118,11 @@ function PremiumNavbar({ hideOnMobile = false }) {
     setShowNotifications(false);
     setShowProfile(false);
 
-    if (location.pathname === "/user" || location.pathname === "/user/home") {
+    if (
+      location.pathname === "/explore" ||
+      location.pathname === "/user" ||
+      location.pathname === "/user/home"
+    ) {
       const element = document.getElementById(sectionId);
       if (element) {
         element.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -126,7 +130,7 @@ function PremiumNavbar({ hideOnMobile = false }) {
       }
     }
 
-    navigate(`/user/home#${sectionId}`);
+    navigate(`/explore#${sectionId}`);
   };
 
   const navigateFromMenu = (path) => {
@@ -152,7 +156,7 @@ function PremiumNavbar({ hideOnMobile = false }) {
           <button
             type="button"
             className={styles.brand}
-            onClick={() => navigate("/user/home")}
+            onClick={() => navigate("/explore")}
             aria-label="Go to NEFRU home"
           >
             <img src={logo} alt="" aria-hidden="true" />
@@ -164,7 +168,7 @@ function PremiumNavbar({ hideOnMobile = false }) {
 
           <nav className={styles.desktopNav} aria-label="Main navigation">
             <button type="button" onClick={() => goHomeSection("popular-tours")}>Experiences</button>
-            <button type="button" onClick={() => navigate("/user/nearby")}>Nearby</button>
+            <button type="button" onClick={() => navigate("/nearby")}>Nearby</button>
             <button type="button" onClick={() => goHomeSection("explore-egypt")}>Destinations</button>
             <button type="button" onClick={() => goHomeSection("top-guides")}>Guides</button>
           </nav>

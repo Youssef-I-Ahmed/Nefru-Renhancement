@@ -1,4 +1,5 @@
 import {
+  Activity,
   ArrowLeft,
   Bell,
   CalendarDays,
@@ -38,6 +39,7 @@ const profileMenuItems = [
   { path: "/guide/dashboard", label: "Dashboard", icon: Home },
   { path: "/guide", label: "My Tours", icon: MapPinned },
   { path: "/guide/calendar", label: "Calendar", icon: CalendarDays },
+  { path: "/guide/operations", label: "Operations", icon: Activity },
   { path: "/guide/earnings", label: "Earnings", icon: CircleDollarSign },
 ];
 

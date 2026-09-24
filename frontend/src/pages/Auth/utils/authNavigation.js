@@ -13,5 +13,5 @@ export function getPostAuthPath(user, profile) {
     return "/guide/dashboard";
   }
 
-  return "/user/home";
+  return "/explore";
 }

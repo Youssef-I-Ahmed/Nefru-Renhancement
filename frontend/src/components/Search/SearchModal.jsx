@@ -32,7 +32,7 @@ const SearchModal = ({ open, onOpenChange }) => {
 
     onOpenChange?.(false);
     const queryString = params.toString();
-    navigate(`/user/trips${queryString ? `?${queryString}` : ""}`);
+    navigate(`/trips${queryString ? `?${queryString}` : ""}`);
   };
 
   return (

@@ -447,7 +447,7 @@ function RecommendedTrips() {
                     category={trip.category}
                     guide={trip.guide}
                     verified={Boolean(trip.guide?.verified)}
-                    fallbackPath="/user/trips"
+                    fallbackPath="/trips"
                     className={loading ? styles.loadingCard : ""}
                   />
                 ))}

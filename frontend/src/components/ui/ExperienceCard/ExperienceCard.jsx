@@ -35,7 +35,7 @@ function ExperienceCard({
   guideName,
   verified = false,
   instantConfirmation = false,
-  fallbackPath = "/user/trips",
+  fallbackPath = "/trips",
   onOpen,
   className = "",
 }) {
@@ -54,7 +54,7 @@ function ExperienceCard({
 
   const openCard = () => {
     if (onOpen) return onOpen(tripId);
-    navigate(canUseTripRoute ? `/user/trips/${tripId}` : fallbackPath);
+    navigate(canUseTripRoute ? `/trips/${tripId}` : fallbackPath);
   };
 
   const saveCard = async (event) => {

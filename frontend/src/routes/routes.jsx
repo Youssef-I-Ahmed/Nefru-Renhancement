@@ -59,6 +59,7 @@ import GuideAccountProfile from "../pages/Guide/GuideAccountProfile/GuideAccount
 import GuideNotifications from "../pages/Guide/GuideNotifications/GuideNotifications";
 import GuideVerification from "../pages/Guide/GuideVerification/GuideVerification";
 import GuideApplicationReceived from "../pages/Guide/GuideApplicationReceived/GuideApplicationReceived";
+import GuideOperations from "../pages/Guide/GuideOperations/GuideOperations";
 
 export const router = createBrowserRouter([
   {
@@ -82,19 +83,39 @@ export const router = createBrowserRouter([
     ],
   },
   {
+    element: <MasterLayout />,
+    children: [
+      { path: "explore", element: <Home /> },
+      { path: "nearby", element: <NearbyMap /> },
+      {
+        path: "trips",
+        children: [
+          { index: true, element: <RecommendedTrips /> },
+          {
+            path: ":id",
+            children: [
+              { index: true, element: <Info /> },
+              { path: "guide", element: <Guide /> },
+            ],
+          },
+        ],
+      },
+    ],
+  },
+  {
     path: "user",
     element: <ProtectedRoute allowedRoles={["tourist", "guide"]} />,
     children: [
       {
         element: <MasterLayout />,
         children: [
-          { index: true, element: <Home /> },
-          { path: "home", element: <Home /> },
-          { path: "nearby", element: <NearbyMap /> },
+          { index: true, element: <Navigate to="/explore" replace /> },
+          { path: "home", element: <Navigate to="/explore" replace /> },
+          { path: "nearby", element: <Navigate to="/nearby" replace /> },
           {
             path: "trips",
             children: [
-              { index: true, element: <RecommendedTrips /> },
+              { index: true, element: <Navigate to="/trips" replace /> },
               {
                 path: ":id",
                 children: [
@@ -141,7 +162,7 @@ export const router = createBrowserRouter([
                 children: [
                   { index: true, element: <ToursManagement /> },
                   { path: "dashboard", element: <GuideDashboard /> },
-                  {path:"operations",element:<Operations role="guide"/>},
+                  { path: "operations", element: <GuideOperations /> },
                   { path: "calendar", element: <GuideCalendar /> },
                   { path: "bookings", element: <GuideBookings /> },
                   { path: "earnings", element: <GuideEarnings /> },
