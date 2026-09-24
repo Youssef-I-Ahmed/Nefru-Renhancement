@@ -191,5 +191,5 @@ export const router = createBrowserRouter([
       },
     ],
   },
-  { path: "*", element: <Navigate to="/user" replace /> },
+  { path: "*", element: <NotFound /> },
 ]);
