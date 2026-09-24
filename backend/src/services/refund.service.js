@@ -116,10 +116,43 @@ export async function finalizePaymobRefund(
     const booking = await Booking.findById(bookingId).session(session);
     demand(booking, "Booking not found", 404, "BOOKING_NOT_FOUND");
 
-    const amountCents = validateRefundTransaction(transaction, booking);
+    const providerAmountCents = validateRefundTransaction(transaction, booking);
     const totalCents = centsFor(booking.totalPrice);
-    const amount = Math.min(Number(booking.totalPrice), amountCents / 100);
-    const fullRefund = amountCents >= totalCents;
+    const existingRefundedCents = centsFor(booking.refundedAmount);
+    const transactionId = String(transaction.id || "");
+
+    if (transaction.is_refund === true && transactionId) {
+      const previousRefundAttempt = await PaymentAttempt.findOne({
+        transactionId,
+      }).session(session);
+
+      if (previousRefundAttempt) {
+        demand(
+          String(previousRefundAttempt.booking) === String(booking._id),
+          "Refund transaction already belongs to another booking",
+          409,
+          "REFUND_TRANSACTION_ALREADY_ASSIGNED",
+        );
+
+        if (previousRefundAttempt.outcome === "refunded") {
+          return booking;
+        }
+      }
+    }
+
+    const cumulativeRefundCents =
+      transaction.is_refund === true
+        ? Math.min(
+            totalCents,
+            existingRefundedCents + providerAmountCents,
+          )
+        : Math.min(
+            totalCents,
+            Math.max(existingRefundedCents, providerAmountCents),
+          );
+
+    const amount = cumulativeRefundCents / 100;
+    const fullRefund = cumulativeRefundCents >= totalCents;
 
     if (
       fullRefund &&
@@ -146,7 +179,7 @@ export async function finalizePaymobRefund(
       booking.refundOriginalPlatformFee = Number(booking.platformFee || 0);
     }
 
-    booking.refundedAmount = Math.max(Number(booking.refundedAmount || 0), amount);
+    booking.refundedAmount = amount;
     booking.refundStatus = fullRefund ? "refunded" : "partially_refunded";
     booking.paymentStatus = fullRefund ? "refunded" : "partially_refunded";
     booking.refundCompletedAt = new Date();
@@ -197,7 +230,6 @@ export async function finalizePaymobRefund(
 
     await booking.save({ session });
 
-    const transactionId = String(transaction.id || "");
     if (
       transaction.is_refund === true &&
       transactionId &&
@@ -210,7 +242,7 @@ export async function finalizePaymobRefund(
             booking: booking._id,
             orderId: String(transaction.order?.id || booking.paymobOrderId || ""),
             outcome: "refunded",
-            amountCents,
+            amountCents: providerAmountCents,
             currency: "EGP",
           },
         },
@@ -311,6 +343,26 @@ export async function requestFullPaymobRefund(
     "REFUND_ALREADY_PROCESSING",
   );
 
+  const openRefundCase = await OperationalCase.findOne({
+    booking: booking._id,
+    type: "refund_review",
+    status: "open",
+  })
+    .select("_id")
+    .lean();
+
+  demand(
+    ["cancelled", "expired"].includes(booking.status) ||
+      ["full_refund_due", "admin_review"].includes(
+        booking.refundEntitlement,
+      ) ||
+      booking.refundStatus === "partially_refunded" ||
+      Boolean(openRefundCase),
+    "Refund the booking only after cancellation or refund review.",
+    409,
+    "REFUND_WORKFLOW_REQUIRED",
+  );
+
   const remainingCents = Math.max(
     0,
     centsFor(booking.totalPrice) - centsFor(booking.refundedAmount),
@@ -330,6 +382,27 @@ export async function requestFullPaymobRefund(
       "A refund is already being processed",
       409,
       "REFUND_ALREADY_PROCESSING",
+    );
+
+    const currentRefundCase = await OperationalCase.findOne({
+      booking: current._id,
+      type: "refund_review",
+      status: "open",
+    })
+      .select("_id")
+      .session(session)
+      .lean();
+
+    demand(
+      ["cancelled", "expired"].includes(current.status) ||
+        ["full_refund_due", "admin_review"].includes(
+          current.refundEntitlement,
+        ) ||
+        current.refundStatus === "partially_refunded" ||
+        Boolean(currentRefundCase),
+      "Refund the booking only after cancellation or refund review.",
+      409,
+      "REFUND_WORKFLOW_REQUIRED",
     );
 
     if (current.refundOriginalGuideEarnings == null) {

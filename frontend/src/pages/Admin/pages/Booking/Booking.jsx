@@ -200,7 +200,14 @@ export default function Booking() {
     detail.paymentProvider === "paymob" &&
     ["paid", "partially_refunded"].includes(detail.paymentStatus) &&
     detail.refundStatus !== "processing" &&
-    detail.settlementStatus !== "settled";
+    detail.settlementStatus !== "settled" &&
+    (
+      ["cancelled", "expired"].includes(detail.status) ||
+      ["full_refund_due", "admin_review"].includes(
+        detail.refundEntitlement,
+      ) ||
+      detail.refundStatus === "partially_refunded"
+    );
 
   return (
     <div className={styles.page}>
