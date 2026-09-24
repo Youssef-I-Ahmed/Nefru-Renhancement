@@ -17,6 +17,10 @@ import {
   inquirePaymobTransactionByOrderId,
 } from "../services/paymob.service.js";
 import {
+  finalizePaymobRefund,
+  isPaymobRefundTransaction,
+} from "../services/refund.service.js";
+import {
   decryptPaymentToken,
   encryptPaymentToken,
   isPaymentTokenStorageConfigured,
@@ -405,6 +409,12 @@ function serializePaymentStatus(booking) {
     lastPaymentSyncAt: booking.lastPaymentSyncAt || null,
     confirmed: booking.status === "confirmed" && booking.paymentStatus === "paid",
     reconciliationAvailable: Boolean(env.paymobApiKey && booking.paymobOrderId),
+    refundStatus: booking.refundStatus || "none",
+    refundedAmount: Number(booking.refundedAmount || 0),
+    refundRequestedAmount: Number(booking.refundRequestedAmount || 0),
+    refundRequestedAt: booking.refundRequestedAt || null,
+    refundCompletedAt: booking.refundCompletedAt || null,
+    refundFailureReason: booking.refundFailureReason || "",
   };
 }
 
@@ -570,19 +580,28 @@ export const reconcilePaymobPayment = asyncHandler(async (req, res) => {
     );
   }
 
-  validateTransactionAgainstBooking(transaction, booking);
-
-  if (transaction.success === true && transaction.pending === false) {
-    await finalizeSuccessfulPayment(transaction, booking);
-  } else if (transaction.pending === false) {
-    await markFailedPayment(transaction, booking);
+  if (isPaymobRefundTransaction(transaction)) {
+    await finalizePaymobRefund(
+      transaction,
+      booking._id,
+      null,
+      "Refund reconciled from Paymob",
+    );
   } else {
+    validateTransactionAgainstBooking(transaction, booking);
+
+    if (transaction.success === true && transaction.pending === false) {
+      await finalizeSuccessfulPayment(transaction, booking);
+    } else if (transaction.pending === false) {
+      await markFailedPayment(transaction, booking);
+    } else {
     booking.lastPaymentSyncAt = new Date();
     booking.paymobTransactionId = String(transaction.id || booking.paymobTransactionId || "");
-    await booking.save();
+      await booking.save();
+    }
   }
 
-  if (transaction.success !== true) {
+  if (!isPaymobRefundTransaction(transaction) && transaction.success !== true) {
     await expirePendingBookings({ _id: booking._id });
   }
 
@@ -683,15 +702,24 @@ export const handlePaymobWebhook = async (req, res, next) => {
       return res.status(200).json({ received: true, ignored: true });
     }
 
-    validateTransactionAgainstBooking(transaction, booking);
-
-    if (transaction.success === true && transaction.pending === false) {
-      await finalizeSuccessfulPayment(transaction, booking);
-    } else if (transaction.pending === false) {
-      await markFailedPayment(transaction, booking);
+    if (isPaymobRefundTransaction(transaction)) {
+      await finalizePaymobRefund(
+        transaction,
+        booking._id,
+        null,
+        "Paymob refund callback",
+      );
     } else {
-      booking.lastPaymentSyncAt = new Date();
-      await booking.save();
+      validateTransactionAgainstBooking(transaction, booking);
+
+      if (transaction.success === true && transaction.pending === false) {
+        await finalizeSuccessfulPayment(transaction, booking);
+      } else if (transaction.pending === false) {
+        await markFailedPayment(transaction, booking);
+      } else {
+        booking.lastPaymentSyncAt = new Date();
+        await booking.save();
+      }
     }
 
     console.info("Paymob transaction callback accepted", {

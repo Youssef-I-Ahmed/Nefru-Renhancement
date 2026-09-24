@@ -81,7 +81,7 @@ export default function MyBookings() {
 
   const cancelBooking = async (booking) => {
     const paidNote = booking.paymentStatus === "paid"
-      ? " Payment handling for cancelled paid bookings depends on the active payment provider and support policy."
+      ? " If the booking is refund-eligible, NEFRU will route it to admin refund processing."
       : "";
     if (!window.confirm(`Cancel your booking for ${booking.title}?${paidNote}`)) return;
 
@@ -163,6 +163,21 @@ export default function MyBookings() {
 
                 <div className={styles.guideRow}>Guide <strong>{booking.guide || "NEFRU guide"}</strong></div>
                 {booking.cancellationReason && <div className={styles.cancellationReason}>Cancellation reason: {booking.cancellationReason}</div>}
+                {booking.refundStatus === "processing" && (
+                  <div className={styles.cancellationReason}>
+                    Refund status: processing with Paymob.
+                  </div>
+                )}
+                {booking.paymentStatus === "refunded" && (
+                  <div className={styles.cancellationReason}>
+                    Refund completed: {Number(booking.refundedAmount || booking.totalPrice || 0).toLocaleString("en-US")} {booking.currency || "EGP"}.
+                  </div>
+                )}
+                {booking.refundStatus === "failed" && (
+                  <div className={styles.cancellationReason}>
+                    Refund needs support review. Your booking record is preserved.
+                  </div>
+                )}
 
                 <div className={styles.actions}>
                   {booking.status === "pending_payment" && (

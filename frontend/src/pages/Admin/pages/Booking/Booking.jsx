@@ -7,13 +7,18 @@ import {
   Clock3,
   CreditCard,
   RefreshCw,
+  RotateCcw,
   Search,
   UsersRound,
   X,
 } from "lucide-react";
 import { useCallback, useEffect, useMemo, useState } from "react";
 
-import { getBookingOperation, getBookingOperations } from "../../api";
+import {
+  getBookingOperation,
+  getBookingOperations,
+  refundBookingOperation,
+} from "../../api";
 import { resolveMediaUrl } from "../../../../services/api";
 import styles from "./Booking.module.css";
 
@@ -24,6 +29,7 @@ const BOOKING_FILTERS = [
   ["completed", "Completed"],
   ["cancelled", "Cancelled"],
   ["expired", "Expired"],
+  ["refunded", "Refunded"],
 ];
 
 const PAYMENT_FILTERS = [
@@ -69,6 +75,7 @@ function statusTone(value) {
   if (["paid", "confirmed", "completed"].includes(value)) return "success";
   if (["pending_payment", "unpaid"].includes(value)) return "warning";
   if (["cancelled", "expired", "failed", "refunded"].includes(value)) return "danger";
+  if (["partially_refunded", "processing"].includes(value)) return "warning";
   return "neutral";
 }
 
@@ -112,6 +119,9 @@ export default function Booking() {
   const [detail, setDetail] = useState(null);
   const [detailLoading, setDetailLoading] = useState(false);
   const [detailError, setDetailError] = useState("");
+  const [refundOpen, setRefundOpen] = useState(false);
+  const [refundReason, setRefundReason] = useState("");
+  const [refunding, setRefunding] = useState(false);
 
   const load = useCallback(async () => {
     setLoading(true);
@@ -158,6 +168,39 @@ export default function Booking() {
     event.preventDefault();
     setFilters((current) => ({ ...current, page: 1, query: draftQuery.trim() }));
   };
+
+  const submitRefund = async () => {
+    if (!detail || refundReason.trim().length < 3) return;
+
+    setRefunding(true);
+    setDetailError("");
+    const response = await refundBookingOperation(
+      detail.id,
+      refundReason.trim(),
+    );
+
+    if (response.error) {
+      setDetailError(response.error);
+      setRefunding(false);
+      return;
+    }
+
+    const refreshed = await getBookingOperation(detail.id);
+    if (refreshed.error) setDetailError(refreshed.error);
+    else setDetail(refreshed.data);
+
+    setRefundOpen(false);
+    setRefundReason("");
+    setRefunding(false);
+    await load();
+  };
+
+  const canRefund =
+    detail &&
+    detail.paymentProvider === "paymob" &&
+    ["paid", "partially_refunded"].includes(detail.paymentStatus) &&
+    detail.refundStatus !== "processing" &&
+    detail.settlementStatus !== "settled";
 
   return (
     <div className={styles.page}>
@@ -265,7 +308,102 @@ export default function Booking() {
                   <span><small>Traveler paid / payable</small><strong>{money(detail.totalPrice, detail.currency)}</strong></span>
                   <span><small>Platform fee</small><strong>{money(detail.platformFee, detail.currency)}</strong></span>
                   <span><small>Guide earnings</small><strong>{money(detail.guideEarnings, detail.currency)}</strong></span>
+                  <span><small>Refunded</small><strong>{money(detail.refundedAmount || 0, detail.currency)}</strong></span>
                 </div></section>
+
+                {detail.paymentProvider === "paymob" && (
+                  <section className={styles.detailCard}>
+                    <h3><RotateCcw size={17} /> Refund lifecycle</h3>
+                    <div className={styles.detailGrid}>
+                      <div><span>Entitlement</span><strong>{label(detail.refundEntitlement)}</strong></div>
+                      <div><span>Refund status</span><strong>{label(detail.refundStatus)}</strong></div>
+                      <div><span>Requested</span><strong>{money(detail.refundRequestedAmount || 0, detail.currency)}</strong></div>
+                      <div><span>Completed</span><strong>{money(detail.refundedAmount || 0, detail.currency)}</strong></div>
+                      <div><span>Requested at</span><strong>{dateTime(detail.refundRequestedAt)}</strong></div>
+                      <div><span>Completed at</span><strong>{dateTime(detail.refundCompletedAt)}</strong></div>
+                    </div>
+
+                    {detail.refundProviderReference && (
+                      <div className={styles.refundReference}>
+                        <span>Refund transaction</span>
+                        <CopyValue value={detail.refundProviderReference} />
+                      </div>
+                    )}
+
+                    {detail.refundFailureReason && (
+                      <div className={styles.refundError}>
+                        <AlertTriangle size={15} />
+                        {detail.refundFailureReason}
+                      </div>
+                    )}
+
+                    {detail.refundStatus === "processing" && (
+                      <div className={styles.refundNotice}>
+                        Refund submitted to Paymob. NEFRU will finalize it from the provider response/webhook.
+                      </div>
+                    )}
+
+                    {detail.settlementStatus === "settled" &&
+                      ["paid", "partially_refunded"].includes(detail.paymentStatus) && (
+                        <div className={styles.refundError}>
+                          <AlertTriangle size={15} />
+                          Guide earnings are already settled. This requires a manual finance recovery workflow.
+                        </div>
+                      )}
+
+                    {canRefund && !refundOpen && (
+                      <button
+                        type="button"
+                        className={styles.refundButton}
+                        onClick={() => {
+                          setRefundOpen(true);
+                          setRefundReason(detail.cancellationReason || "");
+                        }}
+                      >
+                        <RotateCcw size={16} />
+                        {detail.refundedAmount > 0 ? "Refund remaining balance" : "Issue full refund"}
+                      </button>
+                    )}
+
+                    {refundOpen && (
+                      <div className={styles.refundPanel}>
+                        <label>
+                          <span>Admin refund reason</span>
+                          <textarea
+                            value={refundReason}
+                            onChange={(event) => setRefundReason(event.target.value)}
+                            maxLength={1000}
+                            placeholder="Document why this refund is being issued…"
+                          />
+                        </label>
+                        <p>
+                          This sends the remaining captured amount to Paymob. On confirmation,
+                          the booking becomes refunded and unsettled guide earnings are reduced to zero.
+                        </p>
+                        <div className={styles.refundActions}>
+                          <button
+                            type="button"
+                            onClick={() => {
+                              setRefundOpen(false);
+                              setRefundReason("");
+                            }}
+                            disabled={refunding}
+                          >
+                            Cancel
+                          </button>
+                          <button
+                            type="button"
+                            className={styles.confirmRefund}
+                            onClick={submitRefund}
+                            disabled={refunding || refundReason.trim().length < 3}
+                          >
+                            {refunding ? "Submitting…" : "Confirm Paymob refund"}
+                          </button>
+                        </div>
+                      </div>
+                    )}
+                  </section>
+                )}
 
                 {(detail.specialRequests?.length > 0 || detail.cancellationReason) && <section className={styles.detailCard}><h3>Operational notes</h3>{detail.specialRequests?.map((request) => <p key={request}>{request}</p>)}{detail.cancellationReason && <p><strong>Cancellation:</strong> {detail.cancellationReason} {detail.cancelledBy ? `(${detail.cancelledBy})` : ""}</p>}</section>}
 
@@ -275,6 +413,8 @@ export default function Booking() {
                   {detail.paymobTransactionId && <span><i><CreditCard size={14} /></i><div><strong>Paymob transaction recorded</strong><small>{shortId(detail.paymobTransactionId)}</small></div></span>}
                   {detail.completedAt && <span><i><CheckCircle2 size={14} /></i><div><strong>Experience completed</strong><small>{dateTime(detail.completedAt)}</small></div></span>}
                   {detail.cancelledAt && <span><i><AlertTriangle size={14} /></i><div><strong>Booking closed</strong><small>{dateTime(detail.cancelledAt)}</small></div></span>}
+                  {detail.refundRequestedAt && <span><i><RotateCcw size={14} /></i><div><strong>Refund requested</strong><small>{dateTime(detail.refundRequestedAt)}</small></div></span>}
+                  {detail.refundCompletedAt && <span><i><CheckCircle2 size={14} /></i><div><strong>Refund completed</strong><small>{dateTime(detail.refundCompletedAt)}</small></div></span>}
                 </div></section>
 
                 <button type="button" className={styles.refreshDetail} onClick={() => { const id = selectedId; setSelectedId(""); window.setTimeout(() => setSelectedId(id), 0); }}><RefreshCw size={16} /> Refresh current state</button>

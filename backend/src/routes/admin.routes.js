@@ -28,6 +28,7 @@ import {
   getAdminAnalytics,
   getAdminBookingOperation,
   listAdminBookingOperations,
+  refundAdminBookingOperation,
 } from "../controllers/Admin/bookingAnalytics.controller.js";
 import { authorizeRoles, protect } from "../middlewares/authMiddleware.js";
 import { createRateLimiter } from "../utils/rateLimiter.js";
@@ -79,6 +80,7 @@ router.patch("/trip/:id/status", updateTripStatus);
 // Booking & Paymob operations v2. Legacy paginated endpoint remains below.
 router.get("/booking-operations", listAdminBookingOperations);
 router.get("/booking-operations/:id", getAdminBookingOperation);
+router.post("/booking-operations/:id/refund", refundAdminBookingOperation);
 router.get("/analytics", getAdminAnalytics);
 
 // Bookings (legacy read-only)

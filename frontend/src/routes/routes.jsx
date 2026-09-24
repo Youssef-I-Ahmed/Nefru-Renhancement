@@ -61,6 +61,7 @@ import GuideNotifications from "../pages/Guide/GuideNotifications/GuideNotificat
 import GuideVerification from "../pages/Guide/GuideVerification/GuideVerification";
 import GuideApplicationReceived from "../pages/Guide/GuideApplicationReceived/GuideApplicationReceived";
 import GuideOperations from "../pages/Guide/GuideOperations/GuideOperations";
+import GuideReviews from "../pages/Guide/GuideReviews/GuideReviews";
 
 export const router = createBrowserRouter([
   {
@@ -166,6 +167,7 @@ export const router = createBrowserRouter([
                   { path: "operations", element: <GuideOperations /> },
                   { path: "calendar", element: <GuideCalendar /> },
                   { path: "bookings", element: <GuideBookings /> },
+                  { path: "reviews", element: <GuideReviews /> },
                   { path: "earnings", element: <GuideEarnings /> },
                   { path: "profile", element: <GuideAccountProfile /> },
                   { path: "notifications", element: <GuideNotifications /> },

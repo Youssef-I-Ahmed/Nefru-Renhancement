@@ -28,7 +28,13 @@ export async function runDueJob(now = new Date()) {
     if (job.type === "notification")
       await Notification.updateOne(
         { eventKey: job.key },
-        { $setOnInsert: { ...job.payload, eventKey: job.key, type: "system" } },
+        {
+          $setOnInsert: {
+            ...job.payload,
+            eventKey: job.key,
+            type: job.payload.type || "system",
+          },
+        },
         { upsert: true, runValidators: true },
       );
     if (job.type === "email") {

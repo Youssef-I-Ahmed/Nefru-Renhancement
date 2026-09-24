@@ -99,6 +99,16 @@ export const getBookingOperation = (id) =>
     "Failed to load booking details",
   );
 
+export const refundBookingOperation = (id, reason) =>
+  request(
+    `/admin/booking-operations/${id}/refund`,
+    {
+      method: "POST",
+      body: JSON.stringify({ reason }),
+    },
+    "Failed to refund booking",
+  );
+
 export const getAdminAnalytics = (days = 30) =>
   request(
     `/admin/analytics?days=${encodeURIComponent(days)}`,
