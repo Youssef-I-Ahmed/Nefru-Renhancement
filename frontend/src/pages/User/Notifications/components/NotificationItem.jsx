@@ -29,7 +29,14 @@ export default function NotificationItem({ notification, compact = false, onRead
   const type = notification?.type?.trim();
   const Icon = iconMap[type] || iconMap.default;
   const isUnread = !notification?.isRead;
-  const hasLink = Boolean(notification?.link);
+  const rawLink = notification?.link;
+  const safeLink =
+    typeof rawLink === "string" &&
+    rawLink.startsWith("/") &&
+    !rawLink.startsWith("//")
+      ? rawLink
+      : "";
+  const hasLink = Boolean(safeLink);
   const itemClassName = `${styles.item} ${isUnread ? styles.unread : ""} ${compact ? styles.compact : ""}`;
   const content = <>
     <div className={styles.iconBox} aria-hidden="true"><Icon size={19} /></div>
@@ -46,5 +53,5 @@ export default function NotificationItem({ notification, compact = false, onRead
     },
     "data-type": type || "default",
   };
-  return hasLink ? <Link to={notification.link} {...common}>{content}</Link> : <button type="button" {...common}>{content}</button>;
+  return hasLink ? <Link to={safeLink} {...common}>{content}</Link> : <button type="button" {...common}>{content}</button>;
 }

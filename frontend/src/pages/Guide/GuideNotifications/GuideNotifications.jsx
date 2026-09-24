@@ -8,6 +8,7 @@ import {
   markAsRead,
 } from "../../../store/slices/notificationSlice";
 import NotificationItem from "../../User/Notifications/components/NotificationItem";
+import { formatTimeAgo } from "../../User/Notifications/utils/formatTimeAgo";
 import styles from "./GuideNotifications.module.css";
 
 const resolveGuideNotification = (notification) => {
@@ -35,7 +36,14 @@ const filters = [
 export default function GuideNotifications() {
   const [activeFilter, setActiveFilter] = useState("all");
   const dispatch = useDispatch();
-  const { notifications, unreadCount, loading, error } = useSelector((state) => state.notifications);
+  const {
+    notifications,
+    unreadCount,
+    loading,
+    error,
+    actionError,
+    lastSyncedAt,
+  } = useSelector((state) => state.notifications);
 
   useEffect(() => {
     dispatch(fetchNotifications());
@@ -54,9 +62,14 @@ export default function GuideNotifications() {
           <span className={styles.eyebrow}>{unreadCount > 0 ? `${unreadCount} unread` : "All caught up"}</span>
           <h1>Guide notifications</h1>
           <p>Bookings, successful payments, reviews, and verification updates from NEFRU.</p>
+          {lastSyncedAt && (
+            <small className={styles.syncMeta}>
+              Updated {formatTimeAgo(lastSyncedAt)}
+            </small>
+          )}
         </div>
         <div className={styles.actions}>
-          <button type="button" onClick={() => dispatch(fetchNotifications())} disabled={loading}>
+          <button type="button" onClick={() => dispatch(fetchNotifications({ force: true }))} disabled={loading}>
             <RefreshCw size={16} /> Refresh
           </button>
           <button type="button" onClick={() => dispatch(markAllAsRead())} disabled={unreadCount === 0}>
@@ -65,7 +78,15 @@ export default function GuideNotifications() {
         </div>
       </header>
 
-      {error && <div className={styles.error}>{error}</div>}
+      {(actionError || (error && notifications.length > 0)) && (
+        <div className={styles.warning} role="status">
+          <span>{actionError || "Could not refresh notifications. Showing the latest saved list."}</span>
+          <button type="button" onClick={() => dispatch(fetchNotifications({ force: true }))}>
+            Try again
+          </button>
+        </div>
+      )}
+      {error && notifications.length === 0 && <div className={styles.error}>{error}</div>}
 
       <section className={styles.panel}>
         <div className={styles.tabs} role="tablist" aria-label="Notification filters">

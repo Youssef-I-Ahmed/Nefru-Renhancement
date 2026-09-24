@@ -43,6 +43,10 @@ const notificationSchema = new mongoose.Schema(
       default: false,
       index: true,
     },
+    readAt: {
+      type: Date,
+      default: null,
+    },
     link: {
       type: String,
       trim: true,

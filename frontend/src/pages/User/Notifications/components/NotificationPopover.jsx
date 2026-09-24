@@ -1,8 +1,10 @@
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Bell } from "lucide-react";
 
 import {
+  fetchNotifications,
   markAllAsRead,
   markAsRead,
 } from "../../../../store/slices/notificationSlice";
@@ -16,12 +18,15 @@ export default function NotificationPopover({
 }) {
   const dispatch = useDispatch();
 
-  const notifications = useSelector(
-    (state) => state.notifications.notifications
+  const { notifications, unreadCount, loading } = useSelector(
+    (state) => state.notifications,
   );
 
+  useEffect(() => {
+    dispatch(fetchNotifications({ force: true }));
+  }, [dispatch]);
+
   const latestNotifications = notifications.slice(0, 5);
-  const unreadCount = notifications.filter((item) => !item.isRead).length;
 
   const handleMarkAllRead = () => {
     dispatch(markAllAsRead());
@@ -41,9 +46,11 @@ export default function NotificationPopover({
         <div>
           <h2>Notifications</h2>
           <p>
-            {unreadCount > 0
-              ? `${unreadCount} unread notification${unreadCount > 1 ? "s" : ""}`
-              : "You are all caught up"}
+            {loading && notifications.length > 0
+              ? "Checking for new updates…"
+              : unreadCount > 0
+                ? `${unreadCount} unread notification${unreadCount > 1 ? "s" : ""}`
+                : "You are all caught up"}
           </p>
         </div>
 
