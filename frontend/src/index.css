@@ -301,3 +301,124 @@ span {
   from{ opacity: 1; }
   to{ opacity: 0; }
 }
+
+
+/* NEFRU FINAL UI POLISH */
+html {
+  scroll-behavior: smooth;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+button,
+a,
+input,
+select,
+textarea {
+  -webkit-tap-highlight-color: transparent;
+}
+
+:where(button, a, input, select, textarea, [tabindex]):focus-visible {
+  outline: 3px solid rgba(237, 174, 73, 0.42);
+  outline-offset: 2px;
+}
+
+::selection {
+  background: rgba(237, 174, 73, 0.28);
+  color: var(--color-primary-dark);
+}
+
+.nefruDemoBanner {
+  min-height: 38px;
+  padding: 8px clamp(14px, 3vw, 24px);
+  background: linear-gradient(90deg, #10213a 0%, #18334b 100%);
+  color: rgba(255, 255, 255, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  text-align: center;
+  font-size: 11px;
+  line-height: 1.45;
+}
+
+.nefruDemoBanner strong {
+  flex: 0 0 auto;
+  padding: 3px 7px;
+  border: 1px solid rgba(237, 174, 73, 0.42);
+  border-radius: 999px;
+  color: #f3c96f;
+  font-size: 9px;
+  font-weight: 850;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.nefruDemoBanner span {
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.nefruRouteLoading {
+  min-height: 48vh;
+  padding: 44px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-primary-dark);
+  text-align: center;
+}
+
+.nefruRouteLoading strong {
+  margin-top: 12px;
+  font-size: 15px;
+  font-weight: 800;
+}
+
+.nefruRouteLoading small {
+  margin-top: 4px;
+  color: var(--color-text-muted);
+  font-size: 12px;
+}
+
+.nefruRouteSpinner {
+  width: 34px;
+  height: 34px;
+  border: 3px solid var(--color-border-soft);
+  border-top-color: var(--color-secondary-dark);
+  border-radius: 50%;
+  animation: nefruRouteSpin 0.8s linear infinite;
+}
+
+@keyframes nefruRouteSpin {
+  to { transform: rotate(360deg); }
+}
+
+@media (max-width: 575px) {
+  .nefruDemoBanner {
+    min-height: 34px;
+    padding: 7px 12px;
+    gap: 6px;
+    font-size: 9px;
+  }
+
+  .nefruDemoBanner strong {
+    font-size: 8px;
+    padding: 2px 6px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .nefruRouteSpinner {
+    animation-duration: 1.6s;
+  }
+}

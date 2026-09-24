@@ -18,8 +18,19 @@ createRoot(document.getElementById("root")).render(
         <SavedTripsProvider>
           <AuthRefresh />
           <NotificationSync />
-          <aside role="note" style={{background:'#123249',color:'#fff',padding:'8px 16px',textAlign:'center',fontSize:13}}>NEFRU portfolio demo · Fictional experiences, no real reservations. Use payment test details only; do not upload real identity documents.</aside>
-          <Suspense fallback={<div role="status" aria-live="polite" style={{minHeight:"45vh",display:"grid",placeItems:"center",padding:"32px 16px",color:"#64748b",fontSize:14,fontWeight:700}}>Loading NEFRU…</div>}>
+          <aside className="nefruDemoBanner" role="note">
+            <strong>Portfolio demo</strong>
+            <span>Fictional experiences · no real reservations · use payment test details only · do not upload real identity documents.</span>
+          </aside>
+          <Suspense
+            fallback={
+              <div className="nefruRouteLoading" role="status" aria-live="polite">
+                <span className="nefruRouteSpinner" aria-hidden="true" />
+                <strong>Loading NEFRU</strong>
+                <small>Preparing your experience…</small>
+              </div>
+            }
+          >
             <RouterProvider router={router} />
           </Suspense>
         </SavedTripsProvider>
