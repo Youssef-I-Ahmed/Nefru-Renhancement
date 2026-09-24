@@ -112,6 +112,7 @@ export default function GuideOperations() {
   const [cancelOpenId, setCancelOpenId] = useState("");
   const [cancelReason, setCancelReason] = useState("");
   const [showAccountClosure, setShowAccountClosure] = useState(false);
+  const [nowMs, setNowMs] = useState(0);
 
   const load = useCallback(async () => {
     setError("");
@@ -126,8 +127,27 @@ export default function GuideOperations() {
   }, []);
 
   useEffect(() => {
-    load();
+    let active = true;
+    const timer = window.setTimeout(() => {
+      if (active) load();
+    }, 0);
+
+    return () => {
+      active = false;
+      window.clearTimeout(timer);
+    };
   }, [load]);
+
+  useEffect(() => {
+    const tick = () => setNowMs(Date.now());
+    const initialTimer = window.setTimeout(tick, 0);
+    const interval = window.setInterval(tick, 30000);
+
+    return () => {
+      window.clearTimeout(initialTimer);
+      window.clearInterval(interval);
+    };
+  }, []);
 
   const trips = useMemo(
     () => (Array.isArray(data.trips) ? data.trips : []),
@@ -388,8 +408,8 @@ export default function GuideOperations() {
               const roster = bookingsByOccurrence.get(occurrenceId) || [];
               const startsAt = new Date(occurrence.startsAt);
               const endsAt = new Date(occurrence.endsAt);
-              const noShowAllowed = Date.now() >= +startsAt + 30 * 60 * 1000;
-              const endAllowed = Date.now() >= +endsAt;
+              const noShowAllowed = nowMs >= +startsAt + 30 * 60 * 1000;
+              const endAllowed = nowMs >= +endsAt;
               const checkedIn = roster.filter(
                 (booking) => booking.attendance?.status === "checked_in",
               ).length;
