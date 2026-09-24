@@ -1,12 +1,13 @@
 import { useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Bell } from "lucide-react";
+import { Bell, RefreshCw } from "lucide-react";
 
 import useIsMobile from "../../../hooks/useIsMobile";
 import PremiumFooter from "@/pages/User/Home/PremiumFooter";
 import MobilePageHeader from "../../../shared/components/MobilePageHeader/MobilePageHeader";
 import { fetchNotifications, markAllAsRead, markAsRead } from "../../../store/slices/notificationSlice";
 import NotificationItem from "./components/NotificationItem";
+import { formatTimeAgo } from "./utils/formatTimeAgo";
 import styles from "./NotificationsPage.module.css";
 
 const filters = [
@@ -20,9 +21,15 @@ const filters = [
 
 function NotificationsContent({ isMobile }) {
   const dispatch = useDispatch();
-  const { notifications, loading, error } = useSelector((state) => state.notifications);
+  const {
+    notifications,
+    unreadCount,
+    loading,
+    error,
+    actionError,
+    lastSyncedAt,
+  } = useSelector((state) => state.notifications);
   const [activeFilter, setActiveFilter] = useState("all");
-  const unreadCount = notifications.filter((item) => !item.isRead).length;
 
   useEffect(() => {
     dispatch(fetchNotifications());
@@ -35,6 +42,7 @@ function NotificationsContent({ isMobile }) {
   }, [activeFilter, notifications]);
 
   const handleMarkAllRead = () => dispatch(markAllAsRead());
+  const handleRefresh = () => dispatch(fetchNotifications({ force: true }));
 
   return (
     <main className={styles.page}>
@@ -53,13 +61,28 @@ function NotificationsContent({ isMobile }) {
             </span>
             {!isMobile && <h1>Notifications</h1>}
             <p>Booking, payment, review, and account activity — all in one place.</p>
+            {lastSyncedAt && (
+              <span className={styles.syncMeta}>
+                Updated {formatTimeAgo(lastSyncedAt)}
+              </span>
+            )}
           </div>
           {!isMobile && (
             <div className={styles.heroActions}>
+              <button type="button" className={styles.refreshButton} onClick={handleRefresh} disabled={loading}>
+                <RefreshCw size={16} /> {loading ? "Refreshing…" : "Refresh"}
+              </button>
               <button type="button" className={styles.markAllButton} onClick={handleMarkAllRead} disabled={unreadCount === 0}>Mark all read</button>
             </div>
           )}
         </section>
+
+        {(actionError || (error && notifications.length > 0)) && (
+          <div className={styles.warningBanner} role="status">
+            <span>{actionError || "Could not refresh notifications. Showing the latest saved list."}</span>
+            <button type="button" onClick={handleRefresh}>Try again</button>
+          </div>
+        )}
 
         <section className={styles.panel} aria-label="Notification center">
           <div className={styles.tabs} role="tablist" aria-label="Notification filters">
@@ -74,12 +97,12 @@ function NotificationsContent({ isMobile }) {
             })}
           </div>
 
-          {error && (
+          {error && notifications.length === 0 && (
             <div className={styles.emptyState}>
               <div className={styles.emptyIcon}><Bell size={30} /></div>
               <h2>Notifications are temporarily unavailable</h2>
               <p>{error}</p>
-              <button type="button" className={styles.markAllButton} onClick={() => dispatch(fetchNotifications())}>Try again</button>
+              <button type="button" className={styles.markAllButton} onClick={handleRefresh}>Try again</button>
             </div>
           )}
 

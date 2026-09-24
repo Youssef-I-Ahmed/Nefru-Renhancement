@@ -44,9 +44,10 @@ export const markNotificationRead = asyncHandler(async (req, res) => {
     throw new Error("Invalid notification id");
   }
 
+  const now = new Date();
   const notification = await Notification.findOneAndUpdate(
     { _id: req.params.id, user: req.user._id },
-    { $set: { isRead: true } },
+    { $set: { isRead: true, readAt: now } },
     { new: true },
   );
 
@@ -63,9 +64,10 @@ export const markNotificationRead = asyncHandler(async (req, res) => {
 });
 
 export const markAllNotificationsRead = asyncHandler(async (req, res) => {
+  const now = new Date();
   await Notification.updateMany(
     { user: req.user._id, isRead: false },
-    { $set: { isRead: true } },
+    { $set: { isRead: true, readAt: now } },
   );
 
   res.status(200).json({

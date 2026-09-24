@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { MapContainer, TileLayer, Marker, Popup, Polyline, useMap } from "react-leaflet";
 import L from "leaflet";
+import "leaflet/dist/leaflet.css";
 import { Search, ArrowLeft, Crosshair, Clock, Car, Footprints, SlidersHorizontal, Plus, Minus, Heart, MapPin, Calendar, ChevronDown, Bell, User, X, Check, Compass } from "lucide-react";
 import { apiRequest, resolveUploadsUrl } from "../../../services/api";
 import { useSavedTrips } from "../../../context/useSavedTrips";

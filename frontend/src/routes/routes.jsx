@@ -1,4 +1,3 @@
-import Operations from '../pages/Marketplace/Operations';
 import { Navigate, createBrowserRouter } from "react-router-dom";
 
 import ProtectedRoute from "./ProtectedRoute";
@@ -9,59 +8,60 @@ import MasterLayout from "../shared/MasterLayout/MasterLayout";
 import NotFound from "../shared/NotFound/NotFound";
 
 import Welcome from "../pages/Auth/Welcome/Welcome";
-import Login from "../pages/Auth/components/Login/Login";
-import Register from "../pages/Auth/components/Register/Register";
-import Forgetpassword from "../pages/Auth/components/Forgetpassword/Forgetpassword";
-import ResetPassword from "../pages/Auth/components/ResetPassword/ResetPassword";
-import ApplicationReceived from "../pages/Auth/components/ApplicationReceived/ApplicationReceived";
-import CheckEmail from "../pages/Auth/Onboarding/CheckEmail";
-import ChooseRole from "../pages/Auth/Onboarding/ChooseRole";
-import LinkGoogleAccount from "../pages/Auth/Onboarding/LinkGoogleAccount";
-import VerifyEmail from "../pages/Auth/Onboarding/VerifyEmail";
 
-import Home from "../pages/User/Home/Home";
-import Info from "../pages/User/Trips/Info/Info";
-import Book from "../pages/User/Trips/Book/Book";
-import Status from "../pages/User/Trips/Book/components/Status/Status";
-import Guide from "../pages/User/Trips/Guide/Guide";
-import Saved from "../pages/User/Saved/Saved";
-import Profile from "../pages/User/Profile/Profile";
-import ProfileOverview from "../pages/User/Profile/pages/ProfileOverview/ProfileOverview";
-import EditProfile from "../pages/User/Profile/pages/EditProfile/EditProfile";
-import ChangePassword from "../pages/User/Profile/pages/ChangePassword/ChangePassword";
-import MyBookings from "../pages/User/Profile/pages/MyBookings/MyBookings";
-import PaymentMethods from "../pages/User/Profile/pages/PaymentMethods/PaymentMethods";
-import ReviewsWritten from "../pages/User/Profile/pages/ReviewsWritten/ReviewsWritten";
-import HelpSupport from "../pages/User/Profile/pages/HelpSupport/HelpSupport";
-import Settings from "../pages/User/Settings/Settings";
-import NotificationsPage from "../pages/User/Notifications/NotificationsPage";
-import NearbyMap from "../pages/User/NearbyMap/NearbyMap";
-import RecommendedTrips from "../pages/User/RecommendedTrips/RecommendedTrips";
-
-import Admin from "../pages/Admin/Admin";
-import DashboardStatus from "../pages/Admin/pages/DashboardStatus/DashboardStatus";
-import Accounts from "../pages/Admin/pages/Accounts/Accounts";
-import CMS from "../pages/Admin/pages/CMS/CMS";
-import Analytics from "../pages/Admin/pages/Analytics/Analytics";
-import Booking from "../pages/Admin/pages/Booking/Booking";
-import AdminOperations from "../pages/Admin/pages/AdminOperations/AdminOperations";
-
-import ToursManagement from "../pages/Guide/ToursManagement/ToursManagement";
-import CreateTour from "../pages/Guide/CreateTour/CreateTour";
-import Schedule from "../pages/Guide/Schedule/Schedule";
-import TourMedia from "../pages/Guide/TourMedia/TourMedia";
-import TourApprove from "../pages/Guide/TourApprove/TourApprove";
-import GuidePortalLayout from "../pages/Guide/components/GuidePortalLayout/GuidePortalLayout";
-import GuideDashboard from "../pages/Guide/GuideDashboard/GuideDashboard";
-import GuideCalendar from "../pages/Guide/GuideCalendar/GuideCalendar";
-import GuideBookings from "../pages/Guide/GuideBookings/GuideBookings";
-import GuideEarnings from "../pages/Guide/GuideEarnings/GuideEarnings";
-import GuideAccountProfile from "../pages/Guide/GuideAccountProfile/GuideAccountProfile";
-import GuideNotifications from "../pages/Guide/GuideNotifications/GuideNotifications";
-import GuideVerification from "../pages/Guide/GuideVerification/GuideVerification";
-import GuideApplicationReceived from "../pages/Guide/GuideApplicationReceived/GuideApplicationReceived";
-import GuideOperations from "../pages/Guide/GuideOperations/GuideOperations";
-import GuideReviews from "../pages/Guide/GuideReviews/GuideReviews";
+import {
+  Accounts,
+  Admin,
+  AdminOperations,
+  Analytics,
+  ApplicationReceived,
+  Book,
+  Booking,
+  ChangePassword,
+  CheckEmail,
+  ChooseRole,
+  CMS,
+  CreateTour,
+  DashboardStatus,
+  EditProfile,
+  Forgetpassword,
+  Guide,
+  GuideAccountProfile,
+  GuideApplicationReceived,
+  GuideBookings,
+  GuideCalendar,
+  GuideDashboard,
+  GuideEarnings,
+  GuideNotifications,
+  GuideOperations,
+  GuidePortalLayout,
+  GuideReviews,
+  GuideVerification,
+  HelpSupport,
+  Home,
+  Info,
+  LinkGoogleAccount,
+  Login,
+  MyBookings,
+  NearbyMap,
+  NotificationsPage,
+  Operations,
+  PaymentMethods,
+  Profile,
+  ProfileOverview,
+  RecommendedTrips,
+  Register,
+  ResetPassword,
+  ReviewsWritten,
+  Saved,
+  Schedule,
+  Settings,
+  Status,
+  TourApprove,
+  TourMedia,
+  ToursManagement,
+  VerifyEmail,
+} from "./lazyPages";
 
 export const router = createBrowserRouter([
   {

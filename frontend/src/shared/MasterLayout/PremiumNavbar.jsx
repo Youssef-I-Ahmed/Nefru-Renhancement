@@ -49,6 +49,27 @@ const adminMenuItems = [
   { path: "/admin/overview", label: "Admin Dashboard", icon: User },
 ];
 
+const resolveGuideNotificationLink = (notification) => {
+  const type = notification?.type?.trim();
+  let link =
+    typeof notification?.link === "string" &&
+    notification.link.startsWith("/guide")
+      ? notification.link
+      : null;
+
+  if (type === "booking") link = "/guide/bookings";
+  if (type === "payment") link = "/guide/earnings";
+  if (type === "review") link = "/guide/reviews";
+  if (type === "account") {
+    link = notification?.metadata?.verificationStatus
+      ? "/guide/verification"
+      : "/guide/profile";
+  }
+  if (type === "support") link = "/guide/profile";
+
+  return link;
+};
+
 const getImgSrc = (img, fallback) => {
   if (!img || typeof img !== "string") return fallback;
   const source = /^(https?:|data:|blob:)/i.test(img) || img.startsWith("/")
@@ -194,28 +215,34 @@ function PremiumNavbar({ hideOnMobile = false }) {
 
             {isAuthenticated ? (
               <>
-                <div className={styles.actionWrapper}>
-                  <button
-                    type="button"
-                    className={styles.iconButton}
-                    data-open={showNotifications || undefined}
-                    onClick={() => {
-                      setShowNotifications((current) => !current);
-                      setShowProfile(false);
-                    }}
-                    aria-label="Open notifications"
-                    aria-expanded={showNotifications}
-                  >
-                    <Bell size={19} aria-hidden="true" />
-                    {unreadCount > 0 && (
-                      <span className={styles.notificationBadge}>{unreadCount > 9 ? "9+" : unreadCount}</span>
-                    )}
-                  </button>
+                {role !== "admin" && (
+                  <div className={styles.actionWrapper}>
+                    <button
+                      type="button"
+                      className={styles.iconButton}
+                      data-open={showNotifications || undefined}
+                      onClick={() => {
+                        setShowNotifications((current) => !current);
+                        setShowProfile(false);
+                      }}
+                      aria-label="Open notifications"
+                      aria-expanded={showNotifications}
+                    >
+                      <Bell size={19} aria-hidden="true" />
+                      {unreadCount > 0 && (
+                        <span className={styles.notificationBadge}>{unreadCount > 9 ? "9+" : unreadCount}</span>
+                      )}
+                    </button>
 
-                  {showNotifications && (
-                    <NotificationPopover onClose={() => setShowNotifications(false)} />
-                  )}
-                </div>
+                    {showNotifications && (
+                      <NotificationPopover
+                        onClose={() => setShowNotifications(false)}
+                        viewAllTo={role === "guide" ? "/guide/notifications" : "/user/notifications"}
+                        resolveLink={role === "guide" ? resolveGuideNotificationLink : undefined}
+                      />
+                    )}
+                  </div>
+                )}
 
                 <div className={styles.actionWrapper}>
                   <button
@@ -298,7 +325,7 @@ function PremiumNavbar({ hideOnMobile = false }) {
               <Search size={17} aria-hidden="true" />
               <span>Search</span>
             </button>
-            {isAuthenticated ? (
+            {isAuthenticated && role !== "admin" ? (
               <button
                 type="button"
                 className={styles.mobileIconButton}
@@ -308,11 +335,11 @@ function PremiumNavbar({ hideOnMobile = false }) {
                 <Bell size={19} aria-hidden="true" />
                 {unreadCount > 0 && <span className={styles.mobileDot} />}
               </button>
-            ) : (
+            ) : !isAuthenticated ? (
               <button type="button" className={styles.mobileSignIn} onClick={goToLogin}>
                 Sign in
               </button>
-            )}
+            ) : null}
           </div>
         </div>
       </header>
