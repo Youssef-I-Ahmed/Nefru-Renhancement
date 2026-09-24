@@ -9,6 +9,7 @@ import styles from "./Navbar.module.css";
 const PAGE_TITLES = {
   overview: ["Overview", "Platform operations at a glance"],
   accounts: ["Accounts", "Manage tourists, guides, verification and access"],
+  operations: ["Trust & safety", "Reviews, cases, verification and marketplace exceptions"],
   cms: ["Tour moderation", "Review and control marketplace experiences"],
   analytics: ["Analytics", "Understand marketplace performance"],
   booking: ["Bookings", "Review reservation and payment activity"],

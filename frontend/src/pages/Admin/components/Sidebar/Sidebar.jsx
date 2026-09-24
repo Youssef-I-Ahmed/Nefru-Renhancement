@@ -3,6 +3,7 @@ import {
   CalendarCheck2,
   LayoutDashboard,
   MapPinned,
+  ShieldAlert,
   UsersRound,
 } from "lucide-react";
 import { NavLink, useNavigate } from "react-router-dom";
@@ -11,8 +12,8 @@ import Logo from "../../../../assets/logo.png";
 import styles from "./Sidebar.module.css";
 
 const pages = [
-  {label:"Trust & safety",to:"/admin/operations",icon:CalendarCheck2},
   { label: "Overview", to: "/admin/overview", icon: LayoutDashboard },
+  { label: "Trust & safety", to: "/admin/operations", icon: ShieldAlert },
   { label: "Accounts", to: "/admin/accounts", icon: UsersRound },
   { label: "Tour moderation", to: "/admin/cms", icon: MapPinned },
   { label: "Bookings", to: "/admin/booking", icon: CalendarCheck2 },

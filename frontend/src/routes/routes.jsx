@@ -44,6 +44,7 @@ import Accounts from "../pages/Admin/pages/Accounts/Accounts";
 import CMS from "../pages/Admin/pages/CMS/CMS";
 import Analytics from "../pages/Admin/pages/Analytics/Analytics";
 import Booking from "../pages/Admin/pages/Booking/Booking";
+import AdminOperations from "../pages/Admin/pages/AdminOperations/AdminOperations";
 
 import ToursManagement from "../pages/Guide/ToursManagement/ToursManagement";
 import CreateTour from "../pages/Guide/CreateTour/CreateTour";
@@ -204,7 +205,7 @@ export const router = createBrowserRouter([
           { index: true, element: <Navigate to="/admin/overview" replace /> },
           { path: "overview", element: <DashboardStatus /> },
           { path: "accounts", element: <Accounts /> },
-          {path:"operations",element:<Operations role="admin"/>},
+          { path: "operations", element: <AdminOperations /> },
           { path: "cms", element: <CMS /> },
           { path: "analytics", element: <Analytics /> },
           { path: "booking", element: <Booking /> },

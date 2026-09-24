@@ -10,6 +10,7 @@ import { OperationalCase } from "../models/operationalCase.model.js";
 import { AuditLog } from "../models/auditLog.model.js";
 import { GuideProfile } from "../models/guide.model.js";
 import { TouristProfile } from "../models/tourist.model.js";
+import { User } from "../models/user.model.js";
 import { demand, sameId, tripState } from "../domain/policies.js";
 import { moderateReview } from "../services/reviewLifecycle.service.js";
 import { qualityMetrics } from "../services/quality.service.js";
@@ -157,12 +158,44 @@ export const dashboard = reply(async (req) => {
   const reviews =
     req.user.role === "admin"
       ? await Review.find({
-          moderationStatus: { $in: ["pending_moderation", "published"] },
+          moderationStatus: {
+            $in: ["pending_moderation", "published", "hidden", "rejected"],
+          },
         })
           .sort({ createdAt: -1 })
           .limit(100)
           .lean()
       : [];
+  let reviewSummaries = reviews;
+  if (req.user.role === "admin" && reviews.length) {
+    const [reviewTrips, reviewTourists, reviewGuides] = await Promise.all([
+      Trip.find({ _id: { $in: reviews.map((review) => review.trip) } })
+        .select("title location")
+        .lean(),
+      TouristProfile.find({ user: { $in: reviews.map((review) => review.tourist) } })
+        .select("user fullName avatar")
+        .lean(),
+      GuideProfile.find({ user: { $in: reviews.map((review) => review.guide) } })
+        .select("user fullName avatar")
+        .lean(),
+    ]);
+    const tripsById = new Map(reviewTrips.map((trip) => [String(trip._id), trip]));
+    const touristsByUser = new Map(reviewTourists.map((profile) => [String(profile.user), profile]));
+    const guidesByUser = new Map(reviewGuides.map((profile) => [String(profile.user), profile]));
+    reviewSummaries = reviews.map((review) => {
+      const trip = tripsById.get(String(review.trip));
+      const tourist = touristsByUser.get(String(review.tourist));
+      const guide = guidesByUser.get(String(review.guide));
+      return {
+        ...review,
+        context: {
+          trip: { title: trip?.title || "Experience", location: trip?.location || "" },
+          tourist: { fullName: tourist?.fullName || "Traveler", avatar: tourist?.avatar || "" },
+          guide: { fullName: guide?.fullName || "Guide", avatar: guide?.avatar || "" },
+        },
+      };
+    });
+  }
   const cases =
     req.user.role === "admin"
       ? await OperationalCase.find({ status: "open" }).limit(100).lean()
@@ -195,7 +228,7 @@ export const dashboard = reply(async (req) => {
     revisions,
     occurrences,
     bookings: rosterBookings,
-    reviews,
+    reviews: reviewSummaries,
     cases,
     verifications,
     quality:
@@ -208,14 +241,40 @@ export const reviewDetail = reply(async (req) => {
     .select("+moderationReason")
     .lean();
   demand(review, "Review not found", 404);
+  const [booking, survey, touristUser, guideUser, touristProfile, guideProfile, trip] =
+    await Promise.all([
+      Booking.findById(review.booking).select("-paymobClientSecret").lean(),
+      PrivateExperienceSurvey.findOne({ booking: review.booking }).lean(),
+      User.findById(review.tourist).select("email role status accountStatus").lean(),
+      User.findById(review.guide).select("email role status accountStatus").lean(),
+      TouristProfile.findOne({ user: review.tourist }).select("fullName avatar").lean(),
+      GuideProfile.findOne({ user: review.guide })
+        .select("fullName avatar verificationStatus identityStatus licenseStatus")
+        .lean(),
+      Trip.findById(review.trip).select("title location").lean(),
+    ]);
   return {
     review,
-    booking: await Booking.findById(review.booking)
-      .select("-paymobClientSecret")
-      .lean(),
-    survey: await PrivateExperienceSurvey.findOne({
-      booking: review.booking,
-    }).lean(),
+    booking,
+    survey,
+    context: {
+      tourist: {
+        fullName: touristProfile?.fullName || "Traveler",
+        email: touristUser?.email || "",
+        avatar: touristProfile?.avatar || "",
+        accountStatus: touristUser?.accountStatus || touristUser?.status || "",
+      },
+      guide: {
+        fullName: guideProfile?.fullName || "Guide",
+        email: guideUser?.email || "",
+        avatar: guideProfile?.avatar || "",
+        verificationStatus: guideProfile?.verificationStatus || "",
+        identityStatus: guideProfile?.identityStatus || "",
+        licenseStatus: guideProfile?.licenseStatus || "",
+        accountStatus: guideUser?.accountStatus || guideUser?.status || "",
+      },
+      trip: { title: trip?.title || "Experience", location: trip?.location || "" },
+    },
   };
 });
 export const caseDetail = reply(async (req) => {
