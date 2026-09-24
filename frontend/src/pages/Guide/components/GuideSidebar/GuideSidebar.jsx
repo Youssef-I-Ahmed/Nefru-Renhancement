@@ -1,4 +1,5 @@
 import {
+  Activity,
   CalendarDays,
   CircleDollarSign,
   CircleHelp,
@@ -13,10 +14,10 @@ import logo from "../../../../assets/images/logo.png";
 import styles from "./GuideSidebar.module.css";
 
 const navigationItems = [
-  {label:"Experience operations",to:"/guide/operations",icon:ClipboardList},
   { label: "Dashboard", to: "/guide/dashboard", icon: Home },
   { label: "My Tours", to: "/guide", icon: MapPinned, end: true },
   { label: "Calendar", to: "/guide/calendar", icon: CalendarDays },
+  { label: "Operations", to: "/guide/operations", icon: Activity },
   { label: "Bookings", to: "/guide/bookings", icon: ClipboardList },
   { label: "Earnings", to: "/guide/earnings", icon: CircleDollarSign },
   { label: "Profile", to: "/guide/profile", icon: UserRound },

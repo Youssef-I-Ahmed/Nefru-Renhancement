@@ -59,6 +59,7 @@ import GuideAccountProfile from "../pages/Guide/GuideAccountProfile/GuideAccount
 import GuideNotifications from "../pages/Guide/GuideNotifications/GuideNotifications";
 import GuideVerification from "../pages/Guide/GuideVerification/GuideVerification";
 import GuideApplicationReceived from "../pages/Guide/GuideApplicationReceived/GuideApplicationReceived";
+import GuideOperations from "../pages/Guide/GuideOperations/GuideOperations";
 
 export const router = createBrowserRouter([
   {
@@ -161,7 +162,7 @@ export const router = createBrowserRouter([
                 children: [
                   { index: true, element: <ToursManagement /> },
                   { path: "dashboard", element: <GuideDashboard /> },
-                  {path:"operations",element:<Operations role="guide"/>},
+                  { path: "operations", element: <GuideOperations /> },
                   { path: "calendar", element: <GuideCalendar /> },
                   { path: "bookings", element: <GuideBookings /> },
                   { path: "earnings", element: <GuideEarnings /> },

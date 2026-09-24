@@ -9,6 +9,7 @@ import { PrivateExperienceSurvey } from "../models/privateExperienceSurvey.model
 import { OperationalCase } from "../models/operationalCase.model.js";
 import { AuditLog } from "../models/auditLog.model.js";
 import { GuideProfile } from "../models/guide.model.js";
+import { TouristProfile } from "../models/tourist.model.js";
 import { demand, sameId, tripState } from "../domain/policies.js";
 import { moderateReview } from "../services/reviewLifecycle.service.js";
 import { qualityMetrics } from "../services/quality.service.js";
@@ -135,6 +136,24 @@ export const dashboard = reply(async (req) => {
   })
     .select("_id occurrence tourist attendance status paymentStatus")
     .lean();
+  const travelerProfiles = await TouristProfile.find({
+    user: { $in: bookings.map((booking) => booking.tourist) },
+  })
+    .select("user fullName avatar")
+    .lean();
+  const travelersByUser = new Map(
+    travelerProfiles.map((profile) => [String(profile.user), profile]),
+  );
+  const rosterBookings = bookings.map((booking) => {
+    const traveler = travelersByUser.get(String(booking.tourist));
+    return {
+      ...booking,
+      traveler: {
+        fullName: traveler?.fullName || "Traveler",
+        avatar: traveler?.avatar || "",
+      },
+    };
+  });
   const reviews =
     req.user.role === "admin"
       ? await Review.find({
@@ -175,7 +194,7 @@ export const dashboard = reply(async (req) => {
     trips,
     revisions,
     occurrences,
-    bookings,
+    bookings: rosterBookings,
     reviews,
     cases,
     verifications,
