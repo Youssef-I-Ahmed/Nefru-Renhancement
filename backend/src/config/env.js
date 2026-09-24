@@ -88,7 +88,13 @@ export const env = {
   passwordTourist: process.env.PASSWORD_TOURIST,
   emailGuide: process.env.EMAIL_GUIDE || "guide@test.com",
   passwordGuide: process.env.PASSWORD_GUIDE,
+  reviewInviteDelayMinutes: Math.max(
+  1,
+  Number(process.env.REVIEW_INVITE_DELAY_MINUTES) || 45,
+),
 };
+
+
 
 if (nodeEnv === "production") {
   for (const key of ["MONGODB_URI", "FRONTEND_URL", "BACKEND_PUBLIC_URL"]) {
@@ -103,8 +109,10 @@ if (nodeEnv === "production") {
   }
 }
 
+
 export function getPaymobWebhookUrl() {
   if (env.paymobWebhookUrl) return env.paymobWebhookUrl;
   if (!env.backendPublicUrl) return "";
   return `${env.backendPublicUrl}/api/payments/paymob/webhook`;
 }
+

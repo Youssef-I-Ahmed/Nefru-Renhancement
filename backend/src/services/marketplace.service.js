@@ -24,7 +24,7 @@ import {
   normalizeTripSchedule,
   occurrenceDateTime,
 } from "../utils/tripSchedule.js";
-
+import { env } from "../config/env.js";
 export async function atomic(work) {
   try {
     return await mongoose.connection.transaction(work);
@@ -133,8 +133,8 @@ export async function eligibleGuide(id, trip = {}, session = null) {
   const profile = await GuideProfile.findOne({ user: id }).session(session);
   demand(
     accountActive(user) &&
-      user.role === "guide" &&
-      verificationValid(profile, { licenseRequired: trip.licenseRequired }),
+    user.role === "guide" &&
+    verificationValid(profile, { licenseRequired: trip.licenseRequired }),
     "Guide account or required verification is not eligible",
     403,
     "GUIDE_INELIGIBLE",
@@ -144,7 +144,7 @@ export async function eligibleGuide(id, trip = {}, session = null) {
 export async function assertBookable(trip, session = null) {
   demand(
     tripState(trip).lifecycleStatus === "live" &&
-      tripState(trip).reviewStatus === "approved",
+    tripState(trip).reviewStatus === "approved",
     "Experience is not accepting new bookings",
   );
   demand(
@@ -194,14 +194,14 @@ export async function validatedContent(trip, input) {
     for (const time of [slot.startTime, slot.endTime])
       demand(
         typeof time === "string" &&
-          (/^([01]?\d|2[0-3]):[0-5]\d$/.test(time) ||
-            /^(0?[1-9]|1[0-2]):[0-5]\d\s*[ap]m$/i.test(time)),
+        (/^([01]?\d|2[0-3]):[0-5]\d$/.test(time) ||
+          /^(0?[1-9]|1[0-2]):[0-5]\d\s*[ap]m$/i.test(time)),
         "Invalid raw schedule time",
         400,
       );
     demand(
       Number.isInteger(Number(slot.capacity ?? content.groupSize)) &&
-        Number(slot.capacity ?? content.groupSize) > 0,
+      Number(slot.capacity ?? content.groupSize) > 0,
       "Invalid raw capacity",
       400,
     );
@@ -219,7 +219,7 @@ export async function validatedContent(trip, input) {
   );
   demand(
     Number.isInteger(Number(content.groupSize)) &&
-      Number(content.groupSize) > 0,
+    Number(content.groupSize) > 0,
     "Capacity must be a positive integer",
     400,
   );
@@ -232,22 +232,22 @@ export async function validatedContent(trip, input) {
   for (const slot of schedule.slots) {
     demand(
       /^\d{4}-\d{2}-\d{2}$/.test(slot.date) &&
-        new Date(`${slot.date}T12:00Z`).toISOString().slice(0, 10) ===
-          slot.date,
+      new Date(`${slot.date}T12:00Z`).toISOString().slice(0, 10) ===
+      slot.date,
       "Invalid schedule date",
       400,
     );
     demand(
       /^([01]\d|2[0-3]):[0-5]\d$/.test(slot.startTime) &&
-        /^([01]\d|2[0-3]):[0-5]\d$/.test(slot.endTime) &&
-        slot.endTime > slot.startTime,
+      /^([01]\d|2[0-3]):[0-5]\d$/.test(slot.endTime) &&
+      slot.endTime > slot.startTime,
       "Invalid start/end time",
       400,
     );
     demand(
       Number.isInteger(slot.capacity) &&
-        slot.capacity > 0 &&
-        slot.capacity <= 1000,
+      slot.capacity > 0 &&
+      slot.capacity <= 1000,
       "Invalid capacity",
       400,
     );
@@ -287,9 +287,9 @@ export async function syncOccurrences(trip, session) {
     if (booked)
       demand(
         slot &&
-          slot.capacity >= old.capacity &&
-          +occurrenceDateTime(slot.date, slot.startTime) === +old.startsAt &&
-          +occurrenceDateTime(slot.date, slot.endTime) === +old.endsAt,
+        slot.capacity >= old.capacity &&
+        +occurrenceDateTime(slot.date, slot.startTime) === +old.startsAt &&
+        +occurrenceDateTime(slot.date, slot.endTime) === +old.endsAt,
         "Booked occurrences cannot be removed, moved, shortened or reduced",
       );
     if (!slot && old.status === "upcoming") {
@@ -331,9 +331,9 @@ export async function actOnTrip(id, action, actor, reason = "") {
       const content = await validatedContent(trip, {});
       demand(
         content.image &&
-          content.schedule.slots.some(
-            (s) => occurrenceDateTime(s.date, s.startTime) > new Date(),
-          ),
+        content.schedule.slots.some(
+          (s) => occurrenceDateTime(s.date, s.startTime) > new Date(),
+        ),
         "Image and future schedule required",
       );
     }
@@ -420,7 +420,7 @@ export async function editTrip(id, input, actor) {
     );
     demand(
       !revision ||
-        ["draft", "changes_requested"].includes(revision.reviewStatus),
+      ["draft", "changes_requested"].includes(revision.reviewStatus),
       "Revision is currently in review",
     );
     const content = await validatedContent(trip, {
@@ -456,7 +456,7 @@ export async function actOnRevision(id, action, actor, reason = "") {
     demand(trip, "Trip not found", 404);
     demand(
       actor.role === "admin" ||
-        (actor.role === "guide" && sameId(revision.guide, actor)),
+      (actor.role === "guide" && sameId(revision.guide, actor)),
       "Revision access denied",
       403,
     );
@@ -501,11 +501,11 @@ export async function actOnRevision(id, action, actor, reason = "") {
         if (future)
           demand(
             revision.content.location === trip.location &&
-              revision.content.duration === trip.duration &&
-              JSON.stringify(revision.content.coordinates) ===
-                JSON.stringify(
-                  trip.coordinates?.toObject?.() || trip.coordinates,
-                ),
+            revision.content.duration === trip.duration &&
+            JSON.stringify(revision.content.coordinates) ===
+            JSON.stringify(
+              trip.coordinates?.toObject?.() || trip.coordinates,
+            ),
             "Resolve future bookings before changing location or duration",
           );
         Object.assign(trip, await validatedContent(trip, revision.content));
@@ -543,7 +543,7 @@ export async function actOnOccurrence(id, action, actor, reason = "") {
     demand(occurrence, "Occurrence not found", 404);
     demand(
       actor.role === "admin" ||
-        (actor.role === "guide" && sameId(occurrence.guide, actor)),
+      (actor.role === "guide" && sameId(occurrence.guide, actor)),
       "Occurrence access denied",
       403,
     );
@@ -559,7 +559,7 @@ export async function actOnOccurrence(id, action, actor, reason = "") {
         late = Number(process.env.OCCURRENCE_LATE_MINUTES) || 60;
       demand(
         now >= new Date(+occurrence.startsAt - early * 60000) &&
-          now <= new Date(+occurrence.startsAt + late * 60000),
+        now <= new Date(+occurrence.startsAt + late * 60000),
         "Outside allowed start window",
       );
       demand(
@@ -598,8 +598,7 @@ export async function actOnOccurrence(id, action, actor, reason = "") {
             `review-invite:${b._id}`,
             "review_invitation",
             { booking: String(b._id) },
-            new Date(+now + 45 * 60000),
-          );
+            new Date(+now + env.reviewInviteDelayMinutes * 60000));
       }
     } else if (action === "cancel") {
       demand(
@@ -654,7 +653,7 @@ export async function attendanceAction(id, action, actor, reason = "") {
     demand(o, "Occurrence evidence missing");
     demand(
       ["confirmed", "completed"].includes(b.status) &&
-        b.paymentStatus === "paid",
+      b.paymentStatus === "paid",
       "Only paid participants have attendance",
     );
     const previous = b.attendance?.status || "booked";
@@ -728,7 +727,7 @@ export async function accountAction(id, action, actor, reason = "") {
       admin
         ? actor.role === "admin"
         : sameId(user, actor) ||
-            (action === "request_deletion" && actor.role === "admin"),
+        (action === "request_deletion" && actor.role === "admin"),
       "Account access denied",
       403,
     );
