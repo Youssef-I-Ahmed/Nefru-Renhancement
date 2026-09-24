@@ -52,7 +52,7 @@ export default function NotFound() {
               type="outline"
               className={styles.button}
               icon={<FiCompass />}
-              onClick={() => navigate("/user/discover")}
+              onClick={() => navigate("/user/trips")}
             >
               Explore Tours
             </Button>
