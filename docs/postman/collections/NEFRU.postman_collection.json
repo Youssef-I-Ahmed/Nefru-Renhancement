@@ -1,3861 +1,747 @@
 {
   "info": {
     "name": "NEFRU API",
-    "description": "# NEFRU API\n\nPostman documentation generated from the real Express route mounts and route declarations.\n\n## Recommended flow\n1. Select **NEFRU Local**.\n2. Run **Authentication → Login**.\n3. On successful login, the script captures the backend `meta.token` automatically.\n4. Fill any route variables needed for the flow you are testing.\n\nNo real credentials or provider secrets are written by this generator.",
+    "description": "Auto-generated Postman collection for NEFRU backend APIs",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
-  "auth": {
-    "type": "bearer",
-    "bearer": [
-      {
-        "key": "token",
-        "value": "{{token}}",
-        "type": "string"
-      }
-    ]
-  },
-  "variable": [
-    {
-      "key": "base_url",
-      "value": "http://localhost:5000/api",
-      "type": "string"
-    },
-    {
-      "key": "frontend_url",
-      "value": "http://localhost:5173",
-      "type": "string"
-    },
-    {
-      "key": "token",
-      "value": "",
-      "type": "string"
-    },
-    {
-      "key": "refresh_token",
-      "value": "",
-      "type": "string"
-    },
-    {
-      "key": "email_verification_token",
-      "value": "",
-      "type": "string"
-    },
-    {
-      "key": "password_reset_token",
-      "value": "",
-      "type": "string"
-    },
-    {
-      "key": "google_id_token",
-      "value": "",
-      "type": "string"
-    },
-    {
-      "key": "google_onboarding_token",
-      "value": "",
-      "type": "string"
-    },
-    {
-      "key": "google_linking_token",
-      "value": "",
-      "type": "string"
-    },
-    {
-      "key": "accountId",
-      "value": "",
-      "type": "string"
-    },
-    {
-      "key": "action",
-      "value": "",
-      "type": "string"
-    },
-    {
-      "key": "auditId",
-      "value": "",
-      "type": "string"
-    },
-    {
-      "key": "bookingId",
-      "value": "",
-      "type": "string"
-    },
-    {
-      "key": "bookingOperationId",
-      "value": "",
-      "type": "string"
-    },
-    {
-      "key": "caseId",
-      "value": "",
-      "type": "string"
-    },
-    {
-      "key": "documentId",
-      "value": "",
-      "type": "string"
-    },
-    {
-      "key": "guideId",
-      "value": "",
-      "type": "string"
-    },
-    {
-      "key": "id",
-      "value": "",
-      "type": "string"
-    },
-    {
-      "key": "kind",
-      "value": "",
-      "type": "string"
-    },
-    {
-      "key": "methodId",
-      "value": "",
-      "type": "string"
-    },
-    {
-      "key": "occurrenceId",
-      "value": "",
-      "type": "string"
-    },
-    {
-      "key": "page",
-      "value": "1",
-      "type": "string"
-    },
-    {
-      "key": "reviewId",
-      "value": "",
-      "type": "string"
-    },
-    {
-      "key": "revisionId",
-      "value": "",
-      "type": "string"
-    },
-    {
-      "key": "tourReviewId",
-      "value": "",
-      "type": "string"
-    },
-    {
-      "key": "tripId",
-      "value": "",
-      "type": "string"
-    },
-    {
-      "key": "userId",
-      "value": "",
-      "type": "string"
-    },
-    {
-      "key": "verificationId",
-      "value": "",
-      "type": "string"
-    },
-    {
-      "key": "occurrenceKey",
-      "value": "",
-      "type": "string"
-    }
-  ],
   "item": [
     {
-      "name": "Authentication",
-      "description": "Registration, login, Google authentication, email verification, password recovery, and session operations.",
+      "name": "admin",
       "item": [
         {
-          "name": "Register",
+          "name": "GET /dashboard",
           "request": {
-            "method": "POST",
+            "method": "GET",
             "header": [
               {
-                "key": "Content-Type",
-                "value": "application/json",
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
                 "type": "text"
               }
             ],
-            "description": "### NEFRU Authentication\n\n**Method:** `POST`  \n**Path:** `/auth/register`  \n**Access:** Public / no auth\n\nGenerated from the actual Express router mount and route declaration. Saved examples are included only where the backend contract was explicitly documented in the generator.",
             "url": {
-              "raw": "{{base_url}}/auth/register"
-            },
-            "auth": {
-              "type": "noauth"
-            },
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"fullName\": \"Ahmed Mohamed\",\n  \"email\": \"ahmed@example.com\",\n  \"password\": \"Password123\",\n  \"confirmPassword\": \"Password123\",\n  \"role\": \"tourist\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
+              "raw": "{{base_url}}/dashboard"
             }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test('No server error', function () {",
-                  "    pm.expect(pm.response.code).to.be.below(500);",
-                  "});",
-                  "",
-                  "pm.test('Response time is acceptable', function () {",
-                  "    pm.expect(pm.response.responseTime).to.be.below(5000);",
-                  "});",
-                  "",
-                  "if (pm.response.code >= 200 && pm.response.code < 300) {",
-                  "    let json = {};",
-                  "    try { json = pm.response.json(); } catch (e) {}",
-                  "",
-                  "    const token =",
-                  "        json.token ||",
-                  "        json.accessToken ||",
-                  "        json.access_token ||",
-                  "        (json.meta && json.meta.token) ||",
-                  "        (json.data && (json.data.token || json.data.accessToken || json.data.access_token));",
-                  "",
-                  "    const refreshToken =",
-                  "        json.refreshToken ||",
-                  "        json.refresh_token ||",
-                  "        (json.meta && json.meta.refreshToken) ||",
-                  "        (json.data && (json.data.refreshToken || json.data.refresh_token));",
-                  "",
-                  "    if (token) pm.environment.set('token', token);",
-                  "    if (refreshToken) pm.environment.set('refresh_token', refreshToken);",
-                  "}"
-                ]
-              }
-            }
-          ],
-          "response": [
-            {
-              "name": "201 Created",
-              "originalRequest": {
-                "method": "POST",
-                "header": [],
-                "url": {
-                  "raw": "{{base_url}}/auth/register"
-                }
-              },
-              "status": "Created",
-              "code": 201,
-              "_postman_previewlanguage": "json",
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "cookie": [],
-              "body": "{\n  \"success\": true,\n  \"message\": \"Account created. Check your email to verify your account.\",\n  \"data\": {\n    \"user\": {\n      \"id\": \"<USER_ID>\",\n      \"email\": \"ahmed@example.com\",\n      \"role\": \"tourist\"\n    },\n    \"profile\": {},\n    \"requiresEmailVerification\": true,\n    \"emailSent\": true\n  }\n}"
-            }
-          ]
+          }
         },
         {
-          "name": "Login",
+          "name": "GET /accounts",
           "request": {
-            "method": "POST",
+            "method": "GET",
             "header": [
               {
-                "key": "Content-Type",
-                "value": "application/json",
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
                 "type": "text"
               }
             ],
-            "description": "### NEFRU Authentication\n\n**Method:** `POST`  \n**Path:** `/auth/login`  \n**Access:** Public / no auth\n\nGenerated from the actual Express router mount and route declaration. Saved examples are included only where the backend contract was explicitly documented in the generator.",
             "url": {
-              "raw": "{{base_url}}/auth/login"
-            },
-            "auth": {
-              "type": "noauth"
-            },
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"email\": \"tourist@example.com\",\n  \"password\": \"Password123\",\n  \"rememberMe\": false\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
+              "raw": "{{base_url}}/accounts"
             }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test('No server error', function () {",
-                  "    pm.expect(pm.response.code).to.be.below(500);",
-                  "});",
-                  "",
-                  "pm.test('Response time is acceptable', function () {",
-                  "    pm.expect(pm.response.responseTime).to.be.below(5000);",
-                  "});",
-                  "",
-                  "if (pm.response.code >= 200 && pm.response.code < 300) {",
-                  "    let json = {};",
-                  "    try { json = pm.response.json(); } catch (e) {}",
-                  "",
-                  "    const token =",
-                  "        json.token ||",
-                  "        json.accessToken ||",
-                  "        json.access_token ||",
-                  "        (json.meta && json.meta.token) ||",
-                  "        (json.data && (json.data.token || json.data.accessToken || json.data.access_token));",
-                  "",
-                  "    const refreshToken =",
-                  "        json.refreshToken ||",
-                  "        json.refresh_token ||",
-                  "        (json.meta && json.meta.refreshToken) ||",
-                  "        (json.data && (json.data.refreshToken || json.data.refresh_token));",
-                  "",
-                  "    if (token) pm.environment.set('token', token);",
-                  "    if (refreshToken) pm.environment.set('refresh_token', refreshToken);",
-                  "}"
-                ]
-              }
-            }
-          ],
-          "response": [
-            {
-              "name": "200 OK",
-              "originalRequest": {
-                "method": "POST",
-                "header": [],
-                "url": {
-                  "raw": "{{base_url}}/auth/login"
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "_postman_previewlanguage": "json",
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "cookie": [],
-              "body": "{\n  \"success\": true,\n  \"message\": \"Logged in successfully\",\n  \"data\": {\n    \"user\": {\n      \"id\": \"<USER_ID>\",\n      \"email\": \"tourist@example.com\",\n      \"role\": \"tourist\"\n    },\n    \"profile\": {}\n  },\n  \"meta\": {\n    \"token\": \"<JWT_TOKEN>\"\n  }\n}"
-            },
-            {
-              "name": "401 Unauthorized",
-              "originalRequest": {
-                "method": "POST",
-                "header": [],
-                "url": {
-                  "raw": "{{base_url}}/auth/login"
-                }
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "_postman_previewlanguage": "json",
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "cookie": [],
-              "body": "{\n  \"success\": false,\n  \"message\": \"Invalid email or password\"\n}"
-            }
-          ]
+          }
         },
         {
-          "name": "Logout",
+          "name": "GET /accounts/:id",
           "request": {
-            "method": "POST",
-            "header": [],
-            "description": "### NEFRU Authentication\n\n**Method:** `POST`  \n**Path:** `/auth/logout`  \n**Access:** Public / no auth\n\nGenerated from the actual Express router mount and route declaration. Saved examples are included only where the backend contract was explicitly documented in the generator.",
-            "url": {
-              "raw": "{{base_url}}/auth/logout"
-            },
-            "auth": {
-              "type": "noauth"
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test('No server error', function () {",
-                  "    pm.expect(pm.response.code).to.be.below(500);",
-                  "});",
-                  "",
-                  "pm.test('Response time is acceptable', function () {",
-                  "    pm.expect(pm.response.responseTime).to.be.below(5000);",
-                  "});"
-                ]
-              }
-            }
-          ],
-          "response": [
-            {
-              "name": "200 OK",
-              "originalRequest": {
-                "method": "POST",
-                "header": [],
-                "url": {
-                  "raw": "{{base_url}}/auth/logout"
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "_postman_previewlanguage": "json",
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "cookie": [],
-              "body": "{\n  \"success\": true,\n  \"message\": \"Logged out successfully\"\n}"
-            }
-          ]
-        },
-        {
-          "name": "Google Login",
-          "request": {
-            "method": "POST",
+            "method": "GET",
             "header": [
               {
-                "key": "Content-Type",
-                "value": "application/json",
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
                 "type": "text"
               }
             ],
-            "description": "### NEFRU Authentication\n\n**Method:** `POST`  \n**Path:** `/auth/google`  \n**Access:** Public / no auth\n\nGenerated from the actual Express router mount and route declaration. Saved examples are included only where the backend contract was explicitly documented in the generator.",
             "url": {
-              "raw": "{{base_url}}/auth/google"
-            },
-            "auth": {
-              "type": "noauth"
-            },
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"credential\": \"{{google_id_token}}\",\n  \"role\": \"tourist\",\n  \"rememberMe\": false\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
+              "raw": "{{base_url}}/accounts/:id"
             }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test('No server error', function () {",
-                  "    pm.expect(pm.response.code).to.be.below(500);",
-                  "});",
-                  "",
-                  "pm.test('Response time is acceptable', function () {",
-                  "    pm.expect(pm.response.responseTime).to.be.below(5000);",
-                  "});",
-                  "",
-                  "if (pm.response.code >= 200 && pm.response.code < 300) {",
-                  "    let json = {};",
-                  "    try { json = pm.response.json(); } catch (e) {}",
-                  "",
-                  "    const token =",
-                  "        json.token ||",
-                  "        json.accessToken ||",
-                  "        json.access_token ||",
-                  "        (json.meta && json.meta.token) ||",
-                  "        (json.data && (json.data.token || json.data.accessToken || json.data.access_token));",
-                  "",
-                  "    const refreshToken =",
-                  "        json.refreshToken ||",
-                  "        json.refresh_token ||",
-                  "        (json.meta && json.meta.refreshToken) ||",
-                  "        (json.data && (json.data.refreshToken || json.data.refresh_token));",
-                  "",
-                  "    if (token) pm.environment.set('token', token);",
-                  "    if (refreshToken) pm.environment.set('refresh_token', refreshToken);",
-                  "}"
-                ]
-              }
-            }
-          ],
-          "response": []
+          }
         },
         {
-          "name": "Complete Google Signup",
+          "name": "PATCH /accounts/:id/verification",
           "request": {
-            "method": "POST",
+            "method": "PATCH",
             "header": [
               {
-                "key": "Content-Type",
-                "value": "application/json",
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
                 "type": "text"
               }
             ],
-            "description": "### NEFRU Authentication\n\n**Method:** `POST`  \n**Path:** `/auth/google/complete-signup`  \n**Access:** Public / no auth\n\nGenerated from the actual Express router mount and route declaration. Saved examples are included only where the backend contract was explicitly documented in the generator.",
             "url": {
-              "raw": "{{base_url}}/auth/google/complete-signup"
-            },
-            "auth": {
-              "type": "noauth"
-            },
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"onboardingToken\": \"{{google_onboarding_token}}\",\n  \"role\": \"tourist\",\n  \"rememberMe\": false\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
+              "raw": "{{base_url}}/accounts/:id/verification"
             }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test('No server error', function () {",
-                  "    pm.expect(pm.response.code).to.be.below(500);",
-                  "});",
-                  "",
-                  "pm.test('Response time is acceptable', function () {",
-                  "    pm.expect(pm.response.responseTime).to.be.below(5000);",
-                  "});",
-                  "",
-                  "if (pm.response.code >= 200 && pm.response.code < 300) {",
-                  "    let json = {};",
-                  "    try { json = pm.response.json(); } catch (e) {}",
-                  "",
-                  "    const token =",
-                  "        json.token ||",
-                  "        json.accessToken ||",
-                  "        json.access_token ||",
-                  "        (json.meta && json.meta.token) ||",
-                  "        (json.data && (json.data.token || json.data.accessToken || json.data.access_token));",
-                  "",
-                  "    const refreshToken =",
-                  "        json.refreshToken ||",
-                  "        json.refresh_token ||",
-                  "        (json.meta && json.meta.refreshToken) ||",
-                  "        (json.data && (json.data.refreshToken || json.data.refresh_token));",
-                  "",
-                  "    if (token) pm.environment.set('token', token);",
-                  "    if (refreshToken) pm.environment.set('refresh_token', refreshToken);",
-                  "}"
-                ]
-              }
-            }
-          ],
-          "response": []
+          }
         },
         {
-          "name": "Link Google Account",
+          "name": "GET /user",
           "request": {
-            "method": "POST",
+            "method": "GET",
             "header": [
               {
-                "key": "Content-Type",
-                "value": "application/json",
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
                 "type": "text"
               }
             ],
-            "description": "### NEFRU Authentication\n\n**Method:** `POST`  \n**Path:** `/auth/google/link`  \n**Access:** Public / no auth\n\nGenerated from the actual Express router mount and route declaration. Saved examples are included only where the backend contract was explicitly documented in the generator.",
             "url": {
-              "raw": "{{base_url}}/auth/google/link"
-            },
-            "auth": {
-              "type": "noauth"
-            },
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"linkingToken\": \"{{google_linking_token}}\",\n  \"password\": \"Password123\",\n  \"rememberMe\": false\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
+              "raw": "{{base_url}}/user"
             }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test('No server error', function () {",
-                  "    pm.expect(pm.response.code).to.be.below(500);",
-                  "});",
-                  "",
-                  "pm.test('Response time is acceptable', function () {",
-                  "    pm.expect(pm.response.responseTime).to.be.below(5000);",
-                  "});",
-                  "",
-                  "if (pm.response.code >= 200 && pm.response.code < 300) {",
-                  "    let json = {};",
-                  "    try { json = pm.response.json(); } catch (e) {}",
-                  "",
-                  "    const token =",
-                  "        json.token ||",
-                  "        json.accessToken ||",
-                  "        json.access_token ||",
-                  "        (json.meta && json.meta.token) ||",
-                  "        (json.data && (json.data.token || json.data.accessToken || json.data.access_token));",
-                  "",
-                  "    const refreshToken =",
-                  "        json.refreshToken ||",
-                  "        json.refresh_token ||",
-                  "        (json.meta && json.meta.refreshToken) ||",
-                  "        (json.data && (json.data.refreshToken || json.data.refresh_token));",
-                  "",
-                  "    if (token) pm.environment.set('token', token);",
-                  "    if (refreshToken) pm.environment.set('refresh_token', refreshToken);",
-                  "}"
-                ]
-              }
-            }
-          ],
-          "response": []
+          }
         },
         {
-          "name": "Connect Google Account",
+          "name": "GET /user/:id",
           "request": {
-            "method": "POST",
+            "method": "GET",
             "header": [
               {
-                "key": "Content-Type",
-                "value": "application/json",
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
                 "type": "text"
               }
             ],
-            "description": "### NEFRU Authentication\n\n**Method:** `POST`  \n**Path:** `/auth/google/connect`  \n**Access:** Authenticated\n\nGenerated from the actual Express router mount and route declaration. Saved examples are included only where the backend contract was explicitly documented in the generator.",
             "url": {
-              "raw": "{{base_url}}/auth/google/connect"
-            },
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"credential\": \"{{google_id_token}}\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
+              "raw": "{{base_url}}/user/:id"
             }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test('No server error', function () {",
-                  "    pm.expect(pm.response.code).to.be.below(500);",
-                  "});",
-                  "",
-                  "pm.test('Response time is acceptable', function () {",
-                  "    pm.expect(pm.response.responseTime).to.be.below(5000);",
-                  "});"
-                ]
-              }
-            }
-          ],
-          "response": []
+          }
         },
         {
-          "name": "Disconnect Google Account",
+          "name": "PATCH /user/:id",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/user/:id"
+            }
+          }
+        },
+        {
+          "name": "PATCH /user/:id/ban",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/user/:id/ban"
+            }
+          }
+        },
+        {
+          "name": "PATCH /user/:id/unban",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/user/:id/unban"
+            }
+          }
+        },
+        {
+          "name": "DELETE /user/:id",
           "request": {
             "method": "DELETE",
-            "header": [],
-            "description": "### NEFRU Authentication\n\n**Method:** `DELETE`  \n**Path:** `/auth/google/connect`  \n**Access:** Authenticated\n\nGenerated from the actual Express router mount and route declaration. Saved examples are included only where the backend contract was explicitly documented in the generator.",
-            "url": {
-              "raw": "{{base_url}}/auth/google/connect"
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test('No server error', function () {",
-                  "    pm.expect(pm.response.code).to.be.below(500);",
-                  "});",
-                  "",
-                  "pm.test('Response time is acceptable', function () {",
-                  "    pm.expect(pm.response.responseTime).to.be.below(5000);",
-                  "});"
-                ]
-              }
-            }
-          ],
-          "response": []
-        },
-        {
-          "name": "Verify Email",
-          "request": {
-            "method": "POST",
             "header": [
               {
-                "key": "Content-Type",
-                "value": "application/json",
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
                 "type": "text"
               }
             ],
-            "description": "### NEFRU Authentication\n\n**Method:** `POST`  \n**Path:** `/auth/verify-email`  \n**Access:** Public / no auth\n\nGenerated from the actual Express router mount and route declaration. Saved examples are included only where the backend contract was explicitly documented in the generator.",
             "url": {
-              "raw": "{{base_url}}/auth/verify-email"
-            },
-            "auth": {
-              "type": "noauth"
-            },
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"token\": \"{{email_verification_token}}\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
+              "raw": "{{base_url}}/user/:id"
             }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test('No server error', function () {",
-                  "    pm.expect(pm.response.code).to.be.below(500);",
-                  "});",
-                  "",
-                  "pm.test('Response time is acceptable', function () {",
-                  "    pm.expect(pm.response.responseTime).to.be.below(5000);",
-                  "});"
-                ]
-              }
-            }
-          ],
-          "response": []
+          }
         },
         {
-          "name": "Resend Verification Email",
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json",
-                "type": "text"
-              }
-            ],
-            "description": "### NEFRU Authentication\n\n**Method:** `POST`  \n**Path:** `/auth/resend-verification`  \n**Access:** Public / no auth\n\nGenerated from the actual Express router mount and route declaration. Saved examples are included only where the backend contract was explicitly documented in the generator.",
-            "url": {
-              "raw": "{{base_url}}/auth/resend-verification"
-            },
-            "auth": {
-              "type": "noauth"
-            },
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"email\": \"tourist@example.com\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test('No server error', function () {",
-                  "    pm.expect(pm.response.code).to.be.below(500);",
-                  "});",
-                  "",
-                  "pm.test('Response time is acceptable', function () {",
-                  "    pm.expect(pm.response.responseTime).to.be.below(5000);",
-                  "});"
-                ]
-              }
-            }
-          ],
-          "response": []
-        },
-        {
-          "name": "Forgot Password",
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json",
-                "type": "text"
-              }
-            ],
-            "description": "### NEFRU Authentication\n\n**Method:** `POST`  \n**Path:** `/auth/forgot-password`  \n**Access:** Public / no auth\n\nGenerated from the actual Express router mount and route declaration. Saved examples are included only where the backend contract was explicitly documented in the generator.",
-            "url": {
-              "raw": "{{base_url}}/auth/forgot-password"
-            },
-            "auth": {
-              "type": "noauth"
-            },
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"email\": \"tourist@example.com\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test('No server error', function () {",
-                  "    pm.expect(pm.response.code).to.be.below(500);",
-                  "});",
-                  "",
-                  "pm.test('Response time is acceptable', function () {",
-                  "    pm.expect(pm.response.responseTime).to.be.below(5000);",
-                  "});"
-                ]
-              }
-            }
-          ],
-          "response": []
-        },
-        {
-          "name": "Verify Password Reset Token",
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json",
-                "type": "text"
-              }
-            ],
-            "description": "### NEFRU Authentication\n\n**Method:** `POST`  \n**Path:** `/auth/reset-password/verify`  \n**Access:** Public / no auth\n\nGenerated from the actual Express router mount and route declaration. Saved examples are included only where the backend contract was explicitly documented in the generator.",
-            "url": {
-              "raw": "{{base_url}}/auth/reset-password/verify"
-            },
-            "auth": {
-              "type": "noauth"
-            },
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"token\": \"{{password_reset_token}}\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test('No server error', function () {",
-                  "    pm.expect(pm.response.code).to.be.below(500);",
-                  "});",
-                  "",
-                  "pm.test('Response time is acceptable', function () {",
-                  "    pm.expect(pm.response.responseTime).to.be.below(5000);",
-                  "});"
-                ]
-              }
-            }
-          ],
-          "response": []
-        },
-        {
-          "name": "Reset Password",
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json",
-                "type": "text"
-              }
-            ],
-            "description": "### NEFRU Authentication\n\n**Method:** `POST`  \n**Path:** `/auth/reset-password`  \n**Access:** Public / no auth\n\nGenerated from the actual Express router mount and route declaration. Saved examples are included only where the backend contract was explicitly documented in the generator.",
-            "url": {
-              "raw": "{{base_url}}/auth/reset-password"
-            },
-            "auth": {
-              "type": "noauth"
-            },
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"token\": \"{{password_reset_token}}\",\n  \"password\": \"NewPassword123\",\n  \"confirmPassword\": \"NewPassword123\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test('No server error', function () {",
-                  "    pm.expect(pm.response.code).to.be.below(500);",
-                  "});",
-                  "",
-                  "pm.test('Response time is acceptable', function () {",
-                  "    pm.expect(pm.response.responseTime).to.be.below(5000);",
-                  "});"
-                ]
-              }
-            }
-          ],
-          "response": []
-        },
-        {
-          "name": "Change Password",
+          "name": "PATCH /guide/:id/approve",
           "request": {
             "method": "PATCH",
             "header": [
               {
-                "key": "Content-Type",
-                "value": "application/json",
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
                 "type": "text"
               }
             ],
-            "description": "### NEFRU Authentication\n\n**Method:** `PATCH`  \n**Path:** `/auth/change-password`  \n**Access:** Authenticated\n\nGenerated from the actual Express router mount and route declaration. Saved examples are included only where the backend contract was explicitly documented in the generator.",
             "url": {
-              "raw": "{{base_url}}/auth/change-password"
-            },
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"currentPassword\": \"Password123\",\n  \"newPassword\": \"NewPassword123\",\n  \"confirmNewPassword\": \"NewPassword123\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
+              "raw": "{{base_url}}/guide/:id/approve"
             }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test('No server error', function () {",
-                  "    pm.expect(pm.response.code).to.be.below(500);",
-                  "});",
-                  "",
-                  "pm.test('Response time is acceptable', function () {",
-                  "    pm.expect(pm.response.responseTime).to.be.below(5000);",
-                  "});"
-                ]
+          }
+        },
+        {
+          "name": "PATCH /guide/:id/reject",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
               }
+            ],
+            "url": {
+              "raw": "{{base_url}}/guide/:id/reject"
             }
-          ],
-          "response": []
+          }
+        },
+        {
+          "name": "PATCH /guide/:id/suspend",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/guide/:id/suspend"
+            }
+          }
+        },
+        {
+          "name": "GET /tour-reviews",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/tour-reviews"
+            }
+          }
+        },
+        {
+          "name": "GET /tour-reviews/:id",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/tour-reviews/:id"
+            }
+          }
+        },
+        {
+          "name": "PATCH /tour-reviews/:id",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/tour-reviews/:id"
+            }
+          }
+        },
+        {
+          "name": "GET /tours/:page",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/tours/:page"
+            }
+          }
+        },
+        {
+          "name": "GET /trip/:id",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/trip/:id"
+            }
+          }
+        },
+        {
+          "name": "PATCH /trip/:id/status",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/trip/:id/status"
+            }
+          }
+        },
+        {
+          "name": "GET /booking-operations",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/booking-operations"
+            }
+          }
+        },
+        {
+          "name": "GET /booking-operations/:id",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/booking-operations/:id"
+            }
+          }
+        },
+        {
+          "name": "GET /analytics",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/analytics"
+            }
+          }
+        },
+        {
+          "name": "GET /bookings/:page",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/bookings/:page"
+            }
+          }
         }
       ]
     },
     {
-      "name": "Users",
-      "description": "Traveler profile and saved-trip operations.",
+      "name": "authUser",
       "item": [
         {
-          "name": "Get Users/Profile/Me",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "description": "### NEFRU Users\n\n**Method:** `GET`  \n**Path:** `/users/profile/me`  \n**Access:** Authenticated\n\nGenerated from the actual Express router mount and route declaration. Saved examples are included only where the backend contract was explicitly documented in the generator.",
-            "url": {
-              "raw": "{{base_url}}/users/profile/me"
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test('No server error', function () {",
-                  "    pm.expect(pm.response.code).to.be.below(500);",
-                  "});",
-                  "",
-                  "pm.test('Response time is acceptable', function () {",
-                  "    pm.expect(pm.response.responseTime).to.be.below(5000);",
-                  "});"
-                ]
-              }
-            }
-          ],
-          "response": []
-        },
-        {
-          "name": "Update Users/Profile/Me",
-          "request": {
-            "method": "PATCH",
-            "header": [],
-            "description": "### NEFRU Users\n\n**Method:** `PATCH`  \n**Path:** `/users/profile/me`  \n**Access:** Authenticated\n\nGenerated from the actual Express router mount and route declaration. Saved examples are included only where the backend contract was explicitly documented in the generator.",
-            "url": {
-              "raw": "{{base_url}}/users/profile/me"
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test('No server error', function () {",
-                  "    pm.expect(pm.response.code).to.be.below(500);",
-                  "});",
-                  "",
-                  "pm.test('Response time is acceptable', function () {",
-                  "    pm.expect(pm.response.responseTime).to.be.below(5000);",
-                  "});"
-                ]
-              }
-            }
-          ],
-          "response": []
-        },
-        {
-          "name": "Create / Action Users/Profile/Avatar",
-          "request": {
-            "method": "POST",
-            "header": [],
-            "description": "### NEFRU Users\n\n**Method:** `POST`  \n**Path:** `/users/profile/avatar`  \n**Access:** Authenticated\n\nGenerated from the actual Express router mount and route declaration. Saved examples are included only where the backend contract was explicitly documented in the generator.",
-            "url": {
-              "raw": "{{base_url}}/users/profile/avatar"
-            },
-            "body": {
-              "mode": "formdata",
-              "formdata": [
-                {
-                  "key": "avatar",
-                  "type": "file",
-                  "src": []
-                }
-              ]
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test('No server error', function () {",
-                  "    pm.expect(pm.response.code).to.be.below(500);",
-                  "});",
-                  "",
-                  "pm.test('Response time is acceptable', function () {",
-                  "    pm.expect(pm.response.responseTime).to.be.below(5000);",
-                  "});"
-                ]
-              }
-            }
-          ],
-          "response": []
-        },
-        {
-          "name": "Get Users/Me",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "description": "### NEFRU Users\n\n**Method:** `GET`  \n**Path:** `/users/me`  \n**Access:** Authenticated\n\nGenerated from the actual Express router mount and route declaration. Saved examples are included only where the backend contract was explicitly documented in the generator.",
-            "url": {
-              "raw": "{{base_url}}/users/me"
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test('No server error', function () {",
-                  "    pm.expect(pm.response.code).to.be.below(500);",
-                  "});",
-                  "",
-                  "pm.test('Response time is acceptable', function () {",
-                  "    pm.expect(pm.response.responseTime).to.be.below(5000);",
-                  "});"
-                ]
-              }
-            }
-          ],
-          "response": []
-        },
-        {
-          "name": "Get Users/Saved Trips",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "description": "### NEFRU Users\n\n**Method:** `GET`  \n**Path:** `/users/saved-trips`  \n**Access:** Authenticated — roles: tourist\n\nGenerated from the actual Express router mount and route declaration. Saved examples are included only where the backend contract was explicitly documented in the generator.",
-            "url": {
-              "raw": "{{base_url}}/users/saved-trips"
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test('No server error', function () {",
-                  "    pm.expect(pm.response.code).to.be.below(500);",
-                  "});",
-                  "",
-                  "pm.test('Response time is acceptable', function () {",
-                  "    pm.expect(pm.response.responseTime).to.be.below(5000);",
-                  "});"
-                ]
-              }
-            }
-          ],
-          "response": []
-        },
-        {
-          "name": "Create / Action Users/Saved Trips/Tripid",
-          "request": {
-            "method": "POST",
-            "header": [],
-            "description": "### NEFRU Users\n\n**Method:** `POST`  \n**Path:** `/users/saved-trips/:tripId`  \n**Access:** Authenticated — roles: tourist\n\nGenerated from the actual Express router mount and route declaration. Saved examples are included only where the backend contract was explicitly documented in the generator.",
-            "url": {
-              "raw": "{{base_url}}/users/saved-trips/{{tripId}}"
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test('No server error', function () {",
-                  "    pm.expect(pm.response.code).to.be.below(500);",
-                  "});",
-                  "",
-                  "pm.test('Response time is acceptable', function () {",
-                  "    pm.expect(pm.response.responseTime).to.be.below(5000);",
-                  "});"
-                ]
-              }
-            }
-          ],
-          "response": []
-        },
-        {
-          "name": "Delete Users/Saved Trips/Tripid",
-          "request": {
-            "method": "DELETE",
-            "header": [],
-            "description": "### NEFRU Users\n\n**Method:** `DELETE`  \n**Path:** `/users/saved-trips/:tripId`  \n**Access:** Authenticated — roles: tourist\n\nGenerated from the actual Express router mount and route declaration. Saved examples are included only where the backend contract was explicitly documented in the generator.",
-            "url": {
-              "raw": "{{base_url}}/users/saved-trips/{{tripId}}"
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test('No server error', function () {",
-                  "    pm.expect(pm.response.code).to.be.below(500);",
-                  "});",
-                  "",
-                  "pm.test('Response time is acceptable', function () {",
-                  "    pm.expect(pm.response.responseTime).to.be.below(5000);",
-                  "});"
-                ]
-              }
-            }
-          ],
-          "response": []
-        }
-      ]
-    },
-    {
-      "name": "Guides",
-      "description": "Guide profiles and guide verification/document operations.",
-      "item": [
-        {
-          "name": "Get Guides/Profile/Me",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "description": "### NEFRU Guides\n\n**Method:** `GET`  \n**Path:** `/guides/profile/me`  \n**Access:** Authenticated — roles: guide\n\nGenerated from the actual Express router mount and route declaration. Saved examples are included only where the backend contract was explicitly documented in the generator.",
-            "url": {
-              "raw": "{{base_url}}/guides/profile/me"
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test('No server error', function () {",
-                  "    pm.expect(pm.response.code).to.be.below(500);",
-                  "});",
-                  "",
-                  "pm.test('Response time is acceptable', function () {",
-                  "    pm.expect(pm.response.responseTime).to.be.below(5000);",
-                  "});"
-                ]
-              }
-            }
-          ],
-          "response": []
-        },
-        {
-          "name": "Replace Guides/Profile/Me",
-          "request": {
-            "method": "PUT",
-            "header": [],
-            "description": "### NEFRU Guides\n\n**Method:** `PUT`  \n**Path:** `/guides/profile/me`  \n**Access:** Authenticated — roles: guide\n\nGenerated from the actual Express router mount and route declaration. Saved examples are included only where the backend contract was explicitly documented in the generator.",
-            "url": {
-              "raw": "{{base_url}}/guides/profile/me"
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test('No server error', function () {",
-                  "    pm.expect(pm.response.code).to.be.below(500);",
-                  "});",
-                  "",
-                  "pm.test('Response time is acceptable', function () {",
-                  "    pm.expect(pm.response.responseTime).to.be.below(5000);",
-                  "});"
-                ]
-              }
-            }
-          ],
-          "response": []
-        },
-        {
-          "name": "Get Guides/Id",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "description": "### NEFRU Guides\n\n**Method:** `GET`  \n**Path:** `/guides/:id`  \n**Access:** Public / no auth\n\nGenerated from the actual Express router mount and route declaration. Saved examples are included only where the backend contract was explicitly documented in the generator.",
-            "url": {
-              "raw": "{{base_url}}/guides/{{guideId}}"
-            },
-            "auth": {
-              "type": "noauth"
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test('No server error', function () {",
-                  "    pm.expect(pm.response.code).to.be.below(500);",
-                  "});",
-                  "",
-                  "pm.test('Response time is acceptable', function () {",
-                  "    pm.expect(pm.response.responseTime).to.be.below(5000);",
-                  "});"
-                ]
-              }
-            }
-          ],
-          "response": []
-        },
-        {
-          "name": "Get Guide Verification/Me",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "description": "### NEFRU Guides\n\n**Method:** `GET`  \n**Path:** `/guide-verification/me`  \n**Access:** Authenticated — roles: guide\n\nGenerated from the actual Express router mount and route declaration. Saved examples are included only where the backend contract was explicitly documented in the generator.",
-            "url": {
-              "raw": "{{base_url}}/guide-verification/me"
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test('No server error', function () {",
-                  "    pm.expect(pm.response.code).to.be.below(500);",
-                  "});",
-                  "",
-                  "pm.test('Response time is acceptable', function () {",
-                  "    pm.expect(pm.response.responseTime).to.be.below(5000);",
-                  "});"
-                ]
-              }
-            }
-          ],
-          "response": []
-        },
-        {
-          "name": "Get Guide Verification/Documents/Documentid/File",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "description": "### NEFRU Guides\n\n**Method:** `GET`  \n**Path:** `/guide-verification/documents/:documentId/file`  \n**Access:** Authenticated — roles: admin\n\nGenerated from the actual Express router mount and route declaration. Saved examples are included only where the backend contract was explicitly documented in the generator.",
-            "url": {
-              "raw": "{{base_url}}/guide-verification/documents/{{documentId}}/file"
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test('No server error', function () {",
-                  "    pm.expect(pm.response.code).to.be.below(500);",
-                  "});",
-                  "",
-                  "pm.test('Response time is acceptable', function () {",
-                  "    pm.expect(pm.response.responseTime).to.be.below(5000);",
-                  "});"
-                ]
-              }
-            }
-          ],
-          "response": []
-        },
-        {
-          "name": "Create / Action Guide Verification/Documents",
-          "request": {
-            "method": "POST",
-            "header": [],
-            "description": "### NEFRU Guides\n\n**Method:** `POST`  \n**Path:** `/guide-verification/documents`  \n**Access:** Authenticated — roles: guide\n\nGenerated from the actual Express router mount and route declaration. Saved examples are included only where the backend contract was explicitly documented in the generator.",
-            "url": {
-              "raw": "{{base_url}}/guide-verification/documents"
-            },
-            "body": {
-              "mode": "formdata",
-              "formdata": [
-                {
-                  "key": "document",
-                  "type": "file",
-                  "src": []
-                }
-              ]
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test('No server error', function () {",
-                  "    pm.expect(pm.response.code).to.be.below(500);",
-                  "});",
-                  "",
-                  "pm.test('Response time is acceptable', function () {",
-                  "    pm.expect(pm.response.responseTime).to.be.below(5000);",
-                  "});"
-                ]
-              }
-            }
-          ],
-          "response": []
-        },
-        {
-          "name": "Update Guide Verification/Documents/Documentid",
-          "request": {
-            "method": "PATCH",
-            "header": [],
-            "description": "### NEFRU Guides\n\n**Method:** `PATCH`  \n**Path:** `/guide-verification/documents/:documentId`  \n**Access:** Authenticated — roles: guide\n\nGenerated from the actual Express router mount and route declaration. Saved examples are included only where the backend contract was explicitly documented in the generator.",
-            "url": {
-              "raw": "{{base_url}}/guide-verification/documents/{{documentId}}"
-            },
-            "body": {
-              "mode": "formdata",
-              "formdata": [
-                {
-                  "key": "document",
-                  "type": "file",
-                  "src": []
-                }
-              ]
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test('No server error', function () {",
-                  "    pm.expect(pm.response.code).to.be.below(500);",
-                  "});",
-                  "",
-                  "pm.test('Response time is acceptable', function () {",
-                  "    pm.expect(pm.response.responseTime).to.be.below(5000);",
-                  "});"
-                ]
-              }
-            }
-          ],
-          "response": []
-        },
-        {
-          "name": "Create / Action Guide Verification/Submit",
-          "request": {
-            "method": "POST",
-            "header": [],
-            "description": "### NEFRU Guides\n\n**Method:** `POST`  \n**Path:** `/guide-verification/submit`  \n**Access:** Authenticated — roles: guide\n\nGenerated from the actual Express router mount and route declaration. Saved examples are included only where the backend contract was explicitly documented in the generator.",
-            "url": {
-              "raw": "{{base_url}}/guide-verification/submit"
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test('No server error', function () {",
-                  "    pm.expect(pm.response.code).to.be.below(500);",
-                  "});",
-                  "",
-                  "pm.test('Response time is acceptable', function () {",
-                  "    pm.expect(pm.response.responseTime).to.be.below(5000);",
-                  "});"
-                ]
-              }
-            }
-          ],
-          "response": []
-        },
-        {
-          "name": "Create / Action Guide Verification/Resubmit",
-          "request": {
-            "method": "POST",
-            "header": [],
-            "description": "### NEFRU Guides\n\n**Method:** `POST`  \n**Path:** `/guide-verification/resubmit`  \n**Access:** Authenticated — roles: guide\n\nGenerated from the actual Express router mount and route declaration. Saved examples are included only where the backend contract was explicitly documented in the generator.",
-            "url": {
-              "raw": "{{base_url}}/guide-verification/resubmit"
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test('No server error', function () {",
-                  "    pm.expect(pm.response.code).to.be.below(500);",
-                  "});",
-                  "",
-                  "pm.test('Response time is acceptable', function () {",
-                  "    pm.expect(pm.response.responseTime).to.be.below(5000);",
-                  "});"
-                ]
-              }
-            }
-          ],
-          "response": []
-        }
-      ]
-    },
-    {
-      "name": "Trips",
-      "description": "Public trip discovery plus guide trip-management operations.",
-      "item": [
-        {
-          "name": "Get Trips/Guide/Me",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "description": "### NEFRU Trips\n\n**Method:** `GET`  \n**Path:** `/trips/guide/me`  \n**Access:** Authenticated\n\nGenerated from the actual Express router mount and route declaration. Saved examples are included only where the backend contract was explicitly documented in the generator.",
-            "url": {
-              "raw": "{{base_url}}/trips/guide/me"
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test('No server error', function () {",
-                  "    pm.expect(pm.response.code).to.be.below(500);",
-                  "});",
-                  "",
-                  "pm.test('Response time is acceptable', function () {",
-                  "    pm.expect(pm.response.responseTime).to.be.below(5000);",
-                  "});"
-                ]
-              }
-            }
-          ],
-          "response": []
-        },
-        {
-          "name": "Get Trips",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "description": "### NEFRU Trips\n\n**Method:** `GET`  \n**Path:** `/trips/`  \n**Access:** Public / no auth\n\nGenerated from the actual Express router mount and route declaration. Saved examples are included only where the backend contract was explicitly documented in the generator.",
-            "url": {
-              "raw": "{{base_url}}/trips/"
-            },
-            "auth": {
-              "type": "noauth"
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test('No server error', function () {",
-                  "    pm.expect(pm.response.code).to.be.below(500);",
-                  "});",
-                  "",
-                  "pm.test('Response time is acceptable', function () {",
-                  "    pm.expect(pm.response.responseTime).to.be.below(5000);",
-                  "});"
-                ]
-              }
-            }
-          ],
-          "response": []
-        },
-        {
-          "name": "Create / Action Trips",
-          "request": {
-            "method": "POST",
-            "header": [],
-            "description": "### NEFRU Trips\n\n**Method:** `POST`  \n**Path:** `/trips/`  \n**Access:** Authenticated\n\nGenerated from the actual Express router mount and route declaration. Saved examples are included only where the backend contract was explicitly documented in the generator.",
-            "url": {
-              "raw": "{{base_url}}/trips/"
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test('No server error', function () {",
-                  "    pm.expect(pm.response.code).to.be.below(500);",
-                  "});",
-                  "",
-                  "pm.test('Response time is acceptable', function () {",
-                  "    pm.expect(pm.response.responseTime).to.be.below(5000);",
-                  "});"
-                ]
-              }
-            }
-          ],
-          "response": []
-        },
-        {
-          "name": "Get Trips/Id",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "description": "### NEFRU Trips\n\n**Method:** `GET`  \n**Path:** `/trips/:id`  \n**Access:** Public / no auth\n\nGenerated from the actual Express router mount and route declaration. Saved examples are included only where the backend contract was explicitly documented in the generator.",
-            "url": {
-              "raw": "{{base_url}}/trips/{{tripId}}"
-            },
-            "auth": {
-              "type": "noauth"
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test('No server error', function () {",
-                  "    pm.expect(pm.response.code).to.be.below(500);",
-                  "});",
-                  "",
-                  "pm.test('Response time is acceptable', function () {",
-                  "    pm.expect(pm.response.responseTime).to.be.below(5000);",
-                  "});"
-                ]
-              }
-            }
-          ],
-          "response": []
-        },
-        {
-          "name": "Update Trips/Id",
-          "request": {
-            "method": "PATCH",
-            "header": [],
-            "description": "### NEFRU Trips\n\n**Method:** `PATCH`  \n**Path:** `/trips/:id`  \n**Access:** Authenticated\n\nGenerated from the actual Express router mount and route declaration. Saved examples are included only where the backend contract was explicitly documented in the generator.",
-            "url": {
-              "raw": "{{base_url}}/trips/{{tripId}}"
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test('No server error', function () {",
-                  "    pm.expect(pm.response.code).to.be.below(500);",
-                  "});",
-                  "",
-                  "pm.test('Response time is acceptable', function () {",
-                  "    pm.expect(pm.response.responseTime).to.be.below(5000);",
-                  "});"
-                ]
-              }
-            }
-          ],
-          "response": []
-        },
-        {
-          "name": "Update Trips/Id/Status",
-          "request": {
-            "method": "PATCH",
-            "header": [],
-            "description": "### NEFRU Trips\n\n**Method:** `PATCH`  \n**Path:** `/trips/:id/status`  \n**Access:** Authenticated\n\nGenerated from the actual Express router mount and route declaration. Saved examples are included only where the backend contract was explicitly documented in the generator.",
-            "url": {
-              "raw": "{{base_url}}/trips/{{tripId}}/status"
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test('No server error', function () {",
-                  "    pm.expect(pm.response.code).to.be.below(500);",
-                  "});",
-                  "",
-                  "pm.test('Response time is acceptable', function () {",
-                  "    pm.expect(pm.response.responseTime).to.be.below(5000);",
-                  "});"
-                ]
-              }
-            }
-          ],
-          "response": []
-        },
-        {
-          "name": "Update Trips/Id/Media",
-          "request": {
-            "method": "PATCH",
-            "header": [],
-            "description": "### NEFRU Trips\n\n**Method:** `PATCH`  \n**Path:** `/trips/:id/media`  \n**Access:** Authenticated\n\nGenerated from the actual Express router mount and route declaration. Saved examples are included only where the backend contract was explicitly documented in the generator.",
-            "url": {
-              "raw": "{{base_url}}/trips/{{tripId}}/media"
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test('No server error', function () {",
-                  "    pm.expect(pm.response.code).to.be.below(500);",
-                  "});",
-                  "",
-                  "pm.test('Response time is acceptable', function () {",
-                  "    pm.expect(pm.response.responseTime).to.be.below(5000);",
-                  "});"
-                ]
-              }
-            }
-          ],
-          "response": []
-        },
-        {
-          "name": "Create / Action Trips/Id/Upload Media",
-          "request": {
-            "method": "POST",
-            "header": [],
-            "description": "### NEFRU Trips\n\n**Method:** `POST`  \n**Path:** `/trips/:id/upload-media`  \n**Access:** Authenticated\n\nGenerated from the actual Express router mount and route declaration. Saved examples are included only where the backend contract was explicitly documented in the generator.",
-            "url": {
-              "raw": "{{base_url}}/trips/{{tripId}}/upload-media"
-            },
-            "body": {
-              "mode": "formdata",
-              "formdata": [
-                {
-                  "key": "coverImage",
-                  "type": "file",
-                  "src": []
-                },
-                {
-                  "key": "galleryImages",
-                  "type": "file",
-                  "src": []
-                },
-                {
-                  "key": "galleryIndexes",
-                  "value": "[]",
-                  "type": "text"
-                }
-              ]
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test('No server error', function () {",
-                  "    pm.expect(pm.response.code).to.be.below(500);",
-                  "});",
-                  "",
-                  "pm.test('Response time is acceptable', function () {",
-                  "    pm.expect(pm.response.responseTime).to.be.below(5000);",
-                  "});"
-                ]
-              }
-            }
-          ],
-          "response": []
-        }
-      ]
-    },
-    {
-      "name": "Marketplace",
-      "description": "Home discovery and internal marketplace lifecycle operations.",
-      "item": [
-        {
-          "name": "Get Home",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "description": "### NEFRU Marketplace\n\n**Method:** `GET`  \n**Path:** `/home/`  \n**Access:** Public / no auth\n\nGenerated from the actual Express router mount and route declaration. Saved examples are included only where the backend contract was explicitly documented in the generator.",
-            "url": {
-              "raw": "{{base_url}}/home/"
-            },
-            "auth": {
-              "type": "noauth"
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test('No server error', function () {",
-                  "    pm.expect(pm.response.code).to.be.below(500);",
-                  "});",
-                  "",
-                  "pm.test('Response time is acceptable', function () {",
-                  "    pm.expect(pm.response.responseTime).to.be.below(5000);",
-                  "});"
-                ]
-              }
-            }
-          ],
-          "response": []
-        },
-        {
-          "name": "Get Marketplace/Dashboard",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "description": "### NEFRU Marketplace\n\n**Method:** `GET`  \n**Path:** `/marketplace/dashboard`  \n**Access:** Authenticated\n\nGenerated from the actual Express router mount and route declaration. Saved examples are included only where the backend contract was explicitly documented in the generator.",
-            "url": {
-              "raw": "{{base_url}}/marketplace/dashboard"
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test('No server error', function () {",
-                  "    pm.expect(pm.response.code).to.be.below(500);",
-                  "});",
-                  "",
-                  "pm.test('Response time is acceptable', function () {",
-                  "    pm.expect(pm.response.responseTime).to.be.below(5000);",
-                  "});"
-                ]
-              }
-            }
-          ],
-          "response": []
-        },
-        {
-          "name": "Get Marketplace/Guides/Id/Quality",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "description": "### NEFRU Marketplace\n\n**Method:** `GET`  \n**Path:** `/marketplace/guides/:id/quality`  \n**Access:** Authenticated\n\nGenerated from the actual Express router mount and route declaration. Saved examples are included only where the backend contract was explicitly documented in the generator.",
-            "url": {
-              "raw": "{{base_url}}/marketplace/guides/{{guideId}}/quality"
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test('No server error', function () {",
-                  "    pm.expect(pm.response.code).to.be.below(500);",
-                  "});",
-                  "",
-                  "pm.test('Response time is acceptable', function () {",
-                  "    pm.expect(pm.response.responseTime).to.be.below(5000);",
-                  "});"
-                ]
-              }
-            }
-          ],
-          "response": []
-        },
-        {
-          "name": "Get Marketplace/Trips/Id/Edit",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "description": "### NEFRU Marketplace\n\n**Method:** `GET`  \n**Path:** `/marketplace/trips/:id/edit`  \n**Access:** Authenticated\n\nGenerated from the actual Express router mount and route declaration. Saved examples are included only where the backend contract was explicitly documented in the generator.",
-            "url": {
-              "raw": "{{base_url}}/marketplace/trips/{{tripId}}/edit"
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test('No server error', function () {",
-                  "    pm.expect(pm.response.code).to.be.below(500);",
-                  "});",
-                  "",
-                  "pm.test('Response time is acceptable', function () {",
-                  "    pm.expect(pm.response.responseTime).to.be.below(5000);",
-                  "});"
-                ]
-              }
-            }
-          ],
-          "response": []
-        },
-        {
-          "name": "Update Marketplace/Trips/Id/Content",
-          "request": {
-            "method": "PATCH",
-            "header": [],
-            "description": "### NEFRU Marketplace\n\n**Method:** `PATCH`  \n**Path:** `/marketplace/trips/:id/content`  \n**Access:** Authenticated\n\nGenerated from the actual Express router mount and route declaration. Saved examples are included only where the backend contract was explicitly documented in the generator.",
-            "url": {
-              "raw": "{{base_url}}/marketplace/trips/{{tripId}}/content"
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test('No server error', function () {",
-                  "    pm.expect(pm.response.code).to.be.below(500);",
-                  "});",
-                  "",
-                  "pm.test('Response time is acceptable', function () {",
-                  "    pm.expect(pm.response.responseTime).to.be.below(5000);",
-                  "});"
-                ]
-              }
-            }
-          ],
-          "response": []
-        },
-        {
-          "name": "Create / Action Marketplace/Trips/Id/Actions/Action",
-          "request": {
-            "method": "POST",
-            "header": [],
-            "description": "### NEFRU Marketplace\n\n**Method:** `POST`  \n**Path:** `/marketplace/trips/:id/actions/:action`  \n**Access:** Authenticated\n\nGenerated from the actual Express router mount and route declaration. Saved examples are included only where the backend contract was explicitly documented in the generator.",
-            "url": {
-              "raw": "{{base_url}}/marketplace/trips/{{tripId}}/actions/{{action}}"
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test('No server error', function () {",
-                  "    pm.expect(pm.response.code).to.be.below(500);",
-                  "});",
-                  "",
-                  "pm.test('Response time is acceptable', function () {",
-                  "    pm.expect(pm.response.responseTime).to.be.below(5000);",
-                  "});"
-                ]
-              }
-            }
-          ],
-          "response": []
-        },
-        {
-          "name": "Create / Action Marketplace/Revisions/Id/Actions/Action",
-          "request": {
-            "method": "POST",
-            "header": [],
-            "description": "### NEFRU Marketplace\n\n**Method:** `POST`  \n**Path:** `/marketplace/revisions/:id/actions/:action`  \n**Access:** Authenticated\n\nGenerated from the actual Express router mount and route declaration. Saved examples are included only where the backend contract was explicitly documented in the generator.",
-            "url": {
-              "raw": "{{base_url}}/marketplace/revisions/{{revisionId}}/actions/{{action}}"
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test('No server error', function () {",
-                  "    pm.expect(pm.response.code).to.be.below(500);",
-                  "});",
-                  "",
-                  "pm.test('Response time is acceptable', function () {",
-                  "    pm.expect(pm.response.responseTime).to.be.below(5000);",
-                  "});"
-                ]
-              }
-            }
-          ],
-          "response": []
-        },
-        {
-          "name": "Create / Action Marketplace/Occurrences/Id/Actions/Action",
-          "request": {
-            "method": "POST",
-            "header": [],
-            "description": "### NEFRU Marketplace\n\n**Method:** `POST`  \n**Path:** `/marketplace/occurrences/:id/actions/:action`  \n**Access:** Authenticated\n\nGenerated from the actual Express router mount and route declaration. Saved examples are included only where the backend contract was explicitly documented in the generator.",
-            "url": {
-              "raw": "{{base_url}}/marketplace/occurrences/{{occurrenceId}}/actions/{{action}}"
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test('No server error', function () {",
-                  "    pm.expect(pm.response.code).to.be.below(500);",
-                  "});",
-                  "",
-                  "pm.test('Response time is acceptable', function () {",
-                  "    pm.expect(pm.response.responseTime).to.be.below(5000);",
-                  "});"
-                ]
-              }
-            }
-          ],
-          "response": []
-        },
-        {
-          "name": "Create / Action Marketplace/Bookings/Id/Attendance/Action",
-          "request": {
-            "method": "POST",
-            "header": [],
-            "description": "### NEFRU Marketplace\n\n**Method:** `POST`  \n**Path:** `/marketplace/bookings/:id/attendance/:action`  \n**Access:** Authenticated\n\nGenerated from the actual Express router mount and route declaration. Saved examples are included only where the backend contract was explicitly documented in the generator.",
-            "url": {
-              "raw": "{{base_url}}/marketplace/bookings/{{id}}/attendance/{{action}}"
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test('No server error', function () {",
-                  "    pm.expect(pm.response.code).to.be.below(500);",
-                  "});",
-                  "",
-                  "pm.test('Response time is acceptable', function () {",
-                  "    pm.expect(pm.response.responseTime).to.be.below(5000);",
-                  "});"
-                ]
-              }
-            }
-          ],
-          "response": []
-        },
-        {
-          "name": "Create / Action Marketplace/Accounts/Id/Actions/Action",
-          "request": {
-            "method": "POST",
-            "header": [],
-            "description": "### NEFRU Marketplace\n\n**Method:** `POST`  \n**Path:** `/marketplace/accounts/:id/actions/:action`  \n**Access:** Authenticated\n\nGenerated from the actual Express router mount and route declaration. Saved examples are included only where the backend contract was explicitly documented in the generator.",
-            "url": {
-              "raw": "{{base_url}}/marketplace/accounts/{{accountId}}/actions/{{action}}"
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test('No server error', function () {",
-                  "    pm.expect(pm.response.code).to.be.below(500);",
-                  "});",
-                  "",
-                  "pm.test('Response time is acceptable', function () {",
-                  "    pm.expect(pm.response.responseTime).to.be.below(5000);",
-                  "});"
-                ]
-              }
-            }
-          ],
-          "response": []
-        },
-        {
-          "name": "Create / Action Marketplace/Verification/Id/Actions/Action",
-          "request": {
-            "method": "POST",
-            "header": [],
-            "description": "### NEFRU Marketplace\n\n**Method:** `POST`  \n**Path:** `/marketplace/verification/:id/actions/:action`  \n**Access:** Authenticated\n\nGenerated from the actual Express router mount and route declaration. Saved examples are included only where the backend contract was explicitly documented in the generator.",
-            "url": {
-              "raw": "{{base_url}}/marketplace/verification/{{verificationId}}/actions/{{action}}"
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test('No server error', function () {",
-                  "    pm.expect(pm.response.code).to.be.below(500);",
-                  "});",
-                  "",
-                  "pm.test('Response time is acceptable', function () {",
-                  "    pm.expect(pm.response.responseTime).to.be.below(5000);",
-                  "});"
-                ]
-              }
-            }
-          ],
-          "response": []
-        },
-        {
-          "name": "Create / Action Marketplace/Reviews/Id/Actions/Action",
-          "request": {
-            "method": "POST",
-            "header": [],
-            "description": "### NEFRU Marketplace\n\n**Method:** `POST`  \n**Path:** `/marketplace/reviews/:id/actions/:action`  \n**Access:** Authenticated\n\nGenerated from the actual Express router mount and route declaration. Saved examples are included only where the backend contract was explicitly documented in the generator.",
-            "url": {
-              "raw": "{{base_url}}/marketplace/reviews/{{reviewId}}/actions/{{action}}"
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test('No server error', function () {",
-                  "    pm.expect(pm.response.code).to.be.below(500);",
-                  "});",
-                  "",
-                  "pm.test('Response time is acceptable', function () {",
-                  "    pm.expect(pm.response.responseTime).to.be.below(5000);",
-                  "});"
-                ]
-              }
-            }
-          ],
-          "response": []
-        },
-        {
-          "name": "Get Marketplace/Reviews/Id",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "description": "### NEFRU Marketplace\n\n**Method:** `GET`  \n**Path:** `/marketplace/reviews/:id`  \n**Access:** Authenticated\n\nGenerated from the actual Express router mount and route declaration. Saved examples are included only where the backend contract was explicitly documented in the generator.",
-            "url": {
-              "raw": "{{base_url}}/marketplace/reviews/{{reviewId}}"
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test('No server error', function () {",
-                  "    pm.expect(pm.response.code).to.be.below(500);",
-                  "});",
-                  "",
-                  "pm.test('Response time is acceptable', function () {",
-                  "    pm.expect(pm.response.responseTime).to.be.below(5000);",
-                  "});"
-                ]
-              }
-            }
-          ],
-          "response": []
-        },
-        {
-          "name": "Get Marketplace/Audit/Id",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "description": "### NEFRU Marketplace\n\n**Method:** `GET`  \n**Path:** `/marketplace/audit/:id`  \n**Access:** Authenticated\n\nGenerated from the actual Express router mount and route declaration. Saved examples are included only where the backend contract was explicitly documented in the generator.",
-            "url": {
-              "raw": "{{base_url}}/marketplace/audit/{{auditId}}"
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test('No server error', function () {",
-                  "    pm.expect(pm.response.code).to.be.below(500);",
-                  "});",
-                  "",
-                  "pm.test('Response time is acceptable', function () {",
-                  "    pm.expect(pm.response.responseTime).to.be.below(5000);",
-                  "});"
-                ]
-              }
-            }
-          ],
-          "response": []
-        },
-        {
-          "name": "Create / Action Marketplace/Cases/Id/Resolve",
-          "request": {
-            "method": "POST",
-            "header": [],
-            "description": "### NEFRU Marketplace\n\n**Method:** `POST`  \n**Path:** `/marketplace/cases/:id/resolve`  \n**Access:** Authenticated\n\nGenerated from the actual Express router mount and route declaration. Saved examples are included only where the backend contract was explicitly documented in the generator.",
-            "url": {
-              "raw": "{{base_url}}/marketplace/cases/{{caseId}}/resolve"
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test('No server error', function () {",
-                  "    pm.expect(pm.response.code).to.be.below(500);",
-                  "});",
-                  "",
-                  "pm.test('Response time is acceptable', function () {",
-                  "    pm.expect(pm.response.responseTime).to.be.below(5000);",
-                  "});"
-                ]
-              }
-            }
-          ],
-          "response": []
-        },
-        {
-          "name": "Get Marketplace/Cases/Id",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "description": "### NEFRU Marketplace\n\n**Method:** `GET`  \n**Path:** `/marketplace/cases/:id`  \n**Access:** Authenticated\n\nGenerated from the actual Express router mount and route declaration. Saved examples are included only where the backend contract was explicitly documented in the generator.",
-            "url": {
-              "raw": "{{base_url}}/marketplace/cases/{{caseId}}"
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test('No server error', function () {",
-                  "    pm.expect(pm.response.code).to.be.below(500);",
-                  "});",
-                  "",
-                  "pm.test('Response time is acceptable', function () {",
-                  "    pm.expect(pm.response.responseTime).to.be.below(5000);",
-                  "});"
-                ]
-              }
-            }
-          ],
-          "response": []
-        },
-        {
-          "name": "Create / Action Marketplace/Merchandising/Kind/Id",
-          "request": {
-            "method": "POST",
-            "header": [],
-            "description": "### NEFRU Marketplace\n\n**Method:** `POST`  \n**Path:** `/marketplace/merchandising/:kind/:id`  \n**Access:** Authenticated\n\nGenerated from the actual Express router mount and route declaration. Saved examples are included only where the backend contract was explicitly documented in the generator.",
-            "url": {
-              "raw": "{{base_url}}/marketplace/merchandising/{{kind}}/{{id}}"
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test('No server error', function () {",
-                  "    pm.expect(pm.response.code).to.be.below(500);",
-                  "});",
-                  "",
-                  "pm.test('Response time is acceptable', function () {",
-                  "    pm.expect(pm.response.responseTime).to.be.below(5000);",
-                  "});"
-                ]
-              }
-            }
-          ],
-          "response": []
-        }
-      ]
-    },
-    {
-      "name": "Bookings",
-      "description": "Tourist and guide booking lifecycle operations.",
-      "item": [
-        {
-          "name": "Get Bookings/Trips/Tripid/Availability",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "description": "### NEFRU Bookings\n\n**Method:** `GET`  \n**Path:** `/bookings/trips/:tripId/availability`  \n**Access:** Authenticated — roles: tourist\n\nGenerated from the actual Express router mount and route declaration. Saved examples are included only where the backend contract was explicitly documented in the generator.",
-            "url": {
-              "raw": "{{base_url}}/bookings/trips/{{tripId}}/availability"
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test('No server error', function () {",
-                  "    pm.expect(pm.response.code).to.be.below(500);",
-                  "});",
-                  "",
-                  "pm.test('Response time is acceptable', function () {",
-                  "    pm.expect(pm.response.responseTime).to.be.below(5000);",
-                  "});"
-                ]
-              }
-            }
-          ],
-          "response": []
-        },
-        {
-          "name": "Create / Action Bookings",
+          "name": "POST /register",
           "request": {
             "method": "POST",
             "header": [
               {
-                "key": "Content-Type",
-                "value": "application/json",
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
                 "type": "text"
               }
             ],
-            "description": "### NEFRU Bookings\n\n**Method:** `POST`  \n**Path:** `/bookings/`  \n**Access:** Authenticated — roles: tourist\n\nGenerated from the actual Express router mount and route declaration. Saved examples are included only where the backend contract was explicitly documented in the generator.",
             "url": {
-              "raw": "{{base_url}}/bookings/"
-            },
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"tripId\": \"{{tripId}}\",\n  \"occurrenceKey\": \"{{occurrenceKey}}\",\n  \"numberOfGuests\": 1,\n  \"specialRequest\": \"Optional request\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
+              "raw": "{{base_url}}/register"
             }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test('No server error', function () {",
-                  "    pm.expect(pm.response.code).to.be.below(500);",
-                  "});",
-                  "",
-                  "pm.test('Response time is acceptable', function () {",
-                  "    pm.expect(pm.response.responseTime).to.be.below(5000);",
-                  "});"
-                ]
-              }
-            }
-          ],
-          "response": [
-            {
-              "name": "201 Created",
-              "originalRequest": {
-                "method": "POST",
-                "header": [],
-                "url": {
-                  "raw": "{{base_url}}/bookings/"
-                }
-              },
-              "status": "Created",
-              "code": 201,
-              "_postman_previewlanguage": "json",
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "cookie": [],
-              "body": "{\n  \"success\": true,\n  \"message\": \"Your place is held for 15 minutes\",\n  \"data\": {\n    \"booking\": {\n      \"bookingId\": \"<BOOKING_ID>\",\n      \"status\": \"pending_payment\"\n    }\n  }\n}"
-            }
-          ]
+          }
         },
         {
-          "name": "My Bookings",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "description": "### NEFRU Bookings\n\n**Method:** `GET`  \n**Path:** `/bookings/me`  \n**Access:** Authenticated — roles: tourist\n\nGenerated from the actual Express router mount and route declaration. Saved examples are included only where the backend contract was explicitly documented in the generator.",
-            "url": {
-              "raw": "{{base_url}}/bookings/me"
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test('No server error', function () {",
-                  "    pm.expect(pm.response.code).to.be.below(500);",
-                  "});",
-                  "",
-                  "pm.test('Response time is acceptable', function () {",
-                  "    pm.expect(pm.response.responseTime).to.be.below(5000);",
-                  "});"
-                ]
-              }
-            }
-          ],
-          "response": []
-        },
-        {
-          "name": "Update Bookings/Bookingid/Cancel",
-          "request": {
-            "method": "PATCH",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json",
-                "type": "text"
-              }
-            ],
-            "description": "### NEFRU Bookings\n\n**Method:** `PATCH`  \n**Path:** `/bookings/:bookingId/cancel`  \n**Access:** Authenticated — roles: tourist\n\nGenerated from the actual Express router mount and route declaration. Saved examples are included only where the backend contract was explicitly documented in the generator.",
-            "url": {
-              "raw": "{{base_url}}/bookings/{{bookingId}}/cancel"
-            },
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"reason\": \"Plans changed\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test('No server error', function () {",
-                  "    pm.expect(pm.response.code).to.be.below(500);",
-                  "});",
-                  "",
-                  "pm.test('Response time is acceptable', function () {",
-                  "    pm.expect(pm.response.responseTime).to.be.below(5000);",
-                  "});"
-                ]
-              }
-            }
-          ],
-          "response": []
-        },
-        {
-          "name": "Guide Bookings",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "description": "### NEFRU Bookings\n\n**Method:** `GET`  \n**Path:** `/bookings/guide/me`  \n**Access:** Authenticated — roles: guide\n\nGenerated from the actual Express router mount and route declaration. Saved examples are included only where the backend contract was explicitly documented in the generator.",
-            "url": {
-              "raw": "{{base_url}}/bookings/guide/me"
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test('No server error', function () {",
-                  "    pm.expect(pm.response.code).to.be.below(500);",
-                  "});",
-                  "",
-                  "pm.test('Response time is acceptable', function () {",
-                  "    pm.expect(pm.response.responseTime).to.be.below(5000);",
-                  "});"
-                ]
-              }
-            }
-          ],
-          "response": []
-        },
-        {
-          "name": "Update Bookings/Guide/Occurrences/Complete",
-          "request": {
-            "method": "PATCH",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json",
-                "type": "text"
-              }
-            ],
-            "description": "### NEFRU Bookings\n\n**Method:** `PATCH`  \n**Path:** `/bookings/guide/occurrences/complete`  \n**Access:** Authenticated — roles: guide\n\nGenerated from the actual Express router mount and route declaration. Saved examples are included only where the backend contract was explicitly documented in the generator.",
-            "url": {
-              "raw": "{{base_url}}/bookings/guide/occurrences/complete"
-            },
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"tripId\": \"{{tripId}}\",\n  \"occurrenceKey\": \"{{occurrenceKey}}\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test('No server error', function () {",
-                  "    pm.expect(pm.response.code).to.be.below(500);",
-                  "});",
-                  "",
-                  "pm.test('Response time is acceptable', function () {",
-                  "    pm.expect(pm.response.responseTime).to.be.below(5000);",
-                  "});"
-                ]
-              }
-            }
-          ],
-          "response": []
-        },
-        {
-          "name": "Update Bookings/Guide/Occurrences/Cancel",
-          "request": {
-            "method": "PATCH",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json",
-                "type": "text"
-              }
-            ],
-            "description": "### NEFRU Bookings\n\n**Method:** `PATCH`  \n**Path:** `/bookings/guide/occurrences/cancel`  \n**Access:** Authenticated — roles: guide\n\nGenerated from the actual Express router mount and route declaration. Saved examples are included only where the backend contract was explicitly documented in the generator.",
-            "url": {
-              "raw": "{{base_url}}/bookings/guide/occurrences/cancel"
-            },
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"tripId\": \"{{tripId}}\",\n  \"occurrenceKey\": \"{{occurrenceKey}}\",\n  \"reason\": \"Guide cancellation reason\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test('No server error', function () {",
-                  "    pm.expect(pm.response.code).to.be.below(500);",
-                  "});",
-                  "",
-                  "pm.test('Response time is acceptable', function () {",
-                  "    pm.expect(pm.response.responseTime).to.be.below(5000);",
-                  "});"
-                ]
-              }
-            }
-          ],
-          "response": []
-        },
-        {
-          "name": "Get Bookings/Bookingid",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "description": "### NEFRU Bookings\n\n**Method:** `GET`  \n**Path:** `/bookings/:bookingId`  \n**Access:** Authenticated\n\nGenerated from the actual Express router mount and route declaration. Saved examples are included only where the backend contract was explicitly documented in the generator.",
-            "url": {
-              "raw": "{{base_url}}/bookings/{{bookingId}}"
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test('No server error', function () {",
-                  "    pm.expect(pm.response.code).to.be.below(500);",
-                  "});",
-                  "",
-                  "pm.test('Response time is acceptable', function () {",
-                  "    pm.expect(pm.response.responseTime).to.be.below(5000);",
-                  "});"
-                ]
-              }
-            }
-          ],
-          "response": []
-        }
-      ]
-    },
-    {
-      "name": "Payments",
-      "description": "Paymob checkout, reconciliation, payment status, saved methods, and webhook handling.",
-      "item": [
-        {
-          "name": "Paymob Webhook",
-          "request": {
-            "method": "POST",
-            "header": [],
-            "description": "### NEFRU Payments\n\n**Method:** `POST`  \n**Path:** `/payments/paymob/webhook`  \n**Access:** Public / no auth\n\nGenerated from the actual Express router mount and route declaration. Saved examples are included only where the backend contract was explicitly documented in the generator.",
-            "url": {
-              "raw": "{{base_url}}/payments/paymob/webhook"
-            },
-            "auth": {
-              "type": "noauth"
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test('No server error', function () {",
-                  "    pm.expect(pm.response.code).to.be.below(500);",
-                  "});",
-                  "",
-                  "pm.test('Response time is acceptable', function () {",
-                  "    pm.expect(pm.response.responseTime).to.be.below(5000);",
-                  "});"
-                ]
-              }
-            }
-          ],
-          "response": []
-        },
-        {
-          "name": "Get Payments/Methods",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "description": "### NEFRU Payments\n\n**Method:** `GET`  \n**Path:** `/payments/methods`  \n**Access:** Authenticated — roles: tourist\n\nGenerated from the actual Express router mount and route declaration. Saved examples are included only where the backend contract was explicitly documented in the generator.",
-            "url": {
-              "raw": "{{base_url}}/payments/methods"
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test('No server error', function () {",
-                  "    pm.expect(pm.response.code).to.be.below(500);",
-                  "});",
-                  "",
-                  "pm.test('Response time is acceptable', function () {",
-                  "    pm.expect(pm.response.responseTime).to.be.below(5000);",
-                  "});"
-                ]
-              }
-            }
-          ],
-          "response": []
-        },
-        {
-          "name": "Delete Payments/Methods/Methodid",
-          "request": {
-            "method": "DELETE",
-            "header": [],
-            "description": "### NEFRU Payments\n\n**Method:** `DELETE`  \n**Path:** `/payments/methods/:methodId`  \n**Access:** Authenticated — roles: tourist\n\nGenerated from the actual Express router mount and route declaration. Saved examples are included only where the backend contract was explicitly documented in the generator.",
-            "url": {
-              "raw": "{{base_url}}/payments/methods/{{methodId}}"
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test('No server error', function () {",
-                  "    pm.expect(pm.response.code).to.be.below(500);",
-                  "});",
-                  "",
-                  "pm.test('Response time is acceptable', function () {",
-                  "    pm.expect(pm.response.responseTime).to.be.below(5000);",
-                  "});"
-                ]
-              }
-            }
-          ],
-          "response": []
-        },
-        {
-          "name": "Create Paymob Checkout",
+          "name": "POST /login",
           "request": {
             "method": "POST",
             "header": [
               {
-                "key": "Content-Type",
-                "value": "application/json",
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
                 "type": "text"
               }
             ],
-            "description": "### NEFRU Payments\n\n**Method:** `POST`  \n**Path:** `/payments/checkout`  \n**Access:** Authenticated — roles: tourist\n\nGenerated from the actual Express router mount and route declaration. Saved examples are included only where the backend contract was explicitly documented in the generator.",
             "url": {
-              "raw": "{{base_url}}/payments/checkout"
-            },
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"bookingId\": \"{{bookingId}}\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
+              "raw": "{{base_url}}/login"
             }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test('No server error', function () {",
-                  "    pm.expect(pm.response.code).to.be.below(500);",
-                  "});",
-                  "",
-                  "pm.test('Response time is acceptable', function () {",
-                  "    pm.expect(pm.response.responseTime).to.be.below(5000);",
-                  "});"
-                ]
-              }
-            }
-          ],
-          "response": []
+          }
         },
         {
-          "name": "Create / Action Payments/Bookingid/Reconcile",
+          "name": "POST /logout",
           "request": {
             "method": "POST",
-            "header": [],
-            "description": "### NEFRU Payments\n\n**Method:** `POST`  \n**Path:** `/payments/:bookingId/reconcile`  \n**Access:** Authenticated — roles: tourist\n\nGenerated from the actual Express router mount and route declaration. Saved examples are included only where the backend contract was explicitly documented in the generator.",
-            "url": {
-              "raw": "{{base_url}}/payments/{{bookingId}}/reconcile"
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test('No server error', function () {",
-                  "    pm.expect(pm.response.code).to.be.below(500);",
-                  "});",
-                  "",
-                  "pm.test('Response time is acceptable', function () {",
-                  "    pm.expect(pm.response.responseTime).to.be.below(5000);",
-                  "});"
-                ]
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
               }
+            ],
+            "url": {
+              "raw": "{{base_url}}/logout"
             }
-          ],
-          "response": []
+          }
         },
         {
-          "name": "Get Payments/Bookingid/Status",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "description": "### NEFRU Payments\n\n**Method:** `GET`  \n**Path:** `/payments/:bookingId/status`  \n**Access:** Authenticated — roles: tourist\n\nGenerated from the actual Express router mount and route declaration. Saved examples are included only where the backend contract was explicitly documented in the generator.",
-            "url": {
-              "raw": "{{base_url}}/payments/{{bookingId}}/status"
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test('No server error', function () {",
-                  "    pm.expect(pm.response.code).to.be.below(500);",
-                  "});",
-                  "",
-                  "pm.test('Response time is acceptable', function () {",
-                  "    pm.expect(pm.response.responseTime).to.be.below(5000);",
-                  "});"
-                ]
-              }
-            }
-          ],
-          "response": []
-        }
-      ]
-    },
-    {
-      "name": "Reviews",
-      "description": "Public trip reviews and authenticated tourist review operations.",
-      "item": [
-        {
-          "name": "Get Reviews/Trip/Tripid",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "description": "### NEFRU Reviews\n\n**Method:** `GET`  \n**Path:** `/reviews/trip/:tripId`  \n**Access:** Public / no auth\n\nGenerated from the actual Express router mount and route declaration. Saved examples are included only where the backend contract was explicitly documented in the generator.",
-            "url": {
-              "raw": "{{base_url}}/reviews/trip/{{tripId}}"
-            },
-            "auth": {
-              "type": "noauth"
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test('No server error', function () {",
-                  "    pm.expect(pm.response.code).to.be.below(500);",
-                  "});",
-                  "",
-                  "pm.test('Response time is acceptable', function () {",
-                  "    pm.expect(pm.response.responseTime).to.be.below(5000);",
-                  "});"
-                ]
-              }
-            }
-          ],
-          "response": []
-        },
-        {
-          "name": "Get Reviews/Me",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "description": "### NEFRU Reviews\n\n**Method:** `GET`  \n**Path:** `/reviews/me`  \n**Access:** Authenticated — roles: tourist\n\nGenerated from the actual Express router mount and route declaration. Saved examples are included only where the backend contract was explicitly documented in the generator.",
-            "url": {
-              "raw": "{{base_url}}/reviews/me"
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test('No server error', function () {",
-                  "    pm.expect(pm.response.code).to.be.below(500);",
-                  "});",
-                  "",
-                  "pm.test('Response time is acceptable', function () {",
-                  "    pm.expect(pm.response.responseTime).to.be.below(5000);",
-                  "});"
-                ]
-              }
-            }
-          ],
-          "response": []
-        },
-        {
-          "name": "Create / Action Reviews",
+          "name": "POST /google",
           "request": {
             "method": "POST",
-            "header": [],
-            "description": "### NEFRU Reviews\n\n**Method:** `POST`  \n**Path:** `/reviews/`  \n**Access:** Authenticated — roles: tourist\n\nGenerated from the actual Express router mount and route declaration. Saved examples are included only where the backend contract was explicitly documented in the generator.",
-            "url": {
-              "raw": "{{base_url}}/reviews/"
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test('No server error', function () {",
-                  "    pm.expect(pm.response.code).to.be.below(500);",
-                  "});",
-                  "",
-                  "pm.test('Response time is acceptable', function () {",
-                  "    pm.expect(pm.response.responseTime).to.be.below(5000);",
-                  "});"
-                ]
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
               }
+            ],
+            "url": {
+              "raw": "{{base_url}}/google"
             }
-          ],
-          "response": []
+          }
         },
         {
-          "name": "Update Reviews/Id",
+          "name": "POST /verify-email",
           "request": {
-            "method": "PATCH",
-            "header": [],
-            "description": "### NEFRU Reviews\n\n**Method:** `PATCH`  \n**Path:** `/reviews/:id`  \n**Access:** Authenticated — roles: tourist\n\nGenerated from the actual Express router mount and route declaration. Saved examples are included only where the backend contract was explicitly documented in the generator.",
-            "url": {
-              "raw": "{{base_url}}/reviews/{{reviewId}}"
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test('No server error', function () {",
-                  "    pm.expect(pm.response.code).to.be.below(500);",
-                  "});",
-                  "",
-                  "pm.test('Response time is acceptable', function () {",
-                  "    pm.expect(pm.response.responseTime).to.be.below(5000);",
-                  "});"
-                ]
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
               }
-            }
-          ],
-          "response": []
-        },
-        {
-          "name": "Delete Reviews/Id",
-          "request": {
-            "method": "DELETE",
-            "header": [],
-            "description": "### NEFRU Reviews\n\n**Method:** `DELETE`  \n**Path:** `/reviews/:id`  \n**Access:** Authenticated — roles: tourist\n\nGenerated from the actual Express router mount and route declaration. Saved examples are included only where the backend contract was explicitly documented in the generator.",
+            ],
             "url": {
-              "raw": "{{base_url}}/reviews/{{reviewId}}"
+              "raw": "{{base_url}}/verify-email"
             }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test('No server error', function () {",
-                  "    pm.expect(pm.response.code).to.be.below(500);",
-                  "});",
-                  "",
-                  "pm.test('Response time is acceptable', function () {",
-                  "    pm.expect(pm.response.responseTime).to.be.below(5000);",
-                  "});"
-                ]
-              }
-            }
-          ],
-          "response": []
+          }
         }
       ]
     },
     {
-      "name": "Notifications",
-      "description": "Authenticated notification listing and read-state operations.",
+      "name": "fx",
       "item": [
         {
-          "name": "Get Notifications",
+          "name": "GET /rates",
           "request": {
             "method": "GET",
-            "header": [],
-            "description": "### NEFRU Notifications\n\n**Method:** `GET`  \n**Path:** `/notifications/`  \n**Access:** Authenticated\n\nGenerated from the actual Express router mount and route declaration. Saved examples are included only where the backend contract was explicitly documented in the generator.",
-            "url": {
-              "raw": "{{base_url}}/notifications/"
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test('No server error', function () {",
-                  "    pm.expect(pm.response.code).to.be.below(500);",
-                  "});",
-                  "",
-                  "pm.test('Response time is acceptable', function () {",
-                  "    pm.expect(pm.response.responseTime).to.be.below(5000);",
-                  "});"
-                ]
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
               }
-            }
-          ],
-          "response": []
-        },
-        {
-          "name": "Update Notifications/Read All",
-          "request": {
-            "method": "PATCH",
-            "header": [],
-            "description": "### NEFRU Notifications\n\n**Method:** `PATCH`  \n**Path:** `/notifications/read-all`  \n**Access:** Authenticated\n\nGenerated from the actual Express router mount and route declaration. Saved examples are included only where the backend contract was explicitly documented in the generator.",
+            ],
             "url": {
-              "raw": "{{base_url}}/notifications/read-all"
+              "raw": "{{base_url}}/rates"
             }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test('No server error', function () {",
-                  "    pm.expect(pm.response.code).to.be.below(500);",
-                  "});",
-                  "",
-                  "pm.test('Response time is acceptable', function () {",
-                  "    pm.expect(pm.response.responseTime).to.be.below(5000);",
-                  "});"
-                ]
-              }
-            }
-          ],
-          "response": []
-        },
-        {
-          "name": "Update Notifications/Id/Read",
-          "request": {
-            "method": "PATCH",
-            "header": [],
-            "description": "### NEFRU Notifications\n\n**Method:** `PATCH`  \n**Path:** `/notifications/:id/read`  \n**Access:** Authenticated\n\nGenerated from the actual Express router mount and route declaration. Saved examples are included only where the backend contract was explicitly documented in the generator.",
-            "url": {
-              "raw": "{{base_url}}/notifications/{{id}}/read"
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test('No server error', function () {",
-                  "    pm.expect(pm.response.code).to.be.below(500);",
-                  "});",
-                  "",
-                  "pm.test('Response time is acceptable', function () {",
-                  "    pm.expect(pm.response.responseTime).to.be.below(5000);",
-                  "});"
-                ]
-              }
-            }
-          ],
-          "response": []
+          }
         }
       ]
     },
     {
-      "name": "Admin",
-      "description": "Administrative dashboard, users, guide verification, moderation, booking operations, and analytics.",
+      "name": "marketplace",
       "item": [
         {
-          "name": "Get Admin/Dashboard",
+          "name": "GET /dashboard",
           "request": {
             "method": "GET",
-            "header": [],
-            "description": "### NEFRU Admin\n\n**Method:** `GET`  \n**Path:** `/admin/dashboard`  \n**Access:** Authenticated — roles: admin\n\nGenerated from the actual Express router mount and route declaration. Saved examples are included only where the backend contract was explicitly documented in the generator.",
-            "url": {
-              "raw": "{{base_url}}/admin/dashboard"
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test('No server error', function () {",
-                  "    pm.expect(pm.response.code).to.be.below(500);",
-                  "});",
-                  "",
-                  "pm.test('Response time is acceptable', function () {",
-                  "    pm.expect(pm.response.responseTime).to.be.below(5000);",
-                  "});"
-                ]
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
               }
+            ],
+            "url": {
+              "raw": "{{base_url}}/dashboard"
             }
-          ],
-          "response": []
+          }
         },
         {
-          "name": "Get Admin/Accounts",
+          "name": "GET /guides/:id/quality",
           "request": {
             "method": "GET",
-            "header": [],
-            "description": "### NEFRU Admin\n\n**Method:** `GET`  \n**Path:** `/admin/accounts`  \n**Access:** Authenticated — roles: admin\n\nGenerated from the actual Express router mount and route declaration. Saved examples are included only where the backend contract was explicitly documented in the generator.",
-            "url": {
-              "raw": "{{base_url}}/admin/accounts"
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test('No server error', function () {",
-                  "    pm.expect(pm.response.code).to.be.below(500);",
-                  "});",
-                  "",
-                  "pm.test('Response time is acceptable', function () {",
-                  "    pm.expect(pm.response.responseTime).to.be.below(5000);",
-                  "});"
-                ]
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
               }
+            ],
+            "url": {
+              "raw": "{{base_url}}/guides/:id/quality"
             }
-          ],
-          "response": []
+          }
         },
         {
-          "name": "Get Admin/Accounts/Id",
+          "name": "GET /trips/:id/edit",
           "request": {
             "method": "GET",
-            "header": [],
-            "description": "### NEFRU Admin\n\n**Method:** `GET`  \n**Path:** `/admin/accounts/:id`  \n**Access:** Authenticated — roles: admin\n\nGenerated from the actual Express router mount and route declaration. Saved examples are included only where the backend contract was explicitly documented in the generator.",
-            "url": {
-              "raw": "{{base_url}}/admin/accounts/{{accountId}}"
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test('No server error', function () {",
-                  "    pm.expect(pm.response.code).to.be.below(500);",
-                  "});",
-                  "",
-                  "pm.test('Response time is acceptable', function () {",
-                  "    pm.expect(pm.response.responseTime).to.be.below(5000);",
-                  "});"
-                ]
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
               }
+            ],
+            "url": {
+              "raw": "{{base_url}}/trips/:id/edit"
             }
-          ],
-          "response": []
+          }
         },
         {
-          "name": "Update Admin/Accounts/Id/Verification",
+          "name": "PATCH /trips/:id/content",
           "request": {
             "method": "PATCH",
-            "header": [],
-            "description": "### NEFRU Admin\n\n**Method:** `PATCH`  \n**Path:** `/admin/accounts/:id/verification`  \n**Access:** Authenticated — roles: admin\n\nGenerated from the actual Express router mount and route declaration. Saved examples are included only where the backend contract was explicitly documented in the generator.",
-            "url": {
-              "raw": "{{base_url}}/admin/accounts/{{accountId}}/verification"
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test('No server error', function () {",
-                  "    pm.expect(pm.response.code).to.be.below(500);",
-                  "});",
-                  "",
-                  "pm.test('Response time is acceptable', function () {",
-                  "    pm.expect(pm.response.responseTime).to.be.below(5000);",
-                  "});"
-                ]
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
               }
+            ],
+            "url": {
+              "raw": "{{base_url}}/trips/:id/content"
             }
-          ],
-          "response": []
+          }
         },
         {
-          "name": "Get Admin/User",
+          "name": "POST /trips/:id/actions/:action",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/trips/:id/actions/:action"
+            }
+          }
+        },
+        {
+          "name": "POST /revisions/:id/actions/:action",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/revisions/:id/actions/:action"
+            }
+          }
+        },
+        {
+          "name": "POST /occurrences/:id/actions/:action",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/occurrences/:id/actions/:action"
+            }
+          }
+        },
+        {
+          "name": "POST /bookings/:id/attendance/:action",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/bookings/:id/attendance/:action"
+            }
+          }
+        },
+        {
+          "name": "POST /accounts/:id/actions/:action",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/accounts/:id/actions/:action"
+            }
+          }
+        },
+        {
+          "name": "POST /verification/:id/actions/:action",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/verification/:id/actions/:action"
+            }
+          }
+        },
+        {
+          "name": "POST /reviews/:id/actions/:action",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/reviews/:id/actions/:action"
+            }
+          }
+        },
+        {
+          "name": "GET /reviews/:id",
           "request": {
             "method": "GET",
-            "header": [],
-            "description": "### NEFRU Admin\n\n**Method:** `GET`  \n**Path:** `/admin/user`  \n**Access:** Authenticated — roles: admin\n\nGenerated from the actual Express router mount and route declaration. Saved examples are included only where the backend contract was explicitly documented in the generator.",
-            "url": {
-              "raw": "{{base_url}}/admin/user"
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test('No server error', function () {",
-                  "    pm.expect(pm.response.code).to.be.below(500);",
-                  "});",
-                  "",
-                  "pm.test('Response time is acceptable', function () {",
-                  "    pm.expect(pm.response.responseTime).to.be.below(5000);",
-                  "});"
-                ]
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
               }
+            ],
+            "url": {
+              "raw": "{{base_url}}/reviews/:id"
             }
-          ],
-          "response": []
+          }
         },
         {
-          "name": "Get Admin/User/Id",
+          "name": "GET /audit/:id",
           "request": {
             "method": "GET",
-            "header": [],
-            "description": "### NEFRU Admin\n\n**Method:** `GET`  \n**Path:** `/admin/user/:id`  \n**Access:** Authenticated — roles: admin\n\nGenerated from the actual Express router mount and route declaration. Saved examples are included only where the backend contract was explicitly documented in the generator.",
-            "url": {
-              "raw": "{{base_url}}/admin/user/{{userId}}"
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test('No server error', function () {",
-                  "    pm.expect(pm.response.code).to.be.below(500);",
-                  "});",
-                  "",
-                  "pm.test('Response time is acceptable', function () {",
-                  "    pm.expect(pm.response.responseTime).to.be.below(5000);",
-                  "});"
-                ]
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
               }
+            ],
+            "url": {
+              "raw": "{{base_url}}/audit/:id"
             }
-          ],
-          "response": []
+          }
         },
         {
-          "name": "Update Admin/User/Id",
+          "name": "POST /cases/:id/resolve",
           "request": {
-            "method": "PATCH",
-            "header": [],
-            "description": "### NEFRU Admin\n\n**Method:** `PATCH`  \n**Path:** `/admin/user/:id`  \n**Access:** Authenticated — roles: admin\n\nGenerated from the actual Express router mount and route declaration. Saved examples are included only where the backend contract was explicitly documented in the generator.",
-            "url": {
-              "raw": "{{base_url}}/admin/user/{{userId}}"
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test('No server error', function () {",
-                  "    pm.expect(pm.response.code).to.be.below(500);",
-                  "});",
-                  "",
-                  "pm.test('Response time is acceptable', function () {",
-                  "    pm.expect(pm.response.responseTime).to.be.below(5000);",
-                  "});"
-                ]
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
               }
+            ],
+            "url": {
+              "raw": "{{base_url}}/cases/:id/resolve"
             }
-          ],
-          "response": []
+          }
         },
         {
-          "name": "Update Admin/User/Id/Ban",
-          "request": {
-            "method": "PATCH",
-            "header": [],
-            "description": "### NEFRU Admin\n\n**Method:** `PATCH`  \n**Path:** `/admin/user/:id/ban`  \n**Access:** Authenticated — roles: admin\n\nGenerated from the actual Express router mount and route declaration. Saved examples are included only where the backend contract was explicitly documented in the generator.",
-            "url": {
-              "raw": "{{base_url}}/admin/user/{{userId}}/ban"
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test('No server error', function () {",
-                  "    pm.expect(pm.response.code).to.be.below(500);",
-                  "});",
-                  "",
-                  "pm.test('Response time is acceptable', function () {",
-                  "    pm.expect(pm.response.responseTime).to.be.below(5000);",
-                  "});"
-                ]
-              }
-            }
-          ],
-          "response": []
-        },
-        {
-          "name": "Update Admin/User/Id/Unban",
-          "request": {
-            "method": "PATCH",
-            "header": [],
-            "description": "### NEFRU Admin\n\n**Method:** `PATCH`  \n**Path:** `/admin/user/:id/unban`  \n**Access:** Authenticated — roles: admin\n\nGenerated from the actual Express router mount and route declaration. Saved examples are included only where the backend contract was explicitly documented in the generator.",
-            "url": {
-              "raw": "{{base_url}}/admin/user/{{userId}}/unban"
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test('No server error', function () {",
-                  "    pm.expect(pm.response.code).to.be.below(500);",
-                  "});",
-                  "",
-                  "pm.test('Response time is acceptable', function () {",
-                  "    pm.expect(pm.response.responseTime).to.be.below(5000);",
-                  "});"
-                ]
-              }
-            }
-          ],
-          "response": []
-        },
-        {
-          "name": "Delete Admin/User/Id",
-          "request": {
-            "method": "DELETE",
-            "header": [],
-            "description": "### NEFRU Admin\n\n**Method:** `DELETE`  \n**Path:** `/admin/user/:id`  \n**Access:** Authenticated — roles: admin\n\nGenerated from the actual Express router mount and route declaration. Saved examples are included only where the backend contract was explicitly documented in the generator.",
-            "url": {
-              "raw": "{{base_url}}/admin/user/{{userId}}"
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test('No server error', function () {",
-                  "    pm.expect(pm.response.code).to.be.below(500);",
-                  "});",
-                  "",
-                  "pm.test('Response time is acceptable', function () {",
-                  "    pm.expect(pm.response.responseTime).to.be.below(5000);",
-                  "});"
-                ]
-              }
-            }
-          ],
-          "response": []
-        },
-        {
-          "name": "Update Admin/Guide/Id/Approve",
-          "request": {
-            "method": "PATCH",
-            "header": [],
-            "description": "### NEFRU Admin\n\n**Method:** `PATCH`  \n**Path:** `/admin/guide/:id/approve`  \n**Access:** Authenticated — roles: admin\n\nGenerated from the actual Express router mount and route declaration. Saved examples are included only where the backend contract was explicitly documented in the generator.",
-            "url": {
-              "raw": "{{base_url}}/admin/guide/{{guideId}}/approve"
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test('No server error', function () {",
-                  "    pm.expect(pm.response.code).to.be.below(500);",
-                  "});",
-                  "",
-                  "pm.test('Response time is acceptable', function () {",
-                  "    pm.expect(pm.response.responseTime).to.be.below(5000);",
-                  "});"
-                ]
-              }
-            }
-          ],
-          "response": []
-        },
-        {
-          "name": "Update Admin/Guide/Id/Reject",
-          "request": {
-            "method": "PATCH",
-            "header": [],
-            "description": "### NEFRU Admin\n\n**Method:** `PATCH`  \n**Path:** `/admin/guide/:id/reject`  \n**Access:** Authenticated — roles: admin\n\nGenerated from the actual Express router mount and route declaration. Saved examples are included only where the backend contract was explicitly documented in the generator.",
-            "url": {
-              "raw": "{{base_url}}/admin/guide/{{guideId}}/reject"
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test('No server error', function () {",
-                  "    pm.expect(pm.response.code).to.be.below(500);",
-                  "});",
-                  "",
-                  "pm.test('Response time is acceptable', function () {",
-                  "    pm.expect(pm.response.responseTime).to.be.below(5000);",
-                  "});"
-                ]
-              }
-            }
-          ],
-          "response": []
-        },
-        {
-          "name": "Update Admin/Guide/Id/Suspend",
-          "request": {
-            "method": "PATCH",
-            "header": [],
-            "description": "### NEFRU Admin\n\n**Method:** `PATCH`  \n**Path:** `/admin/guide/:id/suspend`  \n**Access:** Authenticated — roles: admin\n\nGenerated from the actual Express router mount and route declaration. Saved examples are included only where the backend contract was explicitly documented in the generator.",
-            "url": {
-              "raw": "{{base_url}}/admin/guide/{{guideId}}/suspend"
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test('No server error', function () {",
-                  "    pm.expect(pm.response.code).to.be.below(500);",
-                  "});",
-                  "",
-                  "pm.test('Response time is acceptable', function () {",
-                  "    pm.expect(pm.response.responseTime).to.be.below(5000);",
-                  "});"
-                ]
-              }
-            }
-          ],
-          "response": []
-        },
-        {
-          "name": "Get Admin/Tour Reviews",
+          "name": "GET /cases/:id",
           "request": {
             "method": "GET",
-            "header": [],
-            "description": "### NEFRU Admin\n\n**Method:** `GET`  \n**Path:** `/admin/tour-reviews`  \n**Access:** Authenticated — roles: admin\n\nGenerated from the actual Express router mount and route declaration. Saved examples are included only where the backend contract was explicitly documented in the generator.",
-            "url": {
-              "raw": "{{base_url}}/admin/tour-reviews"
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test('No server error', function () {",
-                  "    pm.expect(pm.response.code).to.be.below(500);",
-                  "});",
-                  "",
-                  "pm.test('Response time is acceptable', function () {",
-                  "    pm.expect(pm.response.responseTime).to.be.below(5000);",
-                  "});"
-                ]
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
               }
+            ],
+            "url": {
+              "raw": "{{base_url}}/cases/:id"
             }
-          ],
-          "response": []
+          }
         },
         {
-          "name": "Get Admin/Tour Reviews/Id",
+          "name": "POST /merchandising/:kind/:id",
           "request": {
-            "method": "GET",
-            "header": [],
-            "description": "### NEFRU Admin\n\n**Method:** `GET`  \n**Path:** `/admin/tour-reviews/:id`  \n**Access:** Authenticated — roles: admin\n\nGenerated from the actual Express router mount and route declaration. Saved examples are included only where the backend contract was explicitly documented in the generator.",
-            "url": {
-              "raw": "{{base_url}}/admin/tour-reviews/{{tourReviewId}}"
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test('No server error', function () {",
-                  "    pm.expect(pm.response.code).to.be.below(500);",
-                  "});",
-                  "",
-                  "pm.test('Response time is acceptable', function () {",
-                  "    pm.expect(pm.response.responseTime).to.be.below(5000);",
-                  "});"
-                ]
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
               }
-            }
-          ],
-          "response": []
-        },
-        {
-          "name": "Update Admin/Tour Reviews/Id",
-          "request": {
-            "method": "PATCH",
-            "header": [],
-            "description": "### NEFRU Admin\n\n**Method:** `PATCH`  \n**Path:** `/admin/tour-reviews/:id`  \n**Access:** Authenticated — roles: admin\n\nGenerated from the actual Express router mount and route declaration. Saved examples are included only where the backend contract was explicitly documented in the generator.",
+            ],
             "url": {
-              "raw": "{{base_url}}/admin/tour-reviews/{{tourReviewId}}"
+              "raw": "{{base_url}}/merchandising/:kind/:id"
             }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test('No server error', function () {",
-                  "    pm.expect(pm.response.code).to.be.below(500);",
-                  "});",
-                  "",
-                  "pm.test('Response time is acceptable', function () {",
-                  "    pm.expect(pm.response.responseTime).to.be.below(5000);",
-                  "});"
-                ]
-              }
-            }
-          ],
-          "response": []
-        },
-        {
-          "name": "Get Admin/Tours/Page",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "description": "### NEFRU Admin\n\n**Method:** `GET`  \n**Path:** `/admin/tours/:page`  \n**Access:** Authenticated — roles: admin\n\nGenerated from the actual Express router mount and route declaration. Saved examples are included only where the backend contract was explicitly documented in the generator.",
-            "url": {
-              "raw": "{{base_url}}/admin/tours/{{page}}"
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test('No server error', function () {",
-                  "    pm.expect(pm.response.code).to.be.below(500);",
-                  "});",
-                  "",
-                  "pm.test('Response time is acceptable', function () {",
-                  "    pm.expect(pm.response.responseTime).to.be.below(5000);",
-                  "});"
-                ]
-              }
-            }
-          ],
-          "response": []
-        },
-        {
-          "name": "Get Admin/Trip/Id",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "description": "### NEFRU Admin\n\n**Method:** `GET`  \n**Path:** `/admin/trip/:id`  \n**Access:** Authenticated — roles: admin\n\nGenerated from the actual Express router mount and route declaration. Saved examples are included only where the backend contract was explicitly documented in the generator.",
-            "url": {
-              "raw": "{{base_url}}/admin/trip/{{tripId}}"
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test('No server error', function () {",
-                  "    pm.expect(pm.response.code).to.be.below(500);",
-                  "});",
-                  "",
-                  "pm.test('Response time is acceptable', function () {",
-                  "    pm.expect(pm.response.responseTime).to.be.below(5000);",
-                  "});"
-                ]
-              }
-            }
-          ],
-          "response": []
-        },
-        {
-          "name": "Update Admin/Trip/Id/Status",
-          "request": {
-            "method": "PATCH",
-            "header": [],
-            "description": "### NEFRU Admin\n\n**Method:** `PATCH`  \n**Path:** `/admin/trip/:id/status`  \n**Access:** Authenticated — roles: admin\n\nGenerated from the actual Express router mount and route declaration. Saved examples are included only where the backend contract was explicitly documented in the generator.",
-            "url": {
-              "raw": "{{base_url}}/admin/trip/{{tripId}}/status"
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test('No server error', function () {",
-                  "    pm.expect(pm.response.code).to.be.below(500);",
-                  "});",
-                  "",
-                  "pm.test('Response time is acceptable', function () {",
-                  "    pm.expect(pm.response.responseTime).to.be.below(5000);",
-                  "});"
-                ]
-              }
-            }
-          ],
-          "response": []
-        },
-        {
-          "name": "Get Admin/Booking Operations",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "description": "### NEFRU Admin\n\n**Method:** `GET`  \n**Path:** `/admin/booking-operations`  \n**Access:** Authenticated — roles: admin\n\nGenerated from the actual Express router mount and route declaration. Saved examples are included only where the backend contract was explicitly documented in the generator.",
-            "url": {
-              "raw": "{{base_url}}/admin/booking-operations"
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test('No server error', function () {",
-                  "    pm.expect(pm.response.code).to.be.below(500);",
-                  "});",
-                  "",
-                  "pm.test('Response time is acceptable', function () {",
-                  "    pm.expect(pm.response.responseTime).to.be.below(5000);",
-                  "});"
-                ]
-              }
-            }
-          ],
-          "response": []
-        },
-        {
-          "name": "Get Admin/Booking Operations/Id",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "description": "### NEFRU Admin\n\n**Method:** `GET`  \n**Path:** `/admin/booking-operations/:id`  \n**Access:** Authenticated — roles: admin\n\nGenerated from the actual Express router mount and route declaration. Saved examples are included only where the backend contract was explicitly documented in the generator.",
-            "url": {
-              "raw": "{{base_url}}/admin/booking-operations/{{bookingOperationId}}"
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test('No server error', function () {",
-                  "    pm.expect(pm.response.code).to.be.below(500);",
-                  "});",
-                  "",
-                  "pm.test('Response time is acceptable', function () {",
-                  "    pm.expect(pm.response.responseTime).to.be.below(5000);",
-                  "});"
-                ]
-              }
-            }
-          ],
-          "response": []
-        },
-        {
-          "name": "Get Admin/Analytics",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "description": "### NEFRU Admin\n\n**Method:** `GET`  \n**Path:** `/admin/analytics`  \n**Access:** Authenticated — roles: admin\n\nGenerated from the actual Express router mount and route declaration. Saved examples are included only where the backend contract was explicitly documented in the generator.",
-            "url": {
-              "raw": "{{base_url}}/admin/analytics"
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test('No server error', function () {",
-                  "    pm.expect(pm.response.code).to.be.below(500);",
-                  "});",
-                  "",
-                  "pm.test('Response time is acceptable', function () {",
-                  "    pm.expect(pm.response.responseTime).to.be.below(5000);",
-                  "});"
-                ]
-              }
-            }
-          ],
-          "response": []
-        },
-        {
-          "name": "Get Admin/Bookings/Page",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "description": "### NEFRU Admin\n\n**Method:** `GET`  \n**Path:** `/admin/bookings/:page`  \n**Access:** Authenticated — roles: admin\n\nGenerated from the actual Express router mount and route declaration. Saved examples are included only where the backend contract was explicitly documented in the generator.",
-            "url": {
-              "raw": "{{base_url}}/admin/bookings/{{page}}"
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test('No server error', function () {",
-                  "    pm.expect(pm.response.code).to.be.below(500);",
-                  "});",
-                  "",
-                  "pm.test('Response time is acceptable', function () {",
-                  "    pm.expect(pm.response.responseTime).to.be.below(5000);",
-                  "});"
-                ]
-              }
-            }
-          ],
-          "response": []
-        }
-      ]
-    },
-    {
-      "name": "System",
-      "description": "Health/readiness and FX utility endpoints.",
-      "item": [
-        {
-          "name": "API Health Check",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "description": "### NEFRU System\n\n**Method:** `GET`  \n**Path:** `/health`  \n**Access:** Public / no auth\n\nGenerated from the actual Express router mount and route declaration. Saved examples are included only where the backend contract was explicitly documented in the generator.",
-            "url": {
-              "raw": "{{base_url}}/health"
-            },
-            "auth": {
-              "type": "noauth"
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test('No server error', function () {",
-                  "    pm.expect(pm.response.code).to.be.below(500);",
-                  "});",
-                  "",
-                  "pm.test('Response time is acceptable', function () {",
-                  "    pm.expect(pm.response.responseTime).to.be.below(5000);",
-                  "});"
-                ]
-              }
-            }
-          ],
-          "response": [
-            {
-              "name": "200 OK",
-              "originalRequest": {
-                "method": "GET",
-                "header": [],
-                "url": {
-                  "raw": "{{base_url}}/health"
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "_postman_previewlanguage": "json",
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "cookie": [],
-              "body": "{\n  \"success\": true,\n  \"message\": \"NEFRU API is running\"\n}"
-            }
-          ]
-        },
-        {
-          "name": "Database Readiness Check",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "description": "### NEFRU System\n\n**Method:** `GET`  \n**Path:** `/ready`  \n**Access:** Public / no auth\n\nGenerated from the actual Express router mount and route declaration. Saved examples are included only where the backend contract was explicitly documented in the generator.",
-            "url": {
-              "raw": "{{base_url}}/ready"
-            },
-            "auth": {
-              "type": "noauth"
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test('No server error', function () {",
-                  "    pm.expect(pm.response.code).to.be.below(500);",
-                  "});",
-                  "",
-                  "pm.test('Response time is acceptable', function () {",
-                  "    pm.expect(pm.response.responseTime).to.be.below(5000);",
-                  "});"
-                ]
-              }
-            }
-          ],
-          "response": [
-            {
-              "name": "200 OK",
-              "originalRequest": {
-                "method": "GET",
-                "header": [],
-                "url": {
-                  "raw": "{{base_url}}/ready"
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "_postman_previewlanguage": "json",
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "cookie": [],
-              "body": "{\n  \"success\": true\n}"
-            },
-            {
-              "name": "503 Service Unavailable",
-              "originalRequest": {
-                "method": "GET",
-                "header": [],
-                "url": {
-                  "raw": "{{base_url}}/ready"
-                }
-              },
-              "status": "Service Unavailable",
-              "code": 503,
-              "_postman_previewlanguage": "json",
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "cookie": [],
-              "body": "{\n  \"success\": false,\n  \"message\": \"Database unavailable\"\n}"
-            }
-          ]
-        },
-        {
-          "name": "Get Fx/Rates",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "description": "### NEFRU System\n\n**Method:** `GET`  \n**Path:** `/fx/rates`  \n**Access:** Public / no auth\n\nGenerated from the actual Express router mount and route declaration. Saved examples are included only where the backend contract was explicitly documented in the generator.",
-            "url": {
-              "raw": "{{base_url}}/fx/rates"
-            },
-            "auth": {
-              "type": "noauth"
-            }
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test('No server error', function () {",
-                  "    pm.expect(pm.response.code).to.be.below(500);",
-                  "});",
-                  "",
-                  "pm.test('Response time is acceptable', function () {",
-                  "    pm.expect(pm.response.responseTime).to.be.below(5000);",
-                  "});"
-                ]
-              }
-            }
-          ],
-          "response": []
+          }
         }
       ]
     }
