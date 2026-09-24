@@ -1,39 +1,45 @@
-# NEFRU API Documentation
+# NEFRU API — Postman
 
-Postman documentation for NEFRU backend APIs.
+The Postman assets in this directory document the NEFRU backend API.
 
-## Environment
-
-Supported environments:
-
-- Local Development
-- Production
-
-## API Modules
+## Modules
 
 - Authentication
-- Users
+- Users / profiles
 - Guides
 - Trips
-- Marketplace
+- Marketplace / occurrences
 - Bookings
-- Payments
+- Paymob payments
 - Reviews
 - Notifications
-- Admin
-
-## Authentication
-
-Protected endpoints require:
-
-Authorization: Bearer <JWT_TOKEN>
+- Admin operations
 
 ## Base URLs
 
 Local:
 
+```text
 http://localhost:5000/api
+```
 
-Production:
+Hosted portfolio API:
 
-https://api.nefru.com/api
+```text
+https://nefru-renhancement-production.up.railway.app/api
+```
+
+## Authentication
+
+The browser app uses authenticated cookies. Some collection requests may also use an Authorization token depending on the endpoint/environment.
+
+Do not save real passwords, JWTs, Paymob secrets, Cloudinary secrets, or private verification-document URLs in a committed Postman environment.
+
+## Files
+
+```text
+collections/NEFRU.postman_collection.json
+environments/NEFRU Local.postman_environment.json
+```
+
+When backend routes change, validate the collection against the actual route definitions before publishing generated API documentation.
