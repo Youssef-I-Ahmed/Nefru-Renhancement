@@ -1,15 +1,51 @@
-// import { Link } from "react-router-dom";
 import { FiCompass, FiHome } from "react-icons/fi";
-
-import { Button } from "../components/Button/Button";
-import styles from "./NotFound.module.css";
-import Logo_Light from "../../assets/images/Logo_Light.png";
-import illustration from "../../assets/images/not-found-illustration.png";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
+import Logo_Light from "../../assets/images/Logo_Light.png";
+import illustration from "../../assets/images/not-found-illustration.png";
+import { Button } from "../components/Button/Button";
+import styles from "./NotFound.module.css";
+
+const ROLE_DESTINATIONS = {
+  tourist: {
+    label: "Traveler",
+    homePath: "/user/home",
+    homeLabel: "Back to traveler home",
+    showExplore: true,
+  },
+  guide: {
+    label: "Guide",
+    homePath: "/guide/dashboard",
+    homeLabel: "Back to guide dashboard",
+    showExplore: false,
+  },
+  admin: {
+    label: "Admin",
+    homePath: "/admin/overview",
+    homeLabel: "Back to admin overview",
+    showExplore: false,
+  },
+};
 
 export default function NotFound() {
   const navigate = useNavigate();
+  const { initialized, isAuthenticated, user } = useSelector(
+    (state) => state.auth || {},
+  );
+
+  const role = isAuthenticated ? user?.role : null;
+  const destination = ROLE_DESTINATIONS[role] || {
+    label: "Guest",
+    homePath: "/user/home",
+    homeLabel: "Go to Nefru home",
+    showExplore: true,
+  };
+
+  const sessionMessage =
+    initialized && isAuthenticated
+      ? `You’re still signed in as ${destination.label.toLowerCase()}.`
+      : "You can keep exploring NEFRU from here.";
 
   return (
     <main className={styles.page}>
@@ -18,6 +54,10 @@ export default function NotFound() {
 
         <div className={styles.content}>
           <div className={styles.textContent}>
+            <p className={styles.contextLabel}>
+              {destination.label} · Page not found
+            </p>
+
             <p className={styles.errorCode}>404</p>
 
             <h1 className={styles.title}>
@@ -28,6 +68,8 @@ export default function NotFound() {
               The page you’re looking for doesn’t exist, was moved, or may have
               never existed.
             </p>
+
+            <p className={styles.sessionNote}>{sessionMessage}</p>
           </div>
 
           <div className={styles.imageWrapper}>
@@ -43,19 +85,21 @@ export default function NotFound() {
               type="secondary"
               className={styles.button}
               icon={<FiHome />}
-              onClick={() => navigate("/")}
+              onClick={() => navigate(destination.homePath, { replace: true })}
             >
-              Back to Home
+              {destination.homeLabel}
             </Button>
 
-            <Button
-              type="outline"
-              className={styles.button}
-              icon={<FiCompass />}
-              onClick={() => navigate("/user/trips")}
-            >
-              Explore Tours
-            </Button>
+            {destination.showExplore && (
+              <Button
+                type="outline"
+                className={styles.button}
+                icon={<FiCompass />}
+                onClick={() => navigate("/user/trips")}
+              >
+                Explore Tours
+              </Button>
+            )}
           </div>
         </div>
       </section>
