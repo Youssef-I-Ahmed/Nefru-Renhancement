@@ -117,8 +117,8 @@ function PremiumHome() {
   const guides = useMemo(() => homeData.trustedGuides.slice(0, 3), [homeData.trustedGuides]);
 
   const openExperience = (id) => {
-    if (!id) return navigate("/user/trips");
-    navigate(`/user/trips/${id}`);
+    if (!id) return navigate("/trips");
+    navigate(`/trips/${id}`);
   };
 
   return (
@@ -145,7 +145,7 @@ function PremiumHome() {
       </section>
 
       <section className={styles.section} id="popular-tours">
-        <div className={styles.sectionHeader}><div><span className={styles.sectionKicker}>Handpicked for you</span><h2>Unforgettable experiences</h2><p>Trusted guides, strong reviews and the details you need before opening the tour.</p></div><button type="button" className={styles.textLink} onClick={() => navigate("/user/trips")}>View all <ArrowRight size={17} /></button></div>
+        <div className={styles.sectionHeader}><div><span className={styles.sectionKicker}>Handpicked for you</span><h2>Unforgettable experiences</h2><p>Trusted guides, strong reviews and the details you need before opening the tour.</p></div><button type="button" className={styles.textLink} onClick={() => navigate("/trips")}>View all <ArrowRight size={17} /></button></div>
         <div className={styles.experienceGrid}>
           {featured.map((trip) => (
             <ExperienceCard
@@ -173,7 +173,7 @@ function PremiumHome() {
       </section>
 
       <section className={styles.section}>
-        <div className={styles.sectionHeader}><div><span className={styles.sectionKicker}>Last-minute plans</span><h2>Available today</h2><p>Book an experience that still has availability without digging through calendars.</p></div><button type="button" className={styles.textLink} onClick={() => navigate("/user/trips")}>Browse tours <ArrowRight size={17} /></button></div>
+        <div className={styles.sectionHeader}><div><span className={styles.sectionKicker}>Last-minute plans</span><h2>Available today</h2><p>Book an experience that still has availability without digging through calendars.</p></div><button type="button" className={styles.textLink} onClick={() => navigate("/trips")}>Browse tours <ArrowRight size={17} /></button></div>
         <div className={styles.availableGrid}>{available.map((trip) => <article key={trip.id} className={styles.availableCard} onClick={() => openExperience(trip.id)}><img src={trip.image} alt={trip.title} loading="lazy" decoding="async" /><div><span className={styles.sameDay}>Available today</span><h3>{trip.title}</h3><p><MapPin size={14} /> {trip.location}</p><p><CalendarDays size={14} /> {trip.timeSlot}</p><PriceDisplay amount={trip.price} currency={trip.currency || "EGP"} /></div></article>)}</div>
       </section>
 

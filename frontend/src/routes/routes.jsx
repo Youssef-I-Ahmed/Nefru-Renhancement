@@ -82,19 +82,39 @@ export const router = createBrowserRouter([
     ],
   },
   {
+    element: <MasterLayout />,
+    children: [
+      { path: "explore", element: <Home /> },
+      { path: "nearby", element: <NearbyMap /> },
+      {
+        path: "trips",
+        children: [
+          { index: true, element: <RecommendedTrips /> },
+          {
+            path: ":id",
+            children: [
+              { index: true, element: <Info /> },
+              { path: "guide", element: <Guide /> },
+            ],
+          },
+        ],
+      },
+    ],
+  },
+  {
     path: "user",
     element: <ProtectedRoute allowedRoles={["tourist", "guide"]} />,
     children: [
       {
         element: <MasterLayout />,
         children: [
-          { index: true, element: <Home /> },
-          { path: "home", element: <Home /> },
-          { path: "nearby", element: <NearbyMap /> },
+          { index: true, element: <Navigate to="/explore" replace /> },
+          { path: "home", element: <Navigate to="/explore" replace /> },
+          { path: "nearby", element: <Navigate to="/nearby" replace /> },
           {
             path: "trips",
             children: [
-              { index: true, element: <RecommendedTrips /> },
+              { index: true, element: <Navigate to="/trips" replace /> },
               {
                 path: ":id",
                 children: [

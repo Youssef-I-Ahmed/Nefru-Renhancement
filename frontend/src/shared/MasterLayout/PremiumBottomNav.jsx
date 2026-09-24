@@ -3,8 +3,8 @@ import { useLocation, useNavigate } from "react-router-dom";
 import styles from "./PremiumBottomNav.module.css";
 
 const items = [
-  { label: "Home", path: "/user/home", icon: Home, match: (pathname) => pathname === "/user" || pathname === "/user/home" },
-  { label: "Trips", path: "/user/trips", icon: Briefcase, match: (pathname) => pathname.startsWith("/user/trips") },
+  { label: "Home", path: "/explore", icon: Home, match: (pathname) => pathname === "/explore" || pathname === "/user" || pathname === "/user/home" },
+  { label: "Trips", path: "/trips", icon: Briefcase, match: (pathname) => pathname === "/trips" || pathname.startsWith("/trips/") || pathname.startsWith("/user/trips") },
   { label: "Saved", path: "/user/saved", icon: Heart, match: (pathname) => pathname.startsWith("/user/saved") },
   { label: "Profile", path: "/user/profile", icon: User, match: (pathname) => pathname.startsWith("/user/profile") },
 ];

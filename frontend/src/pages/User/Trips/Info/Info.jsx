@@ -127,7 +127,7 @@ function Info() {
         <div className={styles.errorCard}>
           <span>We couldn&apos;t open this experience.</span>
           <h1>{error || "Trip not found"}</h1>
-          <button type="button" onClick={() => navigate("/user/trips")}>Browse experiences</button>
+          <button type="button" onClick={() => navigate("/trips")}>Browse experiences</button>
         </div>
       </main>
     );
@@ -203,7 +203,7 @@ function Info() {
                   <Star size={15} fill="currentColor" /> {Number(tour.guide?.rating || 0).toFixed(1)} · {tour.guide?.reviewsCount || 0} guide reviews
                 </div>
                 {tour.guide?.about && <p className={styles.guideAbout}>{tour.guide.about}</p>}
-                <button type="button" className={styles.inlineLink} onClick={() => navigate(`/user/trips/${id}/guide`)}>
+                <button type="button" className={styles.inlineLink} onClick={() => navigate(`/trips/${id}/guide`)}>
                   View guide profile <ChevronRight size={16} />
                 </button>
               </div>

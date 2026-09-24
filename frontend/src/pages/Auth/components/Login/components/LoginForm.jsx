@@ -199,7 +199,7 @@ function LoginForm() {
           <div className={styles.guestWrap}>
             <Button
               icon={<Icons.Guest />}
-              onClick={() => navigate("/user/home")}
+              onClick={() => navigate("/explore")}
               type="normal"
             >
               Continue as Guest
